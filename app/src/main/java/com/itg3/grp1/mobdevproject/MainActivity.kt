@@ -9,5 +9,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         //added username field
         //addded password field
+        // added validation to username field
+        // added validation to password field
     }
 }
