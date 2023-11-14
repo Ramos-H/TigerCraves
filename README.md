@@ -1,4 +1,4 @@
-# MobDevProject
+# TigerCraves
 An Android app made with Kotlin that allows the user to find nearby eating spots around the University of Santo Tomas.
 ## Status
 This project is currently in development.
