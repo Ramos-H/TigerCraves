@@ -22,12 +22,13 @@
             android:id="@+id/etEmail"
             android:layout_width="278dp"
             android:layout_height="39dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/rectangle_1btnoutline"
             android:ems="10"
             android:gravity="center"
             android:hint="Email"
             android:inputType="text"
+
             android:textColor="#000000"
             android:textColorHint="#5E574242" />
 
@@ -44,7 +45,7 @@
             android:id="@+id/etPassword"
             android:layout_width="278dp"
             android:layout_height="39dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/rectangle_1btnoutline"
             android:ems="10"
             android:gravity="center"
@@ -90,6 +91,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/marykate"
                 android:gravity="end"
+                android:layout_marginTop="3dp"
                 android:text="Don't have an Account?"
                 android:textColor="#E05D5D"
                 app:layout_constraintBottom_toBottomOf="parent"
