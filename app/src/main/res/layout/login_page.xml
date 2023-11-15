@@ -7,8 +7,8 @@
     android:background="@drawable/group_1mainbg">
 
     <LinearLayout
-        android:layout_width="373dp"
-        android:layout_height="279dp"
+        android:layout_width="391dp"
+        android:layout_height="295dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,12 +29,12 @@
             android:hint="Email"
             android:inputType="text"
             android:textColor="#000000"
-            android:textColorHint="#5E574242"
-            />
+            android:textColorHint="#5E574242" />
+
         <TextView
+            android:id="@+id/validationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/validationTextView"
             android:hint="Test">
 
         </TextView>
@@ -49,22 +49,30 @@
             android:ems="10"
             android:gravity="center"
             android:hint="Password"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="#000000"
             android:textColorHint="#5E574242" />
+
+        <TextView
+            android:id="@+id/validationTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Test">
+
+        </TextView>
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="157dp"
             android:layout_height="49dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="9dp"
 
             android:background="@drawable/loginbtn" />
 
         <LinearLayout
             android:layout_width="274dp"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:orientation="horizontal"
 
@@ -95,8 +103,8 @@
                 android:id="@+id/regBtn"
                 android:layout_width="110dp"
                 android:layout_height="35dp"
-                android:layout_weight="1"
                 android:layout_marginLeft="15dp"
+                android:layout_weight="1"
                 android:background="@drawable/group_2registerbtn" />
         </LinearLayout>
 
