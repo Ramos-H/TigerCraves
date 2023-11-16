@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         val email = fieldEmail.text.toString()
         val pass = fieldPass.text.toString()
 
-        if (email.isEmpty()) {
+        if (email.isNullOrBlank()) {
             setFieldValidationState(fieldEmail, validationTextEmail, View.VISIBLE,"Email is required")
         } else if (!isValidEmail(email)) {
             setFieldValidationState(fieldEmail, validationTextEmail, View.VISIBLE,"Invalid email format")
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             setFieldValidationState(fieldEmail, validationTextEmail, View.INVISIBLE)
         }
 
-        if (pass.isEmpty()) {
+        if (pass.isNullOrBlank()) {
             setFieldValidationState(fieldPass, validationTextPass, View.VISIBLE,"Password is required")
         } else if (!isValidPassword(pass)) {
             setFieldValidationState(fieldPass, validationTextPass, View.VISIBLE,"Password must be at least 8 characters")
