@@ -1,7 +1,6 @@
 package com.itg3.grp1.mobdevproject
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -53,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
         val password = editTextPassword.text.toString()
         val confirmPassword = editTextConfirmPassword.text.toString()
 
-        if (TextUtils.isEmpty(email)) {
+        if (email.isNullOrBlank()) {
             // Email is empty
             setValidationState(editTextEmail, textViewEmailValidation, "Field cannot be empty.")
         } else if (email.length > 255) {
@@ -64,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
             setValidationState(editTextEmail, textViewEmailValidation, "Invalid email.")
         }
 
-        if (TextUtils.isEmpty(password)) {
+        if (password.isNullOrBlank()) {
             // Password is empty
             setValidationState(
                 editTextPassword,
@@ -80,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
             )
         }
 
-        if (TextUtils.isEmpty(confirmPassword)) {
+        if (confirmPassword.isNullOrBlank()) {
             // Confirm Password is empty
             setValidationState(
                 editTextConfirmPassword,
@@ -97,10 +96,10 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         // Check if any validation failed
-        if (!TextUtils.isEmpty(email) && email.length <= 255 &&
+        if (!email.isNullOrBlank() && email.length <= 255 &&
             android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-            !TextUtils.isEmpty(password) && password.matches(Regex("(?=.*[0-9]).{8,}")) &&
-            !TextUtils.isEmpty(confirmPassword) && confirmPassword == password
+            !password.isNullOrBlank() && password.matches(Regex("(?=.*[0-9]).{8,}")) &&
+            !confirmPassword.isNullOrBlank() && confirmPassword == password
         ) {
             // Registration successful
             Toast.makeText(this, "REGISTER SUCCESSFUL", Toast.LENGTH_SHORT).show()
