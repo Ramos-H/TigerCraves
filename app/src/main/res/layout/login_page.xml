@@ -69,16 +69,16 @@
             android:layout_width="157dp"
             android:layout_height="49dp"
             android:layout_marginTop="9dp"
-
-            android:background="@drawable/loginbtn" />
+            android:background="@drawable/loginbtn"
+            android:onClick="login"/>
 
         <LinearLayout
             android:layout_width="274dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="horizontal"
 
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.6"
@@ -90,10 +90,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+                android:layout_marginTop="3dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/marykate"
                 android:gravity="end"
-                android:layout_marginTop="3dp"
                 android:text="Don't have an Account?"
                 android:textColor="#E05D5D"
                 app:layout_constraintBottom_toBottomOf="parent"
