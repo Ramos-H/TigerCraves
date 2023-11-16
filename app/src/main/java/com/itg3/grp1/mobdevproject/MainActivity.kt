@@ -31,10 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         validationTextEmail.visibility = View.INVISIBLE
         validationTextPass.visibility = View.INVISIBLE
-
-        btnRegister.setOnClickListener() {
-            Toast.makeText(this, "Navigated to Register", Toast.LENGTH_LONG).show()
-        }
     }
 
     private fun isValidEmail(email: String): Boolean
@@ -81,5 +77,10 @@ class MainActivity : AppCompatActivity() {
         if (isValidEmail(email) && isValidPassword(pass)) {
             Toast.makeText(this, "LOGIN SUCCESSFUL", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun register(view: View)
+    {
+        Toast.makeText(this, "Navigated to Register", Toast.LENGTH_LONG).show()
     }
 }

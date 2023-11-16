@@ -109,7 +109,8 @@
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
-                android:background="@drawable/group_2registerbtn" />
+                android:background="@drawable/group_2registerbtn"
+                android:onClick="register" />
         </LinearLayout>
 
     </LinearLayout>
