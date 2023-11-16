@@ -32,9 +32,9 @@ class RegisterActivity : AppCompatActivity() {
 
     fun validateAndRegister(view: View) {
         // Reset validation states
-        resetValidationState(editTextEmail, textViewEmailValidation)
-        resetValidationState(editTextPassword, textViewPasswordValidation)
-        resetValidationState(editTextConfirmPassword, textViewConfirmPasswordValidation)
+        setValidationState(editTextEmail, textViewEmailValidation)
+        setValidationState(editTextPassword, textViewPasswordValidation)
+        setValidationState(editTextConfirmPassword, textViewConfirmPasswordValidation)
 
         // Perform validation
         val email = editTextEmail.text.toString()
@@ -102,19 +102,22 @@ class RegisterActivity : AppCompatActivity() {
     private fun setValidationState(
         editText: EditText,
         validationTextView: TextView,
-        validationMessage: String
+        validationMessage: String? = null
     ) {
-        editText.setTextColor(resources.getColor(R.color.colorError))
-        editText.setBackgroundResource(R.drawable.edittext_border_error)
         validationTextView.text = validationMessage
-        validationTextView.setTextColor(resources.getColor(R.color.colorError))
-        validationTextView.visibility = View.VISIBLE
-    }
 
-    private fun resetValidationState(editText: EditText, validationTextView: TextView) {
-        editText.setTextColor(resources.getColor(R.color.colorDefaultText))
-        editText.setBackgroundResource(R.drawable.edittext_border_default)
-        validationTextView.text = ""
-        validationTextView.visibility = View.INVISIBLE
+        if(validationMessage != null)
+        {
+            editText.setTextColor(resources.getColor(R.color.colorError))
+            editText.setBackgroundResource(R.drawable.edittext_border_error)
+            validationTextView.visibility = View.VISIBLE
+            validationTextView.setTextColor(resources.getColor(R.color.colorError))
+        }
+        else
+        {
+            editText.setTextColor(resources.getColor(R.color.colorDefaultText))
+            editText.setBackgroundResource(R.drawable.edittext_border_default)
+            validationTextView.visibility = View.INVISIBLE
+        }
     }
 }
