@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
 
         if (email.isNullOrBlank()) {
             // Email is empty
-            setValidationState(editTextEmail, textViewEmailValidation, "Field cannot be empty.")
+            setValidationState(editTextEmail, textViewEmailValidation, "Email cannot be empty.")
         } else if (email.length > 255) {
             // Email exceeds maximum length
             setValidationState(editTextEmail, textViewEmailValidation, "Email must be 255 characters or less.")
@@ -57,7 +57,7 @@ class RegisterActivity : AppCompatActivity() {
             setValidationState(
                 editTextPassword,
                 textViewPasswordValidation,
-                "Field cannot be empty."
+                "Password cannot be empty."
             )
         } else if (!password.matches(Regex("(?=.*[0-9]).{8,}"))) {
             // Invalid password
@@ -73,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
             setValidationState(
                 editTextConfirmPassword,
                 textViewConfirmPasswordValidation,
-                "Field cannot be empty."
+                "Confirm password cannot be empty."
             )
         } else if (confirmPassword != password) {
             // Passwords don't match
