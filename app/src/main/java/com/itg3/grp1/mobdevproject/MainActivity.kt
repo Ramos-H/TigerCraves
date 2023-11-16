@@ -45,12 +45,10 @@ class MainActivity : AppCompatActivity() {
                 emailEditText.setError("Email is required")
                 validationTextEmail.visibility = View.VISIBLE
                 validationTextEmail.text = "Email is required"
-                validationTextEmail.setTextColor(resources.getColor(android.R.color.holo_red_light))
             } else if (!isValidEmail(email)) {
                 emailEditText.setError("Invalid email")
                 validationTextEmail.visibility = View.VISIBLE
                 validationTextEmail.text = "Invalid email format"
-                validationTextEmail.setTextColor(resources.getColor(android.R.color.holo_red_light))
             } else {
                 resetFieldState(emailEditText, validationTextEmail)
             }
@@ -58,12 +56,10 @@ class MainActivity : AppCompatActivity() {
                 passEditText.setError("Password is required")
                 validationTextPass.visibility = View.VISIBLE
                 validationTextPass.text = "Password is required"
-                validationTextPass.setTextColor(resources.getColor(android.R.color.holo_red_light))
             } else if (!isValidPassword(pass)) {
                 validationTextPass.visibility = View.VISIBLE
                 validationTextPass.text = "Invalid pass format"
                 validationTextPass.text = "Password must be at least 8 characters."
-                validationTextPass.setTextColor(resources.getColor(android.R.color.holo_red_light))
             } else {
                 resetFieldState(passEditText, validationTextPass)
             }
