@@ -28,20 +28,9 @@ class RegisterActivity : AppCompatActivity() {
         textViewEmailValidation = findViewById(R.id.textViewEmailValidation)
         textViewPasswordValidation = findViewById(R.id.textViewPasswordValidation)
         textViewConfirmPasswordValidation = findViewById(R.id.textViewConfirmPasswordValidation)
-
-        val buttonRegister: ImageButton = findViewById(R.id.buttonRegister)
-        val buttonLogin: ImageButton = findViewById(R.id.buttonLogin)
-
-        buttonRegister.setOnClickListener {
-            validateAndRegister()
-        }
-
-        buttonLogin.setOnClickListener {
-            navigateToLogin()
-        }
     }
 
-    private fun validateAndRegister() {
+    fun validateAndRegister(view: View) {
         // Reset validation states
         resetValidationState(editTextEmail, textViewEmailValidation)
         resetValidationState(editTextPassword, textViewPasswordValidation)
@@ -106,7 +95,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToLogin() {
+    fun navigateToLogin(view: View) {
         Toast.makeText(this, "Navigated to Login", Toast.LENGTH_SHORT).show()
     }
 

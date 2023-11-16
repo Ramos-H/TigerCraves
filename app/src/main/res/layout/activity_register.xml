@@ -81,6 +81,7 @@
             android:layout_height="63dp"
             android:background="?android:attr/selectableItemBackground"
             android:contentDescription="Register button"
+            android:onClick="validateAndRegister"
             android:src="@drawable/register_button" />
     </LinearLayout>
 
@@ -90,14 +91,15 @@
         android:layout_height="48dp"
         android:layout_marginStart="115dp"
         android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="Login button"
+        android:onClick="navigateToLogin"
         android:src="@drawable/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.928"
-        android:contentDescription="Login button"/>
+        app:layout_constraintVertical_bias="0.928" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
