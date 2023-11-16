@@ -55,13 +55,13 @@ class RegisterActivity : AppCompatActivity() {
 
         if (TextUtils.isEmpty(email)) {
             // Email is empty
-            setValidationState(editTextEmail, textViewEmailValidation, "  Field cannot be empty.")
+            setValidationState(editTextEmail, textViewEmailValidation, "Field cannot be empty.")
         } else if (email.length > 255) {
             // Email exceeds maximum length
-            setValidationState(editTextEmail, textViewEmailValidation, "        Email must be 255 characters or less.")
+            setValidationState(editTextEmail, textViewEmailValidation, "Email must be 255 characters or less.")
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             // Invalid email
-            setValidationState(editTextEmail, textViewEmailValidation, "  Invalid email.")
+            setValidationState(editTextEmail, textViewEmailValidation, "Invalid email.")
         }
 
         if (TextUtils.isEmpty(password)) {
@@ -69,14 +69,14 @@ class RegisterActivity : AppCompatActivity() {
             setValidationState(
                 editTextPassword,
                 textViewPasswordValidation,
-                "  Field cannot be empty."
+                "Field cannot be empty."
             )
         } else if (!password.matches(Regex("(?=.*[0-9]).{8,}"))) {
             // Invalid password
             setValidationState(
                 editTextPassword,
                 textViewPasswordValidation,
-                "          Must be at least 8 alphanumeric characters."
+                "Must be at least 8 alphanumeric characters."
             )
         }
 
@@ -85,14 +85,14 @@ class RegisterActivity : AppCompatActivity() {
             setValidationState(
                 editTextConfirmPassword,
                 textViewConfirmPasswordValidation,
-                "  Field cannot be empty."
+                "Field cannot be empty."
             )
         } else if (confirmPassword != password) {
             // Passwords don't match
             setValidationState(
                 editTextConfirmPassword,
                 textViewConfirmPasswordValidation,
-                "  Passwords do not match."
+                "Passwords do not match."
             )
         }
 
