@@ -14,16 +14,12 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         val DATABASE_VERSION = 1
     }
 
-    lateinit var users: IDbTable<User>
-    lateinit var listings: IDbTable<Listing>
-    lateinit var reviews: IDbTable<Review>
+    val users = Users(this)
+    val listings = Listings(this)
+    val reviews = Reviews(this)
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        users = Users(this)
-        listings = Listings(this)
-        reviews = Reviews(this)
-
         val tables = listOf(users, listings, reviews)
 
         for (table in tables)
