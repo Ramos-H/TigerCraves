@@ -28,7 +28,7 @@ class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable<Review>(dbHandler)
                 "$COL_RATING REAL, " +
                 "$COL_TITLE TEXT, " +
                 "$COL_CONTENT TEXT, " +
-                "$COL_DATE_POSTED INTEGER DEFAULT(unixepoch()) NOT NULL, " +
+                "$COL_DATE_POSTED INTEGER NOT NULL, " +
                 "FOREIGN KEY ($COL_POSTER) REFERENCES ${Users.TBL_NAME}(${Users.COL_ID}) ON DELETE CASCADE, " +
                 "FOREIGN KEY ($COL_LISTING) REFERENCES ${Listings.TBL_NAME}(${Listings.COL_ID}) ON DELETE CASCADE" +
                 ")"

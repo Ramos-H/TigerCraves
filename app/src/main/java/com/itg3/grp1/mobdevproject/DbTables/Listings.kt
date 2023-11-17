@@ -30,7 +30,7 @@ class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
                 "$COL_PRICE_MIN REAL, " +
                 "$COL_PRICE_MAX REAL, " +
                 "$COL_RATING REAL, " +
-                "$COL_DATE_POSTED INTEGER DEFAULT(unixepoch()) NOT NULL, " +
+                "$COL_DATE_POSTED INTEGER NOT NULL, " +
                 "FOREIGN KEY ($COL_POSTER) REFERENCES ${Users.TBL_NAME}(${Users.COL_ID}) ON DELETE CASCADE" +
                 ")"
 

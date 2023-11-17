@@ -3,7 +3,6 @@ package com.itg3.grp1.mobdevproject.DbTables
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.itg3.grp1.mobdevproject.models.IModel
 import com.itg3.grp1.mobdevproject.models.User
 
 class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
@@ -29,7 +28,7 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
                 "$COL_NAME_LAST TEXT NOT NULL, " +
                 "$COL_EMAIL TEXT NOT NULL, " +
                 "$COL_PASSWORD_HASH TEXT NOT NULL, " +
-                "$COL_DATE_REGISTERED INTEGER DEFAULT(unixepoch()) NOT NULL" +
+                "$COL_DATE_REGISTERED INTEGER NOT NULL" +
                 ")"
         db?.execSQL(SQL_TBL_CREATE)
     }
