@@ -23,9 +23,9 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        users = Users()
-        listings = Listings()
-        reviews = Reviews()
+        users = Users(this)
+        listings = Listings(this)
+        reviews = Reviews(this)
 
         val tables = listOf<IDbTable>(users, listings, reviews)
 

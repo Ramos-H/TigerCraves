@@ -1,9 +1,10 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.models.IModel
 
-class Reviews : IDbTable
+class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable(dbHandler)
 {
     companion object
     {
