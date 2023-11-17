@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
@@ -35,6 +36,11 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
         holder.description.text = description [position]
         holder.itemImage.setImageResource(images[position])
         holder.ratingBar.rating
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            Toast.makeText(context, "Restaurant ${position + 1} pressed", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
