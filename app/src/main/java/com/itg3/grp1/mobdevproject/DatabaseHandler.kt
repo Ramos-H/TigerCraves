@@ -15,7 +15,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        val SQL_TBL_USER_CREATE = "CREATE TABLE ${TigerCraves.User.TABLE_NAME} (" +
+        val SQL_TBL_CREATE_USER = "CREATE TABLE ${TigerCraves.User.TABLE_NAME} (" +
                 "${TigerCraves.User.COL_ID} INTEGER PRIMARY KEY, " +
                 "${TigerCraves.User.COL_NAME_FIRST} TEXT, " +
                 "${TigerCraves.User.COL_NAME_MIDDLE} TEXT, " +
@@ -25,15 +25,32 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
                 "${TigerCraves.User.COL_DATE_REGISTERED} INTEGER" +
                 ")"
 
-        Log.d("SQL_Stuff", SQL_TBL_USER_CREATE)
+        val SQL_TBL_CREATE_LISTING = "CREATE TABLE ${TigerCraves.Listing.TABLE_NAME} (" +
+                "${TigerCraves.Listing.COL_ID} INTEGER PRIMARY KEY, " +
+                "${TigerCraves.Listing.COL_POSTER} INTEGER, " +
+                "${TigerCraves.Listing.COL_NAME} TEXT, " +
+                "${TigerCraves.Listing.COL_ADDRESS} TEXT, " +
+                "${TigerCraves.Listing.COL_PRICE_MIN} REAL, " +
+                "${TigerCraves.Listing.COL_PRICE_MAX} REAL, " +
+                "${TigerCraves.Listing.COL_RATING} REAL, " +
+                "${TigerCraves.Listing.COL_DATE_POSTED} INTEGER" +
+                ")"
 
-        db?.execSQL(SQL_TBL_USER_CREATE)
+        Log.d("SQL_Stuff", SQL_TBL_CREATE_USER)
+        Log.d("SQL_Stuff", SQL_TBL_CREATE_LISTING)
+
+        db?.execSQL(SQL_TBL_CREATE_USER)
+        db?.execSQL(SQL_TBL_CREATE_LISTING)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int)
     {
-        val SQL_TBL_USER_DROP = "DROP TABLE IF EXISTS ${TigerCraves.User.TABLE_NAME}"
-        db?.execSQL(SQL_TBL_USER_DROP)
+        val SQL_TBL_DROP_USER = "DROP TABLE IF EXISTS ${TigerCraves.User.TABLE_NAME}"
+        val SQL_TBL_DROP_LISTING = "DROP TABLE IF EXISTS ${TigerCraves.Listing.TABLE_NAME}"
+
+        db?.execSQL(SQL_TBL_DROP_USER)
+        db?.execSQL(SQL_TBL_DROP_LISTING)
+
         onCreate(db)
     }
 }
