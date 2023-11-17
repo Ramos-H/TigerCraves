@@ -1,4 +1,4 @@
-<!-- activity_detailedlisting.xml -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,42 +10,102 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#EC9F54"
-        android:contentDescription="">
+        android:background="#EC9F54">
 
-        <!-- Container for Top Image and Overlaid Element -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Top Image -->
             <ImageView
-                android:id="@+id/topImageView"
+                android:id="@+id/detailsbgImageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tigercard"
-                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
-                android:contentDescription="tiger card"/>
-
-            <!-- Overlaid Element (Placeholder) -->
+                android:contentDescription="tiger card"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tigercard" />
 
             <ImageView
-                android:id="@+id/restaurantImg"
+                android:id="@+id/restaurantImageView"
                 android:layout_width="327dp"
                 android:layout_height="233dp"
-                android:layout_marginLeft="43dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="155dp"
+                android:layout_gravity="top|start"
                 android:src="@drawable/imgplaceholder" />
 
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="64dp"
+                android:fontFamily="@font/marykate"
+                android:text="Restaurant Name"
+                android:textColor="#EC9F54"
+                android:textSize="40sp" />
 
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="115dp"
+                android:fontFamily="@font/marykate"
+                android:text="123 Anywhere St., Any City"
+                android:textColor="#8B8B8B"
+                android:textSize="26sp" />
 
+            <TextView
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="165dp"
+                android:fontFamily="@font/marykate"
+                android:text="Rating"
+                android:textColor="#8B8B8B"
+                android:textSize="24sp" />
 
+            <TextView
+                android:id="@+id/tvMinPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="268dp"
+                android:fontFamily="@font/marykate"
+                android:text="₱₱₱₱₱"
+                android:textColor="#8B8B8B"
+                android:textSize="23sp" />
 
+            <TextView
+                android:id="@+id/tvMaxPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="247dp"
+                android:layout_marginTop="268dp"
+                android:fontFamily="@font/marykate"
+                android:text="₱₱₱₱₱"
+                android:textColor="#8B8B8B"
+                android:textSize="23sp" />
+
+            <ImageButton
+                android:id="@+id/btnBackToListings"
+                android:layout_width="99dp"
+                android:layout_height="93dp"
+                android:layout_gravity="top|start"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Navigates back to listing page"
+                app:srcCompat="@drawable/backtolistings_btn" />
 
         </FrameLayout>
-
-        <!-- Other Layout Components -->
 
     </LinearLayout>
 </ScrollView>
