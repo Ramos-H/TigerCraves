@@ -36,20 +36,34 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
                 "${TigerCraves.Listing.COL_DATE_POSTED} INTEGER" +
                 ")"
 
+        val SQL_TBL_CREATE_REVIEW = "CREATE TABLE ${TigerCraves.Review.TABLE_NAME} (" +
+                "${TigerCraves.Review.COL_ID} INTEGER PRIMARY KEY, " +
+                "${TigerCraves.Review.COL_POSTER} INTEGER, " +
+                "${TigerCraves.Review.COL_LISTING} INTEGER, " +
+                "${TigerCraves.Review.COL_RATING} REAL, " +
+                "${TigerCraves.Review.COL_TITLE} TEXT, " +
+                "${TigerCraves.Review.COL_CONTENT} TEXT, " +
+                "${TigerCraves.Review.COL_DATE_POSTED} INTEGER " +
+                ")"
+
         Log.d("SQL_Stuff", SQL_TBL_CREATE_USER)
         Log.d("SQL_Stuff", SQL_TBL_CREATE_LISTING)
+        Log.d("SQL_Stuff", SQL_TBL_CREATE_REVIEW)
 
         db?.execSQL(SQL_TBL_CREATE_USER)
         db?.execSQL(SQL_TBL_CREATE_LISTING)
+        db?.execSQL(SQL_TBL_CREATE_REVIEW)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int)
     {
         val SQL_TBL_DROP_USER = "DROP TABLE IF EXISTS ${TigerCraves.User.TABLE_NAME}"
         val SQL_TBL_DROP_LISTING = "DROP TABLE IF EXISTS ${TigerCraves.Listing.TABLE_NAME}"
+        val SQL_TBL_DROP_REVIEW = "DROP TABLE IF EXISTS ${TigerCraves.Review.TABLE_NAME}"
 
         db?.execSQL(SQL_TBL_DROP_USER)
         db?.execSQL(SQL_TBL_DROP_LISTING)
+        db?.execSQL(SQL_TBL_DROP_REVIEW)
 
         onCreate(db)
     }
