@@ -1,5 +1,6 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.models.IModel
@@ -50,7 +51,19 @@ class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
 
     override fun add(instance: Listing): Long
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_POSTER, instance.Poster.Id)
+        contentValues.put(COL_NAME, instance.Name)
+        contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_PRICE_MIN, instance.PriceMin)
+        contentValues.put(COL_PRICE_MAX, instance.PriceMax)
+        contentValues.put(COL_RATING, 0.0)
+        contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
+
+        val success = db.insert(TBL_NAME, null, contentValues)
+        return success
     }
 
     override fun update(instance: Listing): Int
