@@ -10,4 +10,4 @@ data class User(
     var Email: String,
     var PasswordHash: String,
     var DateRegistered: Date? = null
-)
+) : IModel

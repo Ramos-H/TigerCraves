@@ -11,4 +11,4 @@ data class Listing(
     var PriceMax: Double?,
     var Rating: Double?,
     var DatePosted: Date? = null
-)
+) : IModel

@@ -10,4 +10,4 @@ data class Review(
     var Title: String,
     var Content: String,
     var DatePosted: Date? = null
-)
+) : IModel
