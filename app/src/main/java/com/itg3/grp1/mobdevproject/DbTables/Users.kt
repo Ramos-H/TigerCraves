@@ -1,10 +1,12 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.models.IModel
+import com.itg3.grp1.mobdevproject.models.User
 
-class Users(dbHandler: SQLiteOpenHelper) : IDbTable(dbHandler)
+class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
 {
     companion object
     {
@@ -43,17 +45,17 @@ class Users(dbHandler: SQLiteOpenHelper) : IDbTable(dbHandler)
         TODO("Not yet implemented")
     }
 
-    override fun add(instance: IModel)
+    override fun add(instance: User)
+    {
+
+    }
+
+    override fun update(instance: User)
     {
         TODO("Not yet implemented")
     }
 
-    override fun update(instance: IModel)
-    {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(instance: IModel)
+    override fun delete(instance: User)
     {
         TODO("Not yet implemented")
     }

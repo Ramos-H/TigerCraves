@@ -3,11 +3,8 @@ package com.itg3.grp1.mobdevproject
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import com.itg3.grp1.mobdevproject.DbTables.IDbTable
-import com.itg3.grp1.mobdevproject.DbTables.Listings
-import com.itg3.grp1.mobdevproject.DbTables.Reviews
-import com.itg3.grp1.mobdevproject.DbTables.Users
+import com.itg3.grp1.mobdevproject.DbTables.*
+import com.itg3.grp1.mobdevproject.models.*
 
 class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION)
 {
@@ -17,9 +14,9 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         val DATABASE_VERSION = 1
     }
 
-    lateinit var users: IDbTable
-    lateinit var listings: IDbTable
-    lateinit var reviews: IDbTable
+    lateinit var users: IDbTable<User>
+    lateinit var listings: IDbTable<Listing>
+    lateinit var reviews: IDbTable<Review>
 
     override fun onCreate(db: SQLiteDatabase?)
     {
@@ -27,7 +24,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         listings = Listings(this)
         reviews = Reviews(this)
 
-        val tables = listOf<IDbTable>(users, listings, reviews)
+        val tables = listOf(users, listings, reviews)
 
         for (table in tables)
         {
@@ -37,7 +34,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int)
     {
-        val tables = listOf<IDbTable>(users, listings, reviews)
+        val tables = listOf(users, listings, reviews)
         for (table in tables)
         {
             table.dropTable(db)

@@ -3,8 +3,9 @@ package com.itg3.grp1.mobdevproject.DbTables
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.models.IModel
+import com.itg3.grp1.mobdevproject.models.Review
 
-class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable(dbHandler)
+class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable<Review>(dbHandler)
 {
     companion object
     {
@@ -46,17 +47,17 @@ class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable(dbHandler)
         TODO("Not yet implemented")
     }
 
-    override fun add(instance: IModel)
+    override fun add(instance: Review)
     {
         TODO("Not yet implemented")
     }
 
-    override fun update(instance: IModel)
+    override fun update(instance: Review)
     {
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: IModel)
+    override fun delete(instance: Review)
     {
         TODO("Not yet implemented")
     }
