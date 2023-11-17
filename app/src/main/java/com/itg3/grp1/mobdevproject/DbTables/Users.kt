@@ -98,7 +98,7 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
         return success
     }
 
-    override fun update(instance: User) : Long
+    override fun update(instance: User) : Int
     {
         TODO("Not yet implemented")
     }

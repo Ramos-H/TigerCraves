@@ -12,6 +12,6 @@ abstract class IDbTable<T: IModel>(newDbHandler: SQLiteOpenHelper)
     abstract fun dropTable(db: SQLiteDatabase?)
     abstract fun getAll() : List<T>
     abstract fun add(instance: T) : Long
-    abstract fun update(instance: T) : Long
+    abstract fun update(instance: T) : Int
     abstract fun delete(instance: T) : Long
 }

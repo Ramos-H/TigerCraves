@@ -52,7 +52,7 @@ class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable<Review>(dbHandler)
         TODO("Not yet implemented")
     }
 
-    override fun update(instance: Review): Long
+    override fun update(instance: Review): Int
     {
         TODO("Not yet implemented")
     }
