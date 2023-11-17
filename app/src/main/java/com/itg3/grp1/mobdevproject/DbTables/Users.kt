@@ -46,7 +46,18 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
 
     override fun add(instance: User): Long
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME_FIRST, instance.NameFirst)
+        contentValues.put(COL_NAME_MIDDLE, instance.NameMiddle)
+        contentValues.put(COL_NAME_LAST, instance.NameLast)
+        contentValues.put(COL_EMAIL, instance.Email)
+        contentValues.put(COL_PASSWORD_HASH, instance.PasswordHash)
+        contentValues.put(COL_DATE_REGISTERED, System.currentTimeMillis())
+
+        val success = db.insert(TBL_NAME, null, contentValues)
+        return success
     }
 
     override fun update(instance: User) : Long
