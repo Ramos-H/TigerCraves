@@ -115,6 +115,8 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
 
     override fun delete(instance: User) : Int
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+        val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 }
