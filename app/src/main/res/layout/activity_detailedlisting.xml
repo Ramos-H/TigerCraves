@@ -1,5 +1,7 @@
 <!-- activity_detailedlisting.xml -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -11,18 +13,39 @@
         android:background="#EC9F54"
         android:contentDescription="">
 
-        <!-- Top Image -->
-        <ImageView
-            android:id="@+id/topImageView"
+        <!-- Container for Top Image and Overlaid Element -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:src="@drawable/tigercard"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:contentDescription="tiger card"/>
+            <!-- Top Image -->
+            <ImageView
+                android:id="@+id/topImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tigercard"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:contentDescription="tiger card"/>
 
-        <!-- Bottom Image -->
+            <!-- Overlaid Element (Placeholder) -->
+
+            <ImageView
+                android:id="@+id/restaurantImg"
+                android:layout_width="327dp"
+                android:layout_height="233dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="150dp"
+                android:src="@drawable/imgplaceholder" />
+
+
+
+
+
+
+        </FrameLayout>
+
+        <!-- Other Layout Components -->
 
     </LinearLayout>
 </ScrollView>
