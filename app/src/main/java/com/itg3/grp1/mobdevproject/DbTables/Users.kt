@@ -113,7 +113,7 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
         return success
     }
 
-    override fun delete(instance: User) : Long
+    override fun delete(instance: User) : Int
     {
         TODO("Not yet implemented")
     }

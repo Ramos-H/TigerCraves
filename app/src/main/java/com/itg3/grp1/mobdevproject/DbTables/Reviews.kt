@@ -57,7 +57,7 @@ class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable<Review>(dbHandler)
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: Review): Long
+    override fun delete(instance: Review): Int
     {
         TODO("Not yet implemented")
     }

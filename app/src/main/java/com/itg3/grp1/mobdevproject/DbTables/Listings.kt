@@ -58,7 +58,7 @@ class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: Listing): Long
+    override fun delete(instance: Listing): Int
     {
         TODO("Not yet implemented")
     }
