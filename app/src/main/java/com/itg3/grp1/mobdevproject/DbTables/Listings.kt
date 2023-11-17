@@ -43,22 +43,22 @@ class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
-    override fun getAll()
+    override fun getAll(): List<Listing>
     {
         TODO("Not yet implemented")
     }
 
-    override fun add(instance: Listing)
+    override fun add(instance: Listing): Long
     {
         TODO("Not yet implemented")
     }
 
-    override fun update(instance: Listing)
+    override fun update(instance: Listing): Long
     {
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: Listing)
+    override fun delete(instance: Listing): Long
     {
         TODO("Not yet implemented")
     }

@@ -42,23 +42,25 @@ class Reviews(dbHandler: SQLiteOpenHelper) : IDbTable<Review>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
-    override fun getAll()
+    override fun getAll(): List<Review>
     {
         TODO("Not yet implemented")
     }
 
-    override fun add(instance: Review)
+    override fun add(instance: Review): Long
     {
         TODO("Not yet implemented")
     }
 
-    override fun update(instance: Review)
+    override fun update(instance: Review): Long
     {
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: Review)
+    override fun delete(instance: Review): Long
     {
         TODO("Not yet implemented")
     }
+
+
 }

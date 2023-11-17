@@ -40,22 +40,22 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
-    override fun getAll()
+    override fun getAll() : List<User>
     {
         TODO("Not yet implemented")
     }
 
-    override fun add(instance: User)
-    {
-
-    }
-
-    override fun update(instance: User)
+    override fun add(instance: User): Long
     {
         TODO("Not yet implemented")
     }
 
-    override fun delete(instance: User)
+    override fun update(instance: User) : Long
+    {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(instance: User) : Long
     {
         TODO("Not yet implemented")
     }
