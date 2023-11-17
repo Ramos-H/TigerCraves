@@ -100,7 +100,17 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
 
     override fun update(instance: User) : Int
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME_FIRST, instance.NameFirst)
+        contentValues.put(COL_NAME_MIDDLE, instance.NameMiddle)
+        contentValues.put(COL_NAME_LAST, instance.NameLast)
+        contentValues.put(COL_EMAIL, instance.Email)
+        contentValues.put(COL_PASSWORD_HASH, instance.PasswordHash)
+
+        val success = db.update(TBL_NAME, contentValues, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 
     override fun delete(instance: User) : Long
