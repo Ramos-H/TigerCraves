@@ -1,9 +1,13 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.models.User
+import java.util.Date
 
 class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
 {
@@ -39,9 +43,43 @@ class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    @SuppressLint("Range")
     override fun getAll() : List<User>
     {
-        TODO("Not yet implemented")
+        val result = ArrayList<User>()
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
+        val db = dbHandler.readableDatabase
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, null)
+        }
+        catch (e: SQLiteException)
+        {
+            db.execSQL(SELECT_QUERY)
+            return ArrayList()
+        }
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                val user = User(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
+                    cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
+                    cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                )
+                result.add(user)
+            }
+            while (cursor.moveToNext())
+        }
+
+        return result
     }
 
     override fun add(instance: User): Long
