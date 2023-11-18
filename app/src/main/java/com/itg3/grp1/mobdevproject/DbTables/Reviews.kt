@@ -48,9 +48,42 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    @SuppressLint("Range")
     override fun getOne(id: Int): Review?
     {
-        TODO("Not yet implemented")
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
+        val db = dbHandler.readableDatabase
+        var result: Review? = null
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, arrayOf(id.toString()))
+
+            if(cursor.moveToFirst())
+            {
+                val posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                val poster = dbHandler.users.getOne(posterId)
+
+                var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
+                var listing = dbHandler.listings.getOne(listingId)
+
+                result = Review(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    poster!!,
+                    listing!!,
+                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                    cursor.getString(cursor.getColumnIndex(COL_TITLE)),
+                    cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                )
+            }
+        }
+        finally
+        {
+            cursor?.close()
+        }
+        return result
     }
 
     @SuppressLint("Range")
@@ -64,56 +97,40 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
         try
         {
             cursor = db.rawQuery(SELECT_QUERY, null)
+
+            if(cursor.moveToFirst())
+            {
+                do
+                {
+                    var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                    var poster = dbHandler.users.getOne(posterId)
+
+                    var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
+                    var listing = dbHandler.listings.getOne(listingId)
+
+                    val review = Review(
+                        cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                        poster!!,
+                        listing!!,
+                        cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                        cursor.getString(cursor.getColumnIndex(COL_TITLE)),
+                        cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
+                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                    )
+
+                    result.add(review)
+                }
+                while (cursor.moveToNext())
+            }
         }
         catch (e: SQLiteException)
         {
             db.execSQL(SELECT_QUERY)
             return ArrayList()
         }
-
-        if(cursor.moveToFirst())
+        finally
         {
-            do
-            {
-                var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                var poster : User = User(posterId, "", "", "", "", "", null)
-
-                var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
-                var listing : Listing = Listing(listingId, poster, "", "", null, null, null, null)
-
-                val users = dbHandler.users.getAll()
-                for(user in users)
-                {
-                    if(user.Id == posterId)
-                    {
-                        poster = user
-                        break
-                    }
-                }
-
-                val listings = dbHandler.listings.getAll()
-                for(listingEntry in listings)
-                {
-                    if(listingEntry.Id == listingId)
-                    {
-                        listing = listingEntry
-                        break
-                    }
-                }
-
-                val review = Review(
-                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
-                    poster,
-                    listing,
-                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
-                    cursor.getString(cursor.getColumnIndex(COL_TITLE)),
-                    cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
-                )
-
-                result.add(review)
-            }
-            while (cursor.moveToNext())
+            cursor?.close()
         }
 
         return result
