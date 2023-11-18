@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <!-- Default text color -->
     <color name="defaultText">#000000</color>
@@ -11,4 +12,7 @@
 
     <!-- Error border color -->
     <color name="errorBorder">#FF0000</color>
+  
+    <color name="colorDefaultText">#000000</color>
+    <color name="colorError">#FF0000</color>
 </resources>
