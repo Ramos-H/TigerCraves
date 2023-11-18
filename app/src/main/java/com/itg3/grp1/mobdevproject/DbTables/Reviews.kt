@@ -1,5 +1,6 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.itg3.grp1.mobdevproject.DatabaseHandler
@@ -49,7 +50,18 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun add(instance: Review): Long
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_POSTER, instance.Poster.Id)
+        contentValues.put(COL_LISTING, instance.Listing.Id)
+        contentValues.put(COL_RATING, instance.Rating)
+        contentValues.put(COL_TITLE, instance.Title)
+        contentValues.put(COL_CONTENT, instance.Content)
+        contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
+
+        val success = db.insert(TBL_NAME, null, contentValues)
+        return success
     }
 
     override fun update(instance: Review): Int
