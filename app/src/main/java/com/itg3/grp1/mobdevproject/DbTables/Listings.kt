@@ -49,9 +49,40 @@ class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    @SuppressLint("Range")
     override fun getOne(id: Int): Listing?
     {
-        TODO("Not yet implemented")
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
+        val db = dbHandler.readableDatabase
+        var result: Listing? = null
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, arrayOf(id.toString()))
+
+            if(cursor.moveToFirst())
+            {
+                val posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                val poster = dbHandler.users.getOne(posterId)
+
+                result = Listing(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    poster!!,
+                    cursor.getString(cursor.getColumnIndex(COL_NAME)),
+                    cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                )
+            }
+        }
+        finally
+        {
+            cursor?.close()
+        }
+        return result
     }
 
     @SuppressLint("Range")
@@ -65,44 +96,38 @@ class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
         try
         {
             cursor = db.rawQuery(SELECT_QUERY, null)
+
+            if(cursor.moveToFirst())
+            {
+                do
+                {
+                    var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                    var poster = dbHandler.users.getOne(posterId)
+
+                    val listing = Listing(
+                        cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                        poster!!,
+                        cursor.getString(cursor.getColumnIndex(COL_NAME)),
+                        cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                    )
+
+                    result.add(listing)
+                }
+                while (cursor.moveToNext())
+            }
         }
         catch (e: SQLiteException)
         {
             db.execSQL(SELECT_QUERY)
             return ArrayList()
         }
-
-        if(cursor.moveToFirst())
+        finally
         {
-            do
-            {
-                var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                var poster : User = User(posterId, "", "", "", "", "", Date())
-
-                val users = dbHandler.users.getAll()
-                for(user in users)
-                {
-                    if(user.Id == posterId)
-                    {
-                        poster = user
-                        break
-                    }
-                }
-
-                val listing = Listing(
-                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
-                    poster,
-                    cursor.getString(cursor.getColumnIndex(COL_NAME)),
-                    cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
-                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
-                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
-                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
-                )
-
-                result.add(listing)
-            }
-            while (cursor.moveToNext())
+            cursor?.close()
         }
 
         return result

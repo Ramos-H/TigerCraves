@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         review2.Id = 2
 
         Log.d("SQL Get user", db.users.getOne(1).toString())
+        Log.d("SQL Get listing", db.listings.getOne(1).toString())
+
         for (user in db.users.getAll()) Log.d("SQL Get users", user.toString())
         for (listing in db.listings.getAll()) Log.d("SQL Get listing", listing.toString())
         for (review in db.reviews.getAll()) Log.d("SQL Get review", review.toString())
