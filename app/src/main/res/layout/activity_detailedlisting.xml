@@ -202,7 +202,7 @@
                     </androidx.cardview.widget.CardView>
 
 
-                    <!-- Repeat this CardView block for each review -->
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="200dp"
                         android:layout_height="330dp"

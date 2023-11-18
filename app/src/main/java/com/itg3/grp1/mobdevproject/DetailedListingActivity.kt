@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 class DetailedListingActivity : AppCompatActivity() {
 
-    // Declare titleValidationText and contentValidationText as properties of the class
+    // Declare titleValidationText, contentValidationText, and ratingValidationText as properties of the class
     private lateinit var titleValidationText: TextView
     private lateinit var contentValidationText: TextView
+    private lateinit var ratingValidationText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +53,10 @@ class DetailedListingActivity : AppCompatActivity() {
         val titleEditText = dialogView.findViewById<EditText>(R.id.dialogTitleEditText)
         val contentEditText = dialogView.findViewById<EditText>(R.id.dialogContentEditText)
 
-        // Initialize titleValidationText and contentValidationText
+        // Initialize titleValidationText, contentValidationText, and ratingValidationText
         titleValidationText = dialogView.findViewById(R.id.dialogTitleValidationText)
         contentValidationText = dialogView.findViewById(R.id.dialogContentValidationText)
+        ratingValidationText = dialogView.findViewById(R.id.dialogRatingValidationText)
 
         val postButton = dialogView.findViewById<Button>(R.id.dialogPostButton)
         val cancelButton = dialogView.findViewById<Button>(R.id.dialogCancelButton)
@@ -69,7 +71,7 @@ class DetailedListingActivity : AppCompatActivity() {
             val title = titleEditText.text.toString().trim()
             val content = contentEditText.text.toString().trim()
 
-            if (validateInputFields(title, content, titleEditText, contentEditText)) {
+            if (validateInputFields(title, content, rating, titleEditText, contentEditText)) {
                 // Both fields are valid, hide the dialog and show a toast
                 alertDialog.dismiss()
                 showToast("Review Posted!")
@@ -83,10 +85,15 @@ class DetailedListingActivity : AppCompatActivity() {
         }
     }
 
-
     // Function to validate input fields
-    private fun validateInputFields(title: String, content: String, titleEditText: EditText, contentEditText: EditText): Boolean {
-        // Validation logic for title and content
+    private fun validateInputFields(
+        title: String,
+        content: String,
+        rating: Float,
+        titleEditText: EditText,
+        contentEditText: EditText
+    ): Boolean {
+        // Validation logic for title, content, and rating
         var isValid = true
 
         if (title.isEmpty()) {
@@ -109,7 +116,27 @@ class DetailedListingActivity : AppCompatActivity() {
             clearValidationErrors(contentEditText, contentValidationText)
         }
 
+        if (rating == 0.0f) {
+            showValidationErrorForRating("Rating is required")
+            isValid = false
+        } else {
+            clearValidationErrorsForRating()
+        }
+
         return isValid
+    }
+
+    // Function to show validation error for rating
+    private fun showValidationErrorForRating(message: String) {
+        ratingValidationText.text = message
+        ratingValidationText.visibility = View.VISIBLE
+        ratingValidationText.setTextColor(resources.getColor(R.color.errorText))
+    }
+
+    // Function to clear validation errors for rating
+    private fun clearValidationErrorsForRating() {
+        ratingValidationText.setTextColor(resources.getColor(R.color.defaultText))
+        ratingValidationText.visibility = View.INVISIBLE
     }
 
     // Function to show validation error

@@ -9,13 +9,24 @@
     <RatingBar
         android:id="@+id/dialogRatingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="47dp"
         android:layout_gravity="center"
         android:numStars="5"
         android:progressBackgroundTint="#E4E3E3"
         android:progressTint="#FFB600"
         android:rating="0.0"
         android:stepSize="1.0" />
+
+    <!-- TextView for rating validation -->
+    <TextView
+        android:id="@+id/dialogRatingValidationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating is required"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center"/>
 
     <!-- Title Input -->
     <EditText
@@ -81,6 +92,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#D6D6D6"
             android:text="Cancel" />
 
     </LinearLayout>
