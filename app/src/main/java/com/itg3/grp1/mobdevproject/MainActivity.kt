@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun TestDb()
     {
-        val db = DatabaseHandler(this)
+        val db = DatabaseHelper(this)
 
         val user1 = User(null, "Hans", "Rebeta", "Ramos", "hans@mail.com", "mypass", null)
         val user2 = User(null, "Hans Simon", "Rebeta2", "Ramosy", "hans2@mail.com", "mypass2", null)
@@ -46,21 +46,21 @@ class MainActivity : AppCompatActivity() {
         Log.d("SQL Get review", db.reviews.getOne(1).toString())
 
         for (user in db.users.getAll()) Log.d("SQL Get users", user.toString())
-        for (listing in db.listings.getAll()) Log.d("SQL Get listing", listing.toString())
-        for (review in db.reviews.getAll()) Log.d("SQL Get review", review.toString())
+        for (listing in db.listings.getAll()) Log.d("SQL Get listings", listing.toString())
+        for (review in db.reviews.getAll()) Log.d("SQL Get reviews", review.toString())
 
         db.users.update(User(1, "Spider", "-", "Man", "spidey@mail.com", "spideypass", null))
         db.listings.update(Listing(1, user1, "Bon Appetea", "Valley 1", 75.0, 200.0, 5.0, null))
         db.reviews.update(Review(1, user1, listing1, 3.0, "Not the Best", "Boompanes", null))
         for (user in db.users.getAll()) Log.d("SQL Get users 2", user.toString())
-        for (listing in db.listings.getAll()) Log.d("SQL Get listing 2", listing.toString())
-        for (review in db.reviews.getAll()) Log.d("SQL Get review 2", review.toString())
+        for (listing in db.listings.getAll()) Log.d("SQL Get listings 2", listing.toString())
+        for (review in db.reviews.getAll()) Log.d("SQL Get reviews 2", review.toString())
 
         db.users.delete(User(1, "", "", "", "", "", null))
         db.listings.delete(Listing(1, user1, "", "", null, null, null, null))
         db.reviews.delete(Review(1, user1, listing1, 0.0, "", ""))
         for (user in db.users.getAll()) Log.d("SQL Get users 3", user.toString())
-        for (listing in db.listings.getAll()) Log.d("SQL Get listing 3", listing.toString())
-        for (review in db.reviews.getAll()) Log.d("SQL Get review 3", review.toString())
+        for (listing in db.listings.getAll()) Log.d("SQL Get listings 3", listing.toString())
+        for (review in db.reviews.getAll()) Log.d("SQL Get reviews 3", review.toString())
     }
 }

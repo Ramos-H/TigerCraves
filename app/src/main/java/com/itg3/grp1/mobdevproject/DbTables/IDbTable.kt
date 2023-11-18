@@ -1,13 +1,12 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
-import com.itg3.grp1.mobdevproject.DatabaseHandler
+import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.IModel
 
-abstract class IDbTable<T: IModel>(newDbHandler: DatabaseHandler)
+abstract class IDbTable<T: IModel>(newDbHelper: DatabaseHelper)
 {
-    val dbHandler = newDbHandler
+    val dbHelper = newDbHelper
 
     abstract fun createTable(db: SQLiteDatabase?)
     abstract fun dropTable(db: SQLiteDatabase?)

@@ -5,13 +5,11 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import com.itg3.grp1.mobdevproject.DatabaseHandler
-import com.itg3.grp1.mobdevproject.models.Listing
+import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.Review
-import com.itg3.grp1.mobdevproject.models.User
 import java.util.Date
 
-class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
+class Reviews(dbHandler: DatabaseHelper) : IDbTable<Review>(dbHandler)
 {
     companion object
     {
@@ -52,7 +50,7 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
     override fun getOne(id: Int): Review?
     {
         val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
-        val db = dbHandler.readableDatabase
+        val db = dbHelper.readableDatabase
         var result: Review? = null
         var cursor: Cursor? = null
 
@@ -63,10 +61,10 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
             if(cursor.moveToFirst())
             {
                 val posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                val poster = dbHandler.users.getOne(posterId)
+                val poster = dbHelper.users.getOne(posterId)
 
                 var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
-                var listing = dbHandler.listings.getOne(listingId)
+                var listing = dbHelper.listings.getOne(listingId)
 
                 result = Review(
                     cursor.getInt(cursor.getColumnIndex(COL_ID)),
@@ -91,7 +89,7 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
     {
         val result = ArrayList<Review>()
         val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
-        val db = dbHandler.readableDatabase
+        val db = dbHelper.readableDatabase
         var cursor: Cursor? = null
 
         try
@@ -103,10 +101,10 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
                 do
                 {
                     var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                    var poster = dbHandler.users.getOne(posterId)
+                    var poster = dbHelper.users.getOne(posterId)
 
                     var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
-                    var listing = dbHandler.listings.getOne(listingId)
+                    var listing = dbHelper.listings.getOne(listingId)
 
                     val review = Review(
                         cursor.getInt(cursor.getColumnIndex(COL_ID)),
@@ -138,7 +136,7 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun add(instance: Review): Long
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues()
         contentValues.put(COL_POSTER, instance.Poster.Id)
@@ -154,7 +152,7 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun update(instance: Review): Int
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues()
         contentValues.put(COL_RATING, instance.Rating)
@@ -167,7 +165,7 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun delete(instance: Review): Int
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
         val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
         return success
     }

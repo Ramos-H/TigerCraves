@@ -5,12 +5,11 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import android.database.sqlite.SQLiteOpenHelper
-import com.itg3.grp1.mobdevproject.DatabaseHandler
+import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.User
 import java.util.Date
 
-class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
+class Users(newDbHandler: DatabaseHelper) : IDbTable<User>(newDbHandler)
 {
     companion object
     {
@@ -48,7 +47,7 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
     override fun getOne(id: Int): User?
     {
         val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
-        val db = dbHandler.readableDatabase
+        val db = dbHelper.readableDatabase
         var result: User? = null
         var cursor: Cursor? = null
 
@@ -81,7 +80,7 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
     {
         val result = ArrayList<User>()
         val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
-        val db = dbHandler.readableDatabase
+        val db = dbHelper.readableDatabase
         var cursor: Cursor? = null
 
         try
@@ -121,7 +120,7 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
 
     override fun add(instance: User): Long
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues()
         contentValues.put(COL_NAME_FIRST, instance.NameFirst)
@@ -137,7 +136,7 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
 
     override fun update(instance: User) : Int
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues()
         contentValues.put(COL_NAME_FIRST, instance.NameFirst)
@@ -152,7 +151,7 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
 
     override fun delete(instance: User) : Int
     {
-        val db = dbHandler.writableDatabase
+        val db = dbHelper.writableDatabase
         val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
         return success
     }
