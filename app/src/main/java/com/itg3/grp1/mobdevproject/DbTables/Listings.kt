@@ -122,7 +122,17 @@ class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
 
     override fun update(instance: Listing): Int
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME, instance.Name)
+        contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_PRICE_MIN, instance.PriceMin)
+        contentValues.put(COL_PRICE_MAX, instance.PriceMax)
+        contentValues.put(COL_RATING, instance.Rating)
+
+        val success = db.update(TBL_NAME, contentValues, "${COL_ID} = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 
     override fun delete(instance: Listing): Int
