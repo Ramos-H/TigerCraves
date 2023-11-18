@@ -1,10 +1,15 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
+import android.database.sqlite.SQLiteException
 import com.itg3.grp1.mobdevproject.DatabaseHandler
+import com.itg3.grp1.mobdevproject.models.Listing
 import com.itg3.grp1.mobdevproject.models.Review
+import com.itg3.grp1.mobdevproject.models.User
+import java.util.Date
 
 class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 {
@@ -43,9 +48,70 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    @SuppressLint("Range")
     override fun getAll(): List<Review>
     {
-        TODO("Not yet implemented")
+        val result = ArrayList<Review>()
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
+        val db = dbHandler.readableDatabase
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, null)
+        }
+        catch (e: SQLiteException)
+        {
+            db.execSQL(SELECT_QUERY)
+            return ArrayList()
+        }
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                var poster : User = User(posterId, "", "", "", "", "", null)
+
+                var listingId = cursor.getInt(cursor.getColumnIndex(COL_LISTING))
+                var listing : Listing = Listing(listingId, poster, "", "", null, null, null, null)
+
+                val users = dbHandler.users.getAll()
+                for(user in users)
+                {
+                    if(user.Id == posterId)
+                    {
+                        poster = user
+                        break
+                    }
+                }
+
+                val listings = dbHandler.listings.getAll()
+                for(listingEntry in listings)
+                {
+                    if(listingEntry.Id == listingId)
+                    {
+                        listing = listingEntry
+                        break
+                    }
+                }
+
+                val review = Review(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    poster,
+                    listing,
+                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                    cursor.getString(cursor.getColumnIndex(COL_TITLE)),
+                    cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                )
+
+                result.add(review)
+            }
+            while (cursor.moveToNext())
+        }
+
+        return result
     }
 
     override fun add(instance: Review): Long
