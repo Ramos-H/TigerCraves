@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MobDevProject" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.MobDevProject" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.MobDevProject" parent="Base.Theme.MobDevProject" />
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#737373</item>
+        <item name="colorControlActivated">#FFB800</item>
+    </style>
 </resources>

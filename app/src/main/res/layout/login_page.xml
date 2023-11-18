@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group_1mainbg"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="391dp"
+        android:layout_height="295dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922">
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="278dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_1btnoutline"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Email"
+            android:inputType="text"
+
+            android:textColor="#000000"
+            android:textColorHint="#5E574242" />
+
+        <TextView
+            android:id="@+id/validationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Test"
+            android:textColor="@android:color/holo_red_light">
+
+        </TextView>
+
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="278dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rectangle_1btnoutline"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColor="#000000"
+            android:textColorHint="#5E574242" />
+
+        <TextView
+            android:id="@+id/validationTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Test"
+            android:textColor="@android:color/holo_red_light">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="157dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="9dp"
+            android:foreground="@drawable/loginbtn"
+            android:onClick="login" />
+
+        <LinearLayout
+            android:layout_width="274dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.87">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/marykate"
+                android:gravity="end"
+                android:text="Don't have an Account?"
+                android:textColor="#E05D5D"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.87" />
+
+            <Button
+                android:id="@+id/regBtn"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:foreground="@drawable/group_2registerbtn"
+                android:onClick="register" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
