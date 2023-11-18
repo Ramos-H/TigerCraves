@@ -6,10 +6,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import com.itg3.grp1.mobdevproject.DatabaseHandler
 import com.itg3.grp1.mobdevproject.models.User
 import java.util.Date
 
-class Users(newDbHandler: SQLiteOpenHelper) : IDbTable<User>(newDbHandler)
+class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
 {
     companion object
     {

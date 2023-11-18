@@ -1,12 +1,17 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import com.itg3.grp1.mobdevproject.models.IModel
+import com.itg3.grp1.mobdevproject.DatabaseHandler
 import com.itg3.grp1.mobdevproject.models.Listing
+import com.itg3.grp1.mobdevproject.models.User
+import java.util.Date
 
-class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
+class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
 {
     companion object
     {
@@ -44,9 +49,58 @@ class Listings(dbHandler: SQLiteOpenHelper) : IDbTable<Listing>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    @SuppressLint("Range")
     override fun getAll(): List<Listing>
     {
-        TODO("Not yet implemented")
+        val result = ArrayList<Listing>()
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
+        val db = dbHandler.readableDatabase
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, null)
+        }
+        catch (e: SQLiteException)
+        {
+            db.execSQL(SELECT_QUERY)
+            return ArrayList()
+        }
+
+        if(cursor.moveToFirst())
+        {
+            do
+            {
+                var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                var poster : User = User(posterId, "", "", "", "", "", Date())
+
+                val users = dbHandler.users.getAll()
+                for(user in users)
+                {
+                    if(user.Id == posterId)
+                    {
+                        poster = user
+                        break
+                    }
+                }
+
+                val listing = Listing(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    poster,
+                    cursor.getString(cursor.getColumnIndex(COL_NAME)),
+                    cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                )
+
+                result.add(listing)
+            }
+            while (cursor.moveToNext())
+        }
+
+        return result
     }
 
     override fun add(instance: Listing): Long

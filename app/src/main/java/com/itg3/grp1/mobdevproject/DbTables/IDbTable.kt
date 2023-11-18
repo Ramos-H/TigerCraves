@@ -2,9 +2,10 @@ package com.itg3.grp1.mobdevproject.DbTables
 
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.itg3.grp1.mobdevproject.DatabaseHandler
 import com.itg3.grp1.mobdevproject.models.IModel
 
-abstract class IDbTable<T: IModel>(newDbHandler: SQLiteOpenHelper)
+abstract class IDbTable<T: IModel>(newDbHandler: DatabaseHandler)
 {
     val dbHandler = newDbHandler
 
