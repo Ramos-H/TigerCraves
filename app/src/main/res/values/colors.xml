@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Default text color -->
+    <color name="defaultText">#000000</color>
+
+    <!-- Default border color -->
+    <color name="defaultBorder">#E4E3E3</color>
+
+    <!-- Error text color -->
+    <color name="errorText">#FF0000</color>
+
+    <!-- Error border color -->
+    <color name="errorBorder">#FF0000</color>
+  
+    <color name="colorDefaultText">#000000</color>
+    <color name="colorError">#FF0000</color>
 </resources>
