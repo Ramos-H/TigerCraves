@@ -137,123 +137,70 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Repeat this CardView block for each review -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="200dp"
                         android:layout_height="330dp"
                         android:layout_marginEnd="16dp"
                         app:cardCornerRadius="8dp">
 
-                        <LinearLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/cardTitleTextView1"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Review Title"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <TextView
-                                android:id="@+id/cardRatingTextView1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Rating: 4.5"
-                                android:textSize="16sp" />
+                                <TextView
+                                    android:id="@+id/cardTitleTextView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review Title"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/cardNameTextView1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Posted by:"
-                                android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/cardRatingTextView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rating: 4.5"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/cardDatePostedTextView1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Date Posted: 2023-11-30"
-                                android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/cardNameTextView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted by:"
+                                    android:textSize="15sp" />
 
-                            <View
-                                android:id="@+id/divider1"
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:background="?android:attr/listDivider" />
+                                <TextView
+                                    android:id="@+id/cardDatePostedTextView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Posted: 2023-11-30"
+                                    android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/cardContentTextView1"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                <View
+                                    android:id="@+id/divider1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <TextView
+                                    android:id="@+id/cardContentTextView1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </ScrollView>
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Repeat this CardView block for each review -->
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="200dp"
-                        android:layout_height="330dp"
-                        android:layout_marginEnd="16dp"
-                        app:cardCornerRadius="8dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <TextView
-                                android:id="@+id/cardTitleTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Review Title"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/cardRatingTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Rating: 4.5"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/cardNameTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Posted by:"
-                                android:textSize="15sp" />
-
-                            <TextView
-                                android:id="@+id/cardDatePostedTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Date Posted: 2023-11-30"
-                                android:textSize="14sp" />
-
-                            <View
-                                android:id="@+id/divider2"
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:background="?android:attr/listDivider" />
-
-                            <TextView
-                                android:id="@+id/cardContentTextView2"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
-                                android:textSize="14sp" />
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
 
                     <!-- Repeat this CardView block for each review -->
                     <androidx.cardview.widget.CardView
@@ -262,176 +209,256 @@
                         android:layout_marginEnd="16dp"
                         app:cardCornerRadius="8dp">
 
-                        <LinearLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/cardTitleTextView3"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Review Title"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <TextView
-                                android:id="@+id/cardRatingTextView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Rating: 4.5"
-                                android:textSize="16sp" />
+                                <TextView
+                                    android:id="@+id/cardTitleTextView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review Title"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/cardNameTextView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Posted by:"
-                                android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/cardRatingTextView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rating: 4.5"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/cardDatePostedTextView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Date Posted: 2023-11-30"
-                                android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/cardNameTextView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted by:"
+                                    android:textSize="15sp" />
 
-                            <View
-                                android:id="@+id/divider3"
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:background="?android:attr/listDivider" />
+                                <TextView
+                                    android:id="@+id/cardDatePostedTextView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Posted: 2023-11-30"
+                                    android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/cardContentTextView3"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                <View
+                                    android:id="@+id/divider2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <TextView
+                                    android:id="@+id/cardContentTextView2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </ScrollView>
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Repeat this CardView block for each review -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="200dp"
                         android:layout_height="330dp"
                         android:layout_marginEnd="16dp"
                         app:cardCornerRadius="8dp">
 
-                        <LinearLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/cardTitleTextView4"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Review Title"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <TextView
-                                android:id="@+id/cardRatingTextView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Rating: 4.5"
-                                android:textSize="16sp" />
+                                <TextView
+                                    android:id="@+id/cardTitleTextView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review Title"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/cardNameTextView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Posted by:"
-                                android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/cardRatingTextView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rating: 4.5"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/cardDatePostedTextView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Date Posted: 2023-11-30"
-                                android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/cardNameTextView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted by:"
+                                    android:textSize="15sp" />
 
-                            <View
-                                android:id="@+id/divider4"
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:background="?android:attr/listDivider" />
+                                <TextView
+                                    android:id="@+id/cardDatePostedTextView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Posted: 2023-11-30"
+                                    android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/cardContentTextView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                <View
+                                    android:id="@+id/divider3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <TextView
+                                    android:id="@+id/cardContentTextView3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </ScrollView>
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Repeat this CardView block for each review -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="200dp"
                         android:layout_height="330dp"
                         android:layout_marginEnd="16dp"
                         app:cardCornerRadius="8dp">
 
-                        <LinearLayout
+                        <ScrollView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:layout_height="match_parent">
 
-                            <TextView
-                                android:id="@+id/cardTitleTextView5"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Review Title"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
-                            <TextView
-                                android:id="@+id/cardRatingTextView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Rating: 4.5"
-                                android:textSize="16sp" />
+                                <TextView
+                                    android:id="@+id/cardTitleTextView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review Title"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/cardNameTextView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Posted by:"
-                                android:textSize="15sp" />
+                                <TextView
+                                    android:id="@+id/cardRatingTextView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rating: 4.5"
+                                    android:textSize="16sp" />
 
-                            <TextView
-                                android:id="@+id/cardDatePostedTextView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Date Posted: 2023-11-30"
-                                android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/cardNameTextView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted by:"
+                                    android:textSize="15sp" />
 
-                            <View
-                                android:id="@+id/divider5"
-                                android:layout_width="match_parent"
-                                android:layout_height="3dp"
-                                android:background="?android:attr/listDivider" />
+                                <TextView
+                                    android:id="@+id/cardDatePostedTextView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Posted: 2023-11-30"
+                                    android:textSize="14sp" />
 
-                            <TextView
-                                android:id="@+id/cardContentTextView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
-                                android:textSize="14sp" />
-                        </LinearLayout>
+                                <View
+                                    android:id="@+id/divider4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <TextView
+                                    android:id="@+id/cardContentTextView4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </ScrollView>
 
                     </androidx.cardview.widget.CardView>
-                    
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="200dp"
+                        android:layout_height="330dp"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:id="@+id/cardTitleTextView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review Title"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/cardRatingTextView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Rating: 4.5"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/cardNameTextView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Posted by:"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/cardDatePostedTextView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Date Posted: 2023-11-30"
+                                    android:textSize="14sp" />
+
+                                <View
+                                    android:id="@+id/divider5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="3dp"
+                                    android:background="?android:attr/listDivider" />
+
+                                <TextView
+                                    android:id="@+id/cardContentTextView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+
+                        </ScrollView>
+
+                    </androidx.cardview.widget.CardView>
+
 
                 </LinearLayout>
             </HorizontalScrollView>
