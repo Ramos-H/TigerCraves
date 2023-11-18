@@ -145,7 +145,9 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun delete(instance: Review): Int
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+        val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 
 

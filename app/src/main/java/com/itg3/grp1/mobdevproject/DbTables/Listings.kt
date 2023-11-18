@@ -138,7 +138,7 @@ class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
     override fun delete(instance: Listing): Int
     {
         val db = dbHandler.writableDatabase
-        val success = db.delete(TBL_NAME, "${COL_ID} = ?", arrayOf(instance.Id.toString()))
+        val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
         return success
     }
 }
