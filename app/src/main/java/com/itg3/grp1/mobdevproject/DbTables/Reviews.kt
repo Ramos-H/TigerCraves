@@ -48,6 +48,11 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    override fun getOne(id: Int): Review?
+    {
+        TODO("Not yet implemented")
+    }
+
     @SuppressLint("Range")
     override fun getAll(): List<Review>
     {
@@ -149,6 +154,4 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
         val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
         return success
     }
-
-
 }

@@ -49,6 +49,11 @@ class Listings(dbHandler: DatabaseHandler) : IDbTable<Listing>(dbHandler)
         db?.execSQL(SQL_TBL_DROP)
     }
 
+    override fun getOne(id: Int): Listing?
+    {
+        TODO("Not yet implemented")
+    }
+
     @SuppressLint("Range")
     override fun getAll(): List<Listing>
     {
