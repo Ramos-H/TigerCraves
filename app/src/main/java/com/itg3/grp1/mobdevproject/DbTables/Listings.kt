@@ -1,9 +1,15 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.itg3.grp1.mobdevproject.models.IModel
+import android.database.sqlite.SQLiteException
+import com.itg3.grp1.mobdevproject.DatabaseHelper
+import com.itg3.grp1.mobdevproject.models.Listing
+import java.util.Date
 
-class Listings : IDbTable
+class Listings(dbHandler: DatabaseHelper) : IDbTable<Listing>(dbHandler)
 {
     companion object
     {
@@ -28,7 +34,7 @@ class Listings : IDbTable
                 "$COL_PRICE_MIN REAL, " +
                 "$COL_PRICE_MAX REAL, " +
                 "$COL_RATING REAL, " +
-                "$COL_DATE_POSTED INTEGER DEFAULT(unixepoch()) NOT NULL, " +
+                "$COL_DATE_POSTED INTEGER NOT NULL, " +
                 "FOREIGN KEY ($COL_POSTER) REFERENCES ${Users.TBL_NAME}(${Users.COL_ID}) ON DELETE CASCADE" +
                 ")"
 
@@ -41,23 +47,126 @@ class Listings : IDbTable
         db?.execSQL(SQL_TBL_DROP)
     }
 
-    override fun getAll()
+    @SuppressLint("Range")
+    override fun getOne(id: Int): Listing?
     {
-        TODO("Not yet implemented")
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
+        val db = dbHelper.readableDatabase
+        var result: Listing? = null
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, arrayOf(id.toString()))
+
+            if(cursor.moveToFirst())
+            {
+                val posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                val poster = dbHelper.users.getOne(posterId)
+
+                result = Listing(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    poster!!,
+                    cursor.getString(cursor.getColumnIndex(COL_NAME)),
+                    cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
+                    cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                )
+            }
+        }
+        finally
+        {
+            cursor?.close()
+        }
+        return result
     }
 
-    override fun add(instance: IModel)
+    @SuppressLint("Range")
+    override fun getAll(): List<Listing>
     {
-        TODO("Not yet implemented")
+        val result = ArrayList<Listing>()
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
+        val db = dbHelper.readableDatabase
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, null)
+
+            if(cursor.moveToFirst())
+            {
+                do
+                {
+                    var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
+                    var poster = dbHelper.users.getOne(posterId)
+
+                    val listing = Listing(
+                        cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                        poster!!,
+                        cursor.getString(cursor.getColumnIndex(COL_NAME)),
+                        cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
+                        cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
+                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                    )
+
+                    result.add(listing)
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        catch (e: SQLiteException)
+        {
+            db.execSQL(SELECT_QUERY)
+            return ArrayList()
+        }
+        finally
+        {
+            cursor?.close()
+        }
+
+        return result
     }
 
-    override fun update(instance: IModel)
+    override fun add(instance: Listing): Long
     {
-        TODO("Not yet implemented")
+        val db = dbHelper.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_POSTER, instance.Poster.Id)
+        contentValues.put(COL_NAME, instance.Name)
+        contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_PRICE_MIN, instance.PriceMin)
+        contentValues.put(COL_PRICE_MAX, instance.PriceMax)
+        contentValues.put(COL_RATING, 0.0)
+        contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
+
+        val success = db.insert(TBL_NAME, null, contentValues)
+        return success
     }
 
-    override fun delete(instance: IModel)
+    override fun update(instance: Listing): Int
     {
-        TODO("Not yet implemented")
+        val db = dbHelper.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME, instance.Name)
+        contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_PRICE_MIN, instance.PriceMin)
+        contentValues.put(COL_PRICE_MAX, instance.PriceMax)
+        contentValues.put(COL_RATING, instance.Rating)
+
+        val success = db.update(TBL_NAME, contentValues, "${COL_ID} = ?", arrayOf(instance.Id.toString()))
+        return success
+    }
+
+    override fun delete(instance: Listing): Int
+    {
+        val db = dbHelper.writableDatabase
+        val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 }

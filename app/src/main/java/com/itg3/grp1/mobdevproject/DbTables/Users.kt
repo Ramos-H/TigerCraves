@@ -1,9 +1,15 @@
 package com.itg3.grp1.mobdevproject.DbTables
 
+import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import com.itg3.grp1.mobdevproject.models.IModel
+import android.database.sqlite.SQLiteException
+import com.itg3.grp1.mobdevproject.DatabaseHelper
+import com.itg3.grp1.mobdevproject.models.User
+import java.util.Date
 
-class Users : IDbTable
+class Users(newDbHandler: DatabaseHelper) : IDbTable<User>(newDbHandler)
 {
     companion object
     {
@@ -26,7 +32,7 @@ class Users : IDbTable
                 "$COL_NAME_LAST TEXT NOT NULL, " +
                 "$COL_EMAIL TEXT NOT NULL, " +
                 "$COL_PASSWORD_HASH TEXT NOT NULL, " +
-                "$COL_DATE_REGISTERED INTEGER DEFAULT(unixepoch()) NOT NULL" +
+                "$COL_DATE_REGISTERED INTEGER NOT NULL" +
                 ")"
         db?.execSQL(SQL_TBL_CREATE)
     }
@@ -37,23 +43,116 @@ class Users : IDbTable
         db?.execSQL(SQL_TBL_DROP)
     }
 
-    override fun getAll()
+    @SuppressLint("Range")
+    override fun getOne(id: Int): User?
     {
-        TODO("Not yet implemented")
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
+        val db = dbHelper.readableDatabase
+        var result: User? = null
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, arrayOf(id.toString()))
+
+            if(cursor.moveToFirst())
+            {
+                result = User(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
+                    cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
+                    cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                )
+            }
+        }
+        finally
+        {
+            cursor?.close()
+        }
+        return result
     }
 
-    override fun add(instance: IModel)
+    @SuppressLint("Range")
+    override fun getAll() : List<User>
     {
-        TODO("Not yet implemented")
+        val result = ArrayList<User>()
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME"
+        val db = dbHelper.readableDatabase
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, null)
+
+            if(cursor.moveToFirst())
+            {
+                do
+                {
+                    val user = User(
+                        cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
+                        cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
+                        cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
+                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                    )
+                    result.add(user)
+                }
+                while (cursor.moveToNext())
+            }
+        }
+        catch (e: SQLiteException)
+        {
+            db.execSQL(SELECT_QUERY)
+            return ArrayList()
+        }
+        finally
+        {
+            cursor?.close()
+        }
+
+        return result
     }
 
-    override fun update(instance: IModel)
+    override fun add(instance: User): Long
     {
-        TODO("Not yet implemented")
+        val db = dbHelper.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME_FIRST, instance.NameFirst)
+        contentValues.put(COL_NAME_MIDDLE, instance.NameMiddle)
+        contentValues.put(COL_NAME_LAST, instance.NameLast)
+        contentValues.put(COL_EMAIL, instance.Email)
+        contentValues.put(COL_PASSWORD_HASH, instance.PasswordHash)
+        contentValues.put(COL_DATE_REGISTERED, System.currentTimeMillis())
+
+        val success = db.insert(TBL_NAME, null, contentValues)
+        return success
     }
 
-    override fun delete(instance: IModel)
+    override fun update(instance: User) : Int
     {
-        TODO("Not yet implemented")
+        val db = dbHelper.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_NAME_FIRST, instance.NameFirst)
+        contentValues.put(COL_NAME_MIDDLE, instance.NameMiddle)
+        contentValues.put(COL_NAME_LAST, instance.NameLast)
+        contentValues.put(COL_EMAIL, instance.Email)
+        contentValues.put(COL_PASSWORD_HASH, instance.PasswordHash)
+
+        val success = db.update(TBL_NAME, contentValues, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
+    }
+
+    override fun delete(instance: User) : Int
+    {
+        val db = dbHelper.writableDatabase
+        val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 }
