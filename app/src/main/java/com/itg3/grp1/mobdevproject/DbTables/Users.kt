@@ -45,6 +45,38 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
     }
 
     @SuppressLint("Range")
+    override fun getOne(id: Int): User?
+    {
+        val SELECT_QUERY = "SELECT * FROM $TBL_NAME WHERE $COL_ID = ?"
+        val db = dbHandler.readableDatabase
+        var result: User? = null
+        var cursor: Cursor? = null
+
+        try
+        {
+            cursor = db.rawQuery(SELECT_QUERY, arrayOf(id.toString()))
+
+            if(cursor.moveToFirst())
+            {
+                result = User(
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
+                    cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
+                    cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
+                    cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
+                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                )
+            }
+        }
+        finally
+        {
+            cursor?.close()
+        }
+        return result
+    }
+
+    @SuppressLint("Range")
     override fun getAll() : List<User>
     {
         val result = ArrayList<User>()
@@ -55,29 +87,33 @@ class Users(newDbHandler: DatabaseHandler) : IDbTable<User>(newDbHandler)
         try
         {
             cursor = db.rawQuery(SELECT_QUERY, null)
+
+            if(cursor.moveToFirst())
+            {
+                do
+                {
+                    val user = User(
+                        cursor.getInt(cursor.getColumnIndex(COL_ID)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
+                        cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
+                        cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
+                        cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
+                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                    )
+                    result.add(user)
+                }
+                while (cursor.moveToNext())
+            }
         }
         catch (e: SQLiteException)
         {
             db.execSQL(SELECT_QUERY)
             return ArrayList()
         }
-
-        if(cursor.moveToFirst())
+        finally
         {
-            do
-            {
-                val user = User(
-                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
-                    cursor.getString(cursor.getColumnIndex(COL_NAME_FIRST)),
-                    cursor.getString(cursor.getColumnIndex(COL_NAME_MIDDLE)),
-                    cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
-                    cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
-                    cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
-                )
-                result.add(user)
-            }
-            while (cursor.moveToNext())
+            cursor?.close()
         }
 
         return result
