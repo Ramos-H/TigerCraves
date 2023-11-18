@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.MobDevProject" parent="Base.Theme.MobDevProject" />
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#737373</item>
+        <item name="colorControlActivated">#FFB800</item>
+    </style>
 </resources>
