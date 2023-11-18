@@ -132,7 +132,15 @@ class Reviews(dbHandler: DatabaseHandler) : IDbTable<Review>(dbHandler)
 
     override fun update(instance: Review): Int
     {
-        TODO("Not yet implemented")
+        val db = dbHandler.writableDatabase
+
+        val contentValues = ContentValues()
+        contentValues.put(COL_RATING, instance.Rating)
+        contentValues.put(COL_TITLE, instance.Title)
+        contentValues.put(COL_CONTENT, instance.Content)
+
+        val success = db.update(TBL_NAME, contentValues, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        return success
     }
 
     override fun delete(instance: Review): Int
