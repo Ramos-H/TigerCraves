@@ -7,15 +7,13 @@ import android.util.Log
 import com.itg3.grp1.mobdevproject.models.Listing
 import com.itg3.grp1.mobdevproject.models.Review
 import com.itg3.grp1.mobdevproject.models.User
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     lateinit var fieldEmail : EditText
     lateinit var fieldPass : EditText

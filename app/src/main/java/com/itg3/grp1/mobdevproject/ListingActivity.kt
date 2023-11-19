@@ -2,9 +2,7 @@ package com.itg3.grp1.mobdevproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.CalendarContract.Instances
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +24,7 @@ class ListingActivity: AppCompatActivity() {
     }
     fun logout(view: View)
     {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 }
