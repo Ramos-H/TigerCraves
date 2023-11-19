@@ -22,27 +22,19 @@
             </intent-filter>
         </activity>
 
-        <!-- Add the DetailedListingActivity -->
-        <!-- Add this to your AndroidManifest.xml file -->
         <activity
             android:name=".DetailedListingActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
       
         <activity
             android:name=".RegisterActivity"
             android:exported="true">
-            <!-- Add any intent filters or other activity configuration here if needed -->
         </activity>
       
         <activity
             android:name=".ListingActivity"
             android:exported="true">
-            <!-- Add any intent filters or other activity configuration here if needed -->
         </activity>
 
         <meta-data
