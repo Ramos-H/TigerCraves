@@ -71,8 +71,8 @@ class ValEditText : LinearLayout
             try
             {
                 text = getString(R.styleable.ValEditText_android_text)
-                textField.hint = getString(R.styleable.ValEditText_android_hint)
-                textField.inputType = getInteger(R.styleable.ValEditText_android_inputType, InputType.TYPE_CLASS_TEXT)
+                hint = getString(R.styleable.ValEditText_android_hint)
+                inputType = getInteger(R.styleable.ValEditText_android_inputType, InputType.TYPE_CLASS_TEXT)
                 invalidate()
                 requestLayout()
             }
