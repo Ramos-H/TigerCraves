@@ -1,5 +1,6 @@
 package com.itg3.grp1.mobdevproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -8,115 +9,105 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity()
+{
+    lateinit var fieldEmail: ValEditText
+    lateinit var fieldNameFirst: ValEditText
+    lateinit var fieldNameMiddle: ValEditText
+    lateinit var fieldNameLast: ValEditText
+    lateinit var fieldPassword: ValEditText
+    lateinit var fieldPasswordConfirm: ValEditText
 
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextPassword: EditText
-    private lateinit var editTextConfirmPassword: EditText
-    private lateinit var textViewEmailValidation: TextView
-    private lateinit var textViewPasswordValidation: TextView
-    private lateinit var textViewConfirmPasswordValidation: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        editTextEmail = findViewById(R.id.editTextEmail)
-        editTextPassword = findViewById(R.id.editTextPassword)
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
-
-        textViewEmailValidation = findViewById(R.id.textViewEmailValidation)
-        textViewPasswordValidation = findViewById(R.id.textViewPasswordValidation)
-        textViewConfirmPasswordValidation = findViewById(R.id.textViewConfirmPasswordValidation)
+        fieldEmail = findViewById(R.id.fieldEmail)
+        fieldNameFirst = findViewById(R.id.fieldNameFirst)
+        fieldNameMiddle = findViewById(R.id.fieldNameMiddle)
+        fieldNameLast = findViewById(R.id.fieldNameLast)
+        fieldPassword = findViewById(R.id.fieldPassword)
+        fieldPasswordConfirm = findViewById(R.id.fieldPasswordConfirm)
     }
 
-    fun validateAndRegister(view: View) {
+    fun validateAndRegister(view: View)
+    {
         // Reset validation states
-        setValidationState(editTextEmail, textViewEmailValidation)
-        setValidationState(editTextPassword, textViewPasswordValidation)
-        setValidationState(editTextConfirmPassword, textViewConfirmPasswordValidation)
+        fieldEmail.error = null
+        fieldNameFirst.error = null
+        fieldNameMiddle.error = null
+        fieldNameLast.error = null
+        fieldPassword.error = null
+        fieldPasswordConfirm.error = null
 
-        // Perform validation
-        val email = editTextEmail.text.toString()
-        val password = editTextPassword.text.toString()
-        val confirmPassword = editTextConfirmPassword.text.toString()
+        if(fieldNameFirst.text.isNullOrBlank())
+        {
+            fieldNameFirst.error = "First Name cannot be empty"
+        }
 
-        if (email.isNullOrBlank()) {
+        if(fieldNameLast.text.isNullOrBlank())
+        {
+            fieldNameLast.error = "Last Name cannot be empty"
+        }
+
+        if (fieldEmail.text.isNullOrBlank())
+        {
             // Email is empty
-            setValidationState(editTextEmail, textViewEmailValidation, "Email cannot be empty.")
-        } else if (email.length > 255) {
+            fieldEmail.error = "Email cannot be empty."
+        }
+        else if (fieldEmail.text!!.length > 255)
+        {
             // Email exceeds maximum length
-            setValidationState(editTextEmail, textViewEmailValidation, "Email must be 255 characters or less.")
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            fieldEmail.error = "Email must be 255 characters or less."
+        }
+        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(fieldEmail.text).matches())
+        {
             // Invalid email
-            setValidationState(editTextEmail, textViewEmailValidation, "Invalid email.")
+            fieldEmail.error = "Invalid email format."
         }
 
-        if (password.isNullOrBlank()) {
+        if (fieldPassword.text.isNullOrBlank())
+        {
             // Password is empty
-            setValidationState(
-                editTextPassword,
-                textViewPasswordValidation,
-                "Password cannot be empty."
-            )
-        } else if (!password.matches(Regex("(?=.*[0-9]).{8,}"))) {
+            fieldPassword.error =  "Password cannot be empty."
+        }
+        else if (!fieldPassword.text!!.matches(Regex("(?=.*[0-9]).{8,}")))
+        {
             // Invalid password
-            setValidationState(
-                editTextPassword,
-                textViewPasswordValidation,
-                "Must be at least 8 alphanumeric characters."
-            )
+            fieldPassword.error =  "Must be at least 8 alphanumeric characters."
         }
 
-        if (confirmPassword.isNullOrBlank()) {
+        if (fieldPasswordConfirm.text.isNullOrBlank())
+        {
             // Confirm Password is empty
-            setValidationState(
-                editTextConfirmPassword,
-                textViewConfirmPasswordValidation,
-                "Confirm password cannot be empty."
-            )
-        } else if (confirmPassword != password) {
+            fieldPasswordConfirm.error = "Confirm password cannot be empty."
+        }
+        else if (fieldPasswordConfirm.text != fieldPassword.text)
+        {
             // Passwords don't match
-            setValidationState(
-                editTextConfirmPassword,
-                textViewConfirmPasswordValidation,
-                "Passwords do not match."
-            )
+            fieldPasswordConfirm.error = "Passwords do not match."
         }
 
         // Check if any validation failed
-        if (!email.isNullOrBlank() && email.length <= 255 &&
-            android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
-            !password.isNullOrBlank() && password.matches(Regex("(?=.*[0-9]).{8,}")) &&
-            !confirmPassword.isNullOrBlank() && confirmPassword == password
-        ) {
-            // Registration successful
-            Toast.makeText(this, "REGISTER SUCCESSFUL", Toast.LENGTH_SHORT).show()
+        val formHasErrors = !fieldNameFirst.error.isNullOrBlank() ||
+                !fieldNameMiddle.error.isNullOrBlank() ||
+                !fieldNameLast.error.isNullOrBlank() ||
+                !fieldEmail.error.isNullOrBlank() ||
+                !fieldPassword.error.isNullOrBlank() ||
+                !fieldPasswordConfirm.error.isNullOrBlank()
+
+        if (formHasErrors)
+        {
+            return
         }
+
+        Toast.makeText(this, "Registration successful. Please log in.", Toast.LENGTH_SHORT).show()
+
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     fun navigateToLogin(view: View) {
         Toast.makeText(this, "Navigated to Login", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun setValidationState(
-        editText: EditText,
-        validationTextView: TextView,
-        validationMessage: String? = null
-    ) {
-        validationTextView.text = validationMessage
-
-        if(validationMessage != null)
-        {
-            editText.setTextColor(resources.getColor(R.color.errorText))
-            editText.setBackgroundResource(R.drawable.edittext_border_error)
-            validationTextView.visibility = View.VISIBLE
-        }
-        else
-        {
-            editText.setTextColor(resources.getColor(R.color.defaultText))
-            editText.setBackgroundResource(R.drawable.edittext_border_default)
-            validationTextView.visibility = View.INVISIBLE
-        }
     }
 }
