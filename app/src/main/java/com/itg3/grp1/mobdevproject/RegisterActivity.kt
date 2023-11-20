@@ -3,9 +3,6 @@ package com.itg3.grp1.mobdevproject
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -31,7 +28,7 @@ class RegisterActivity : AppCompatActivity()
         fieldPasswordConfirm = findViewById(R.id.fieldPasswordConfirm)
     }
 
-    fun validateAndRegister(view: View)
+    fun register(view: View)
     {
         // Reset validation states
         fieldEmail.error = null
@@ -107,7 +104,5 @@ class RegisterActivity : AppCompatActivity()
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
-    fun navigateToLogin(view: View) {
-        Toast.makeText(this, "Navigated to Login", Toast.LENGTH_SHORT).show()
-    }
+    fun goToLogin(view: View) = startActivity(Intent(this, LoginActivity::class.java))
 }
