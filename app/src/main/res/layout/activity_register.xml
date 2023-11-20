@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth"
-            android:textColor="@color/colorError"
+            android:textColor="@color/errorText"
             android:visibility="invisible"
             tools:visibility="invisible" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth"
-            android:textColor="@color/colorError"
+            android:textColor="@color/errorText"
             android:visibility="invisible"
             tools:visibility="invisible" />
 
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth"
-            android:textColor="@color/colorError"
+            android:textColor="@color/errorText"
             android:visibility="invisible"
             tools:visibility="invisible" />
 

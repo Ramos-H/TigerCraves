@@ -12,7 +12,4 @@
 
     <!-- Error border color -->
     <color name="errorBorder">#FF0000</color>
-  
-    <color name="colorDefaultText">#000000</color>
-    <color name="colorError">#FF0000</color>
 </resources>

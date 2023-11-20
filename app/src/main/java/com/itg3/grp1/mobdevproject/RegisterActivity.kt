@@ -108,13 +108,13 @@ class RegisterActivity : AppCompatActivity() {
 
         if(validationMessage != null)
         {
-            editText.setTextColor(resources.getColor(R.color.colorError))
+            editText.setTextColor(resources.getColor(R.color.errorText))
             editText.setBackgroundResource(R.drawable.edittext_border_error)
             validationTextView.visibility = View.VISIBLE
         }
         else
         {
-            editText.setTextColor(resources.getColor(R.color.colorDefaultText))
+            editText.setTextColor(resources.getColor(R.color.defaultText))
             editText.setBackgroundResource(R.drawable.edittext_border_default)
             validationTextView.visibility = View.INVISIBLE
         }
