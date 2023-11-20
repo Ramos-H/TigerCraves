@@ -9,7 +9,6 @@ import com.itg3.grp1.mobdevproject.models.Review
 import com.itg3.grp1.mobdevproject.models.User
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 
 class LoginActivity : AppCompatActivity() {
 
@@ -56,10 +55,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun register(view: View)
-    {
-        Toast.makeText(this, "Navigated to Register", Toast.LENGTH_LONG).show()
-    }
+    fun goToRegister(view: View) = startActivity(Intent(this, RegisterActivity::class.java))
 
     private fun TestDb()
     {

@@ -69,7 +69,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
                 android:foreground="@drawable/group_2registerbtn"
-                android:onClick="register" />
+                android:onClick="goToRegister" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
