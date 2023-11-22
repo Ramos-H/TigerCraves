@@ -17,24 +17,7 @@ class ListingActivity: AppCompatActivity()
         setContentView(R.layout.activity_listing)
 
         val dbHelper = DatabaseHelper(this)
-        val user = dbHelper.users.getOne(2)
-
-        val listings = ArrayList<Listing>()
-        for (index in 1..10)
-        {
-            listings.add(
-                Listing(
-                null,
-                user!!,
-                "Restaurant $index",
-                "UST",
-                10.0,
-                1000.0,
-                5.0
-            )
-            )
-        }
-
+        val listings = dbHelper.listings.getAll()
         val adapter = ListingAdapter(listings)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
