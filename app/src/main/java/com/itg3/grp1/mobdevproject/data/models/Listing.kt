@@ -4,7 +4,6 @@ import java.util.Date
 
 data class Listing(
     var Id: Int? = null,
-    var Poster: User,
     var Name: String,
     var Address: String,
     var PriceMin: Double?,

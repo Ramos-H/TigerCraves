@@ -15,7 +15,6 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
     {
         val TBL_NAME = "Listings"
         val COL_ID = "Id"
-        val COL_POSTER = "Poster"
         val COL_NAME = "Name"
         val COL_ADDRESS = "Address"
         val COL_PRICE_MIN = "PriceMin"
@@ -28,14 +27,12 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
     {
         val SQL_TBL_CREATE = "CREATE TABLE $TBL_NAME (" +
                 "$COL_ID INTEGER PRIMARY KEY NOT NULL, " +
-                "$COL_POSTER INTEGER NOT NULL, " +
                 "$COL_NAME TEXT NOT NULL, " +
                 "$COL_ADDRESS TEXT NOT NULL, " +
                 "$COL_PRICE_MIN REAL, " +
                 "$COL_PRICE_MAX REAL, " +
                 "$COL_RATING REAL, " +
-                "$COL_DATE_POSTED INTEGER NOT NULL, " +
-                "FOREIGN KEY ($COL_POSTER) REFERENCES ${Users.TBL_NAME}(${Users.COL_ID}) ON DELETE CASCADE" +
+                "$COL_DATE_POSTED INTEGER NOT NULL " +
                 ")"
 
         db?.execSQL(SQL_TBL_CREATE)
@@ -61,12 +58,8 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
 
             if(cursor.moveToFirst())
             {
-                val posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                val poster = dbHelper.users.getOne(posterId)
-
                 result = Listing(
                     cursor.getInt(cursor.getColumnIndex(COL_ID)),
-                    poster!!,
                     cursor.getString(cursor.getColumnIndex(COL_NAME)),
                     cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
                     cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
@@ -99,12 +92,8 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
             {
                 do
                 {
-                    var posterId = cursor.getInt(cursor.getColumnIndex(COL_POSTER))
-                    var poster = dbHelper.users.getOne(posterId)
-
                     val listing = Listing(
                         cursor.getInt(cursor.getColumnIndex(COL_ID)),
-                        poster!!,
                         cursor.getString(cursor.getColumnIndex(COL_NAME)),
                         cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
                         cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
@@ -136,7 +125,6 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         val db = dbHelper.writableDatabase
 
         val contentValues = ContentValues()
-        contentValues.put(COL_POSTER, instance.Poster.Id)
         contentValues.put(COL_NAME, instance.Name)
         contentValues.put(COL_ADDRESS, instance.Address)
         contentValues.put(COL_PRICE_MIN, instance.PriceMin)
