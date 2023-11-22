@@ -16,11 +16,11 @@ class DetailedListingActivity : AppCompatActivity()
 {
     private var userId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
-
     private var listing: Listing? = null
 
+    private var reviewAdapter: ReviewAdapter? = null
+
     private lateinit var ratingValidationText: TextView
-    private lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -63,8 +63,8 @@ class DetailedListingActivity : AppCompatActivity()
 
         if(reviewAdapter != null)
         {
-            reviewAdapter.dataset = reviews
-            reviewAdapter.notifyDataSetChanged()
+            reviewAdapter!!.dataset = reviews
+            reviewAdapter!!.notifyDataSetChanged()
         }
         else
         {
@@ -131,6 +131,12 @@ class DetailedListingActivity : AppCompatActivity()
                 {
                     // Get fresh list of reviews
                     val reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
+
+                    // Update average rating for the current listing
+                    val averageRating = reviews.sumOf { it.Rating } / reviews.count()
+                    listing!!.Rating = averageRating
+                    dbHelper.listings.update(listing!!)
+
                     initReviewAdapter(reviews)
                     showToast("Review Posted!")
                 }
