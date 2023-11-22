@@ -71,7 +71,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvMinPrice"
+                android:id="@+id/tvPriceMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
@@ -83,7 +83,7 @@
                 android:textSize="23sp" />
 
             <TextView
-                android:id="@+id/tvMaxPrice"
+                android:id="@+id/tvPriceMax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"

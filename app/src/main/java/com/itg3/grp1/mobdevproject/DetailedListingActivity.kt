@@ -12,8 +12,9 @@ import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Review
 import kotlin.random.Random
 
-class DetailedListingActivity : AppCompatActivity() {
-
+class DetailedListingActivity : AppCompatActivity()
+{
+    var userId: Int? = -1
     // Declare titleValidationText, contentValidationText, and ratingValidationText as properties of the class
     private lateinit var titleValidationText: TextView
     private lateinit var contentValidationText: TextView
@@ -24,19 +25,38 @@ class DetailedListingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
 
-        // Find views by their IDs
-        val backButton = findViewById<ImageButton>(R.id.btnBackToListings)
-        val addReviewButton = findViewById<ImageButton>(R.id.btnAddReview)
+        userId = intent.extras?.getInt("userId")!!
+        val listingId = intent.extras?.getInt("listingId")
+
+        Toast.makeText(this, "User ID: $userId", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Listing ID: $listingId", Toast.LENGTH_LONG).show()
 
         val dbHelper = DatabaseHelper(this)
-        val user = dbHelper.users.getOne(2)
-        val listing = dbHelper.listings.getOne(2)
+        val listing = dbHelper.listings.getOne(listingId!!)
 
+        val tvName: TextView = findViewById(R.id.tvName)
+        val tvLocation: TextView = findViewById(R.id.tvLocation)
+        val tvPriceMin: TextView = findViewById(R.id.tvPriceMin)
+        val tvPriceMax: TextView = findViewById(R.id.tvPriceMax)
+        val tvRating: TextView = findViewById(R.id.tvRating)
+
+        tvName.text = listing!!.Name
+        tvLocation.text = listing!!.Address
+        tvPriceMin.text = String.format("%.2f", listing!!.PriceMin)
+        tvPriceMax.text = String.format("%.2f", listing!!.PriceMax)
+        tvRating.text = String.format("%.1f", listing!!.Rating)
+
+        // Find views by their IDs
+        val addReviewButton = findViewById<ImageButton>(R.id.btnAddReview)
+
+        // Dummy review stuff
+        val user = dbHelper.users.getOne(2)
+        val dummyListing = dbHelper.listings.getOne(2)
         val reviews = ArrayList<Review>()
         for(index in 1..10)
         {
             reviews.add(
-                Review(null, user!!, listing!!,
+                Review(null, user!!, dummyListing!!,
                 Random(5).nextDouble(1.0, 5.0),
                 "Review $index",
                 "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars")
