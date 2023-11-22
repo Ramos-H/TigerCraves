@@ -3,6 +3,7 @@ package com.itg3.grp1.mobdevproject
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,11 @@ class ListingActivity: AppCompatActivity()
         setContentView(R.layout.activity_listing)
 
         val dbHelper = DatabaseHelper(this)
+
+        val user = dbHelper.users.getOne(intent.extras!!.getInt("userId"))
+        val welcomeBanner: TextView = findViewById(R.id.welcomeBanner)
+        welcomeBanner.text = "Welcome, ${user!!.NameFirst}!"
+
         val listings = dbHelper.listings.getAll()
         val adapter = ListingAdapter(listings)
 
