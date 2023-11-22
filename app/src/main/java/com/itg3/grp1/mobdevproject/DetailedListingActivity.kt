@@ -5,6 +5,10 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.itg3.grp1.mobdevproject.models.Review
+import kotlin.random.Random
 
 class DetailedListingActivity : AppCompatActivity() {
 
@@ -20,6 +24,24 @@ class DetailedListingActivity : AppCompatActivity() {
         // Find views by their IDs
         val backButton = findViewById<ImageButton>(R.id.btnBackToListings)
         val addReviewButton = findViewById<ImageButton>(R.id.btnAddReview)
+
+        val dbHelper = DatabaseHelper(this)
+        val user = dbHelper.users.getOne(2)
+        val listing = dbHelper.listings.getOne(2)
+
+        val reviews = ArrayList<Review>()
+        for(index in 1..10)
+        {
+            reviews.add(Review(null, user!!, listing!!,
+                Random(5).nextDouble(1.0, 5.0),
+                "Review $index",
+                "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"))
+        }
+
+        val reviewAdapter = ReviewAdapter(reviews)
+        val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
+        reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        reviewRecycler.adapter = reviewAdapter
 
         // Set click listener for the back button
         backButton.setOnClickListener {
