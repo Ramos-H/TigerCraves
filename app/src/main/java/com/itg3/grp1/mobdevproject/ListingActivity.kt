@@ -13,7 +13,7 @@ class ListingActivity: AppCompatActivity()
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_listing)
 
         val dbHelper = DatabaseHelper(this)
         val user = dbHelper.users.getOne(2)
