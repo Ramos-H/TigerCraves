@@ -50,20 +50,21 @@ class DetailedListingActivity : AppCompatActivity()
         val addReviewButton = findViewById<ImageButton>(R.id.btnAddReview)
 
         // Dummy review stuff
-        val user = dbHelper.users.getOne(2)
-        val dummyListing = dbHelper.listings.getOne(2)
-        val reviews = ArrayList<Review>()
-        for(index in 1..10)
-        {
-            reviews.add(
-                Review(null, user!!, dummyListing!!,
-                Random(5).nextDouble(1.0, 5.0),
-                "Review $index",
-                "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars")
-            )
-        }
+//        val user = dbHelper.users.getOne(2)
+//        val dummyListing = dbHelper.listings.getOne(2)
+//        val reviews = ArrayList<Review>()
+//        for(index in 1..10)
+//        {
+//            reviews.add(
+//                Review(null, user!!, dummyListing!!,
+//                Random(5).nextDouble(1.0, 5.0),
+//                "Review $index",
+//                "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars")
+//            )
+//        }
 
-        val reviewAdapter = ReviewAdapter(reviews)
+        val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
+        val reviewAdapter = ReviewAdapter(reviews!!)
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         reviewRecycler.adapter = reviewAdapter
