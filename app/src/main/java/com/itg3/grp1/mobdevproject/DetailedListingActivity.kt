@@ -45,10 +45,32 @@ class DetailedListingActivity : AppCompatActivity()
         tvRating.text = String.format("%.1f", listing!!.Rating)
 
         val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
-        reviewAdapter = ReviewAdapter(reviews!!)
+
+
+        if(!reviews.isNullOrEmpty())
+        {
+            val noReviewsText: TextView = findViewById(R.id.noReviewsText)
+            noReviewsText.visibility = View.GONE
+            initReviewAdapter(reviews)
+        }
+    }
+
+    private fun initReviewAdapter(reviews: List<Review>)
+    {
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
+        reviewRecycler.visibility = View.VISIBLE
         reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        reviewRecycler.adapter = reviewAdapter
+
+        if(reviewAdapter != null)
+        {
+            reviewAdapter.dataset = reviews
+            reviewAdapter.notifyDataSetChanged()
+        }
+        else
+        {
+            reviewAdapter = ReviewAdapter(reviews)
+            reviewRecycler.adapter = reviewAdapter
+        }
     }
 
     fun goToListingPage(view: View)
@@ -109,8 +131,7 @@ class DetailedListingActivity : AppCompatActivity()
                 {
                     // Get fresh list of reviews
                     val reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
-                    reviewAdapter.dataset = reviews
-                    reviewAdapter.notifyDataSetChanged()
+                    initReviewAdapter(reviews)
                     showToast("Review Posted!")
                 }
 
