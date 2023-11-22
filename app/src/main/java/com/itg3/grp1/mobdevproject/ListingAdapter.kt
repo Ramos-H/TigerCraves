@@ -1,5 +1,6 @@
 package com.itg3.grp1.mobdevproject
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,7 @@ class ListingAdapter(val dataset: List<Listing>) : RecyclerView.Adapter<ListingA
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-            Toast.makeText(context, "${holder.title.text} pressed", Toast.LENGTH_SHORT).show()
+            context.startActivity(Intent(context, DetailedListingActivity::class.java))
         }
     }
 
