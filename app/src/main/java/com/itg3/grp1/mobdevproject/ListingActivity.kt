@@ -24,11 +24,17 @@ class ListingActivity: AppCompatActivity()
         welcomeBanner.text = "Welcome, ${user!!.NameFirst}!"
 
         val listings = dbHelper.listings.getAll()
-        val adapter = ListingAdapter(listings, user.Id!!)
+        if(!listings.isNullOrEmpty())
+        {
+            val noListingsText: TextView = findViewById(R.id.noListingsText)
+            noListingsText.visibility = View.INVISIBLE
 
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+            val adapter = ListingAdapter(listings, user.Id!!)
+            val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+            recyclerView.visibility = View.VISIBLE
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = adapter
+        }
     }
 
     fun logout(view: View)
