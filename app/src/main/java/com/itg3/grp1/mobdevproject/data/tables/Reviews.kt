@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject.DbTables
+package com.itg3.grp1.mobdevproject.data.tables
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import com.itg3.grp1.mobdevproject.DatabaseHelper
-import com.itg3.grp1.mobdevproject.models.Review
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Review
 import java.util.Date
 
 class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
@@ -42,7 +42,7 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
 
     override fun dropTable(db: SQLiteDatabase?)
     {
-        val SQL_TBL_DROP = "DROP TABLE IF EXISTS ${TBL_NAME}"
+        val SQL_TBL_DROP = "DROP TABLE IF EXISTS $TBL_NAME"
         db?.execSQL(SQL_TBL_DROP)
     }
 

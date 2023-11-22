@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject.DbTables
+package com.itg3.grp1.mobdevproject.data.tables
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import com.itg3.grp1.mobdevproject.DatabaseHelper
-import com.itg3.grp1.mobdevproject.models.Listing
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Listing
 import java.util.Date
 
 class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
@@ -159,7 +159,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         contentValues.put(COL_PRICE_MAX, instance.PriceMax)
         contentValues.put(COL_RATING, instance.Rating)
 
-        val success = db.update(TBL_NAME, contentValues, "${COL_ID} = ?", arrayOf(instance.Id.toString()))
+        val success = db.update(TBL_NAME, contentValues, "$COL_ID = ?", arrayOf(instance.Id.toString()))
         return success
     }
 

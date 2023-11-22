@@ -1,8 +1,8 @@
-package com.itg3.grp1.mobdevproject.DbTables
+package com.itg3.grp1.mobdevproject.data.tables
 
 import android.database.sqlite.SQLiteDatabase
-import com.itg3.grp1.mobdevproject.DatabaseHelper
-import com.itg3.grp1.mobdevproject.models.IModel
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.IModel
 
 abstract class DbTable<T: IModel>(newDbHelper: DatabaseHelper)
 {

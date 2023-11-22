@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.models.Review
+import com.itg3.grp1.mobdevproject.data.models.Review
 
 class ReviewAdapter(val dataset: List<Review>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>()
 {

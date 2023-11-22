@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject.DbTables
+package com.itg3.grp1.mobdevproject.data.tables
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import com.itg3.grp1.mobdevproject.DatabaseHelper
-import com.itg3.grp1.mobdevproject.models.User
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.User
 import java.util.Date
 
 class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)

@@ -6,7 +6,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.models.Listing
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Listing
 
 class ListingActivity: AppCompatActivity()
 {
@@ -21,7 +22,8 @@ class ListingActivity: AppCompatActivity()
         val listings = ArrayList<Listing>()
         for (index in 1..10)
         {
-            listings.add(Listing(
+            listings.add(
+                Listing(
                 null,
                 user!!,
                 "Restaurant $index",
@@ -29,7 +31,8 @@ class ListingActivity: AppCompatActivity()
                 10.0,
                 1000.0,
                 5.0
-            ))
+            )
+            )
         }
 
         val adapter = ListingAdapter(listings)

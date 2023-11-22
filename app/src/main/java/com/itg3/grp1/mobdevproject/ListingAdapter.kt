@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.Listing
 
 class ListingAdapter(val dataset: List<Listing>) : RecyclerView.Adapter<ListingAdapter.ViewHolder>()
 {

@@ -4,11 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.itg3.grp1.mobdevproject.models.Listing
-import com.itg3.grp1.mobdevproject.models.Review
-import com.itg3.grp1.mobdevproject.models.User
+import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.Review
+import com.itg3.grp1.mobdevproject.data.models.User
 import android.view.View
 import android.widget.Button
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
 

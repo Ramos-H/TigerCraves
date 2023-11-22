@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject.models
+package com.itg3.grp1.mobdevproject.data.models
 
 import java.util.Date
 

@@ -7,7 +7,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.models.Review
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Review
 import kotlin.random.Random
 
 class DetailedListingActivity : AppCompatActivity() {
@@ -32,10 +33,12 @@ class DetailedListingActivity : AppCompatActivity() {
         val reviews = ArrayList<Review>()
         for(index in 1..10)
         {
-            reviews.add(Review(null, user!!, listing!!,
+            reviews.add(
+                Review(null, user!!, listing!!,
                 Random(5).nextDouble(1.0, 5.0),
                 "Review $index",
-                "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"))
+                "Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars")
+            )
         }
 
         val reviewAdapter = ReviewAdapter(reviews)
