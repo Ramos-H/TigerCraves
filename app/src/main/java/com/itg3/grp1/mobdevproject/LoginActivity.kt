@@ -49,12 +49,30 @@ class LoginActivity : AppCompatActivity() {
             fieldPassword.error = "Password is required"
         }
 
+        val dbHelper = DatabaseHelper(this)
+        val users = dbHelper.users.getAll()
+        val usersWithSameEmails = users.filter { email == it.Email }
+        var matchingUser : User? = null
+        if(usersWithSameEmails.isEmpty())
+        {
+            fieldEmail.error = "No accounts are registered with that email"
+        }
+        else
+        {
+            matchingUser = usersWithSameEmails.filter { fieldPassword.text == it.PasswordHash }.firstOrNull()
+            if(matchingUser == null)
+            {
+                fieldPassword.error = "Incorrect password"
+            }
+        }
+
         if (!fieldEmail.error.isNullOrBlank() || !fieldPassword.error.isNullOrBlank())
         {
             return
         }
 
         val intent = Intent(this, ListingActivity::class.java)
+        intent.putExtra("userId", matchingUser!!.Id)
         startActivity(intent)
     }
 
