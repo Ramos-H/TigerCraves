@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.User
 
 class RegisterActivity : AppCompatActivity()
 {
@@ -110,6 +111,23 @@ class RegisterActivity : AppCompatActivity()
 
         if (formHasErrors)
         {
+            return
+        }
+
+        val newUser = User(
+            null,
+            nameFirst!!,
+            nameMiddle,
+            nameLast!!,
+            email!!,
+            fieldPassword.text!!
+        )
+
+        val newUserId = dbHelper.users.add(newUser)
+
+        if(newUserId.toInt() == -1)
+        {
+            Toast.makeText(this, "Registration unsuccessful. Probably a database error.", Toast.LENGTH_SHORT).show()
             return
         }
 
