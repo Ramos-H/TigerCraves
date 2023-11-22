@@ -29,7 +29,14 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.btnLogin)
         btnRegister = findViewById(R.id.btnRegister)
 
-//        TestDb()
+//        AddTestListing()
+    }
+
+    private fun AddTestListing()
+    {
+        val dbHelper = DatabaseHelper(this)
+        val count = dbHelper.listings.getAll().count() + 1
+        dbHelper.listings.add(Listing(null, "Bon-Chon $count", "UST", 50.0, 300.0, 0.0))
     }
 
     fun login(view: View)
@@ -89,8 +96,8 @@ class LoginActivity : AppCompatActivity() {
         user1.Id = 1
         user2.Id = 2
 
-        val listing1 = Listing(null, user1, "Bon Appetea", "Valley 1", 75.0, 200.0, 3.0, null)
-        val listing2 = Listing(null, user2, "Bon-chon", "UST", 100.0, 800.0, null, null)
+        val listing1 = Listing(null, "Bon Appetea", "Valley 1", 75.0, 200.0, 3.0, null)
+        val listing2 = Listing(null, "Bon-chon", "UST", 100.0, 800.0, null, null)
         db.listings.add(listing1)
         db.listings.add(listing2)
         listing1.Id = 1
@@ -112,14 +119,14 @@ class LoginActivity : AppCompatActivity() {
         for (review in db.reviews.getAll()) Log.d("SQL Get reviews", review.toString())
 
         db.users.update(User(1, "Spider", "-", "Man", "spidey@mail.com", "spideypass", null))
-        db.listings.update(Listing(1, user1, "Bon Appetea", "Valley 1", 75.0, 200.0, 5.0, null))
+        db.listings.update(Listing(1, "Bon Appetea", "Valley 1", 75.0, 200.0, 5.0, null))
         db.reviews.update(Review(1, user1, listing1, 3.0, "Not the Best", "Boompanes", null))
         for (user in db.users.getAll()) Log.d("SQL Get users 2", user.toString())
         for (listing in db.listings.getAll()) Log.d("SQL Get listings 2", listing.toString())
         for (review in db.reviews.getAll()) Log.d("SQL Get reviews 2", review.toString())
 
         db.users.delete(User(1, "", "", "", "", "", null))
-        db.listings.delete(Listing(1, user1, "", "", null, null, null, null))
+        db.listings.delete(Listing(1, "", "", null, null, null, null))
         db.reviews.delete(Review(1, user1, listing1, 0.0, "", ""))
         for (user in db.users.getAll()) Log.d("SQL Get users 3", user.toString())
         for (listing in db.listings.getAll()) Log.d("SQL Get listings 3", listing.toString())
