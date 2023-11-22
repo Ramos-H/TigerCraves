@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.models.Review
 
-class ReviewAdapter(val dataset: List<Review>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>()
+class ReviewAdapter(var dataset: List<Review>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>()
 {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {

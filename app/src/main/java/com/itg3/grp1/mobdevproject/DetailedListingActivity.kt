@@ -9,12 +9,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.Review
 
 class DetailedListingActivity : AppCompatActivity()
 {
-    var userId: Int? = -1
-    // Declare titleValidationText, contentValidationText, and ratingValidationText as properties of the class
+    private var userId: Int? = -1
+    private val dbHelper = DatabaseHelper(this)
+
+    private var listing: Listing? = null
+
     private lateinit var ratingValidationText: TextView
+    private lateinit var reviewAdapter: ReviewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -24,8 +30,7 @@ class DetailedListingActivity : AppCompatActivity()
         userId = intent.extras?.getInt("userId")!!
         val listingId = intent.extras?.getInt("listingId")
 
-        val dbHelper = DatabaseHelper(this)
-        val listing = dbHelper.listings.getOne(listingId!!)
+        listing = dbHelper.listings.getOne(listingId!!)
 
         val tvName: TextView = findViewById(R.id.tvName)
         val tvLocation: TextView = findViewById(R.id.tvLocation)
@@ -40,7 +45,7 @@ class DetailedListingActivity : AppCompatActivity()
         tvRating.text = String.format("%.1f", listing!!.Rating)
 
         val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
-        val reviewAdapter = ReviewAdapter(reviews!!)
+        reviewAdapter = ReviewAdapter(reviews!!)
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         reviewRecycler.adapter = reviewAdapter
@@ -92,8 +97,24 @@ class DetailedListingActivity : AppCompatActivity()
             if (validateInputFields(fieldTitle, fieldContent, rating))
             {
                 // Both fields are valid, hide the dialog and show a toast
+                val poster = dbHelper.users.getOne(userId!!)
+                val newReview = Review(null, poster!!, listing!!, rating.toDouble(), title, content)
+                val newReviewId = dbHelper.reviews.add(newReview)
+
+                if(newReviewId.toInt() == -1)
+                {
+                    showToast("Review cannot be posted. There must be a problem with the database.")
+                }
+                else
+                {
+                    // Get fresh list of reviews
+                    val reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
+                    reviewAdapter.dataset = reviews
+                    reviewAdapter.notifyDataSetChanged()
+                    showToast("Review Posted!")
+                }
+
                 alertDialog.dismiss()
-                showToast("Review Posted!")
             }
         }
 
