@@ -28,9 +28,6 @@ class DetailedListingActivity : AppCompatActivity()
         userId = intent.extras?.getInt("userId")!!
         val listingId = intent.extras?.getInt("listingId")
 
-        Toast.makeText(this, "User ID: $userId", Toast.LENGTH_LONG).show()
-        Toast.makeText(this, "Listing ID: $listingId", Toast.LENGTH_LONG).show()
-
         val dbHelper = DatabaseHelper(this)
         val listing = dbHelper.listings.getOne(listingId!!)
 
@@ -64,7 +61,9 @@ class DetailedListingActivity : AppCompatActivity()
 
     fun goToListingPage(view: View)
     {
-        startActivity(Intent(this, ListingActivity::class.java))
+        val intent = Intent(this, ListingActivity::class.java)
+        intent.putExtra("userId", userId)
+        startActivity(intent)
     }
 
     // Function to show a toast message
