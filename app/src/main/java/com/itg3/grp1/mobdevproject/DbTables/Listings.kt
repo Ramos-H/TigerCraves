@@ -9,7 +9,7 @@ import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.Listing
 import java.util.Date
 
-class Listings(dbHandler: DatabaseHelper) : IDbTable<Listing>(dbHandler)
+class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
 {
     companion object
     {

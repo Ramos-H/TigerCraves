@@ -9,7 +9,7 @@ import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.User
 import java.util.Date
 
-class Users(newDbHandler: DatabaseHelper) : IDbTable<User>(newDbHandler)
+class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)
 {
     companion object
     {

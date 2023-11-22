@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.IModel
 
-abstract class IDbTable<T: IModel>(newDbHelper: DatabaseHelper)
+abstract class DbTable<T: IModel>(newDbHelper: DatabaseHelper)
 {
     val dbHelper = newDbHelper
 

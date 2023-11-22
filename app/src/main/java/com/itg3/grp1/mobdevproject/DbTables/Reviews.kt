@@ -9,7 +9,7 @@ import com.itg3.grp1.mobdevproject.DatabaseHelper
 import com.itg3.grp1.mobdevproject.models.Review
 import java.util.Date
 
-class Reviews(dbHandler: DatabaseHelper) : IDbTable<Review>(dbHandler)
+class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
 {
     companion object
     {
