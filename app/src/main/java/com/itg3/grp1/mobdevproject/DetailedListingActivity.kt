@@ -1,5 +1,6 @@
 package com.itg3.grp1.mobdevproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -18,7 +19,8 @@ class DetailedListingActivity : AppCompatActivity() {
     private lateinit var contentValidationText: TextView
     private lateinit var ratingValidationText: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
 
@@ -46,17 +48,16 @@ class DetailedListingActivity : AppCompatActivity() {
         reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         reviewRecycler.adapter = reviewAdapter
 
-        // Set click listener for the back button
-        backButton.setOnClickListener {
-            // Show a toast message when clicked
-            showToast("Navigated to Listings Page")
-        }
-
         // Set click listener for the "Add Review" button
         addReviewButton.setOnClickListener {
             // Show the Review Composer dialog
             showReviewComposerDialog()
         }
+    }
+
+    fun goToListingPage(view: View)
+    {
+        startActivity(Intent(this, ListingActivity::class.java))
     }
 
     // Function to show a toast message

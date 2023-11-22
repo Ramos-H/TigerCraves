@@ -103,6 +103,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="Navigates back to listing page"
+                android:onClick="goToListingPage"
                 app:srcCompat="@drawable/backtolistings_btn" />
         </FrameLayout>
 
