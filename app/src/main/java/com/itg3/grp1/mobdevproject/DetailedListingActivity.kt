@@ -43,20 +43,11 @@ class DetailedListingActivity : AppCompatActivity()
         tvPriceMax.text = String.format("%.2f", listing!!.PriceMax)
         tvRating.text = String.format("%.1f", listing!!.Rating)
 
-        // Find views by their IDs
-        val addReviewButton = findViewById<ImageButton>(R.id.btnAddReview)
-
         val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
         val reviewAdapter = ReviewAdapter(reviews!!)
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         reviewRecycler.adapter = reviewAdapter
-
-        // Set click listener for the "Add Review" button
-        addReviewButton.setOnClickListener {
-            // Show the Review Composer dialog
-            showReviewComposerDialog()
-        }
     }
 
     fun goToListingPage(view: View)
@@ -72,7 +63,8 @@ class DetailedListingActivity : AppCompatActivity()
     }
 
     // Function to show the Review Composer dialog
-    private fun showReviewComposerDialog() {
+    fun showReviewComposerDialog(view: View)
+    {
         val dialogView = layoutInflater.inflate(R.layout.dialog_review_composer, null)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(dialogView)

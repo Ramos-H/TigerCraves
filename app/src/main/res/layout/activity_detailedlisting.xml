@@ -133,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:contentDescription="Navigates back to listing page"
-                app:srcCompat="@drawable/addreview_btn" />
+                app:srcCompat="@drawable/addreview_btn"
+                android:onClick="showReviewComposerDialog"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
