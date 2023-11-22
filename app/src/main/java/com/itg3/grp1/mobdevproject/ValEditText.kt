@@ -1,6 +1,7 @@
 package com.itg3.grp1.mobdevproject
 
 import android.content.Context
+import android.text.InputFilter
 import android.text.InputType
 import android.util.AttributeSet
 import android.view.View
@@ -54,6 +55,43 @@ class ValEditText : LinearLayout
             requestLayout()
         }
 
+    var lines: Int
+        get() = textField.lineCount
+        set(value)
+        {
+            textField.setLines(value)
+            invalidate()
+            requestLayout()
+        }
+
+    var maxLines: Int
+        get() = textField.maxLines
+        set(value)
+        {
+            textField.maxLines = value
+            invalidate()
+            requestLayout()
+        }
+
+    var maxLength: Int
+        get()
+        {
+            val lengthFilter = textField.filters.filter { it is InputFilter.LengthFilter }
+                .firstOrNull() as InputFilter.LengthFilter
+            return lengthFilter.max
+        }
+        set(value)
+        {
+            val newFilters = textField.filters.filterNot { it is InputFilter.LengthFilter }.toMutableList()
+            if(value > -1)
+            {
+                newFilters.add(InputFilter.LengthFilter(value))
+            }
+            textField.filters = newFilters.toTypedArray()
+            invalidate()
+            requestLayout()
+        }
+
     private lateinit var textField: EditText
     private lateinit var validationText: TextView
 
@@ -73,6 +111,9 @@ class ValEditText : LinearLayout
                 text = getString(R.styleable.ValEditText_android_text)
                 hint = getString(R.styleable.ValEditText_android_hint)
                 inputType = getInteger(R.styleable.ValEditText_android_inputType, InputType.TYPE_CLASS_TEXT)
+                lines = getInteger(R.styleable.ValEditText_android_lines, 1)
+                maxLines = getInteger(R.styleable.ValEditText_android_maxLines, 1)
+                maxLength = getInteger(R.styleable.ValEditText_android_maxLength, -1)
                 invalidate()
                 requestLayout()
             }
