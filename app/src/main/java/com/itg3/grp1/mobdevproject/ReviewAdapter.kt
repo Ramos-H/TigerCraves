@@ -38,7 +38,7 @@ class ReviewAdapter(val dataset: List<Review>) : RecyclerView.Adapter<ReviewAdap
         holder.title.text = currentReview.Title
         holder.content.text = currentReview.Content
         holder.datePosted.text = currentReview.DatePosted?.date.toString()
-        holder.rating.text = currentReview.Rating!!.toString()
+        holder.rating.text = String.format("%.1f", currentReview.Rating)
     }
 
     override fun getItemCount() = dataset.size
