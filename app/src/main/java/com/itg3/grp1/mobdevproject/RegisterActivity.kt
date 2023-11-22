@@ -38,27 +38,32 @@ class RegisterActivity : AppCompatActivity()
         fieldPassword.error = null
         fieldPasswordConfirm.error = null
 
-        if(fieldNameFirst.text.isNullOrBlank())
+        val nameFirst = fieldNameFirst.text?.trim()
+        val nameMiddle = fieldNameMiddle.text?.trim()
+        val nameLast = fieldNameLast.text?.trim()
+        val email = fieldEmail.text?.trim()
+
+        if(nameFirst.isNullOrBlank())
         {
             fieldNameFirst.error = "First Name cannot be empty"
         }
 
-        if(fieldNameLast.text.isNullOrBlank())
+        if(nameLast.isNullOrBlank())
         {
             fieldNameLast.error = "Last Name cannot be empty"
         }
 
-        if (fieldEmail.text.isNullOrBlank())
+        if (email.isNullOrBlank())
         {
             // Email is empty
             fieldEmail.error = "Email cannot be empty."
         }
-        else if (fieldEmail.text!!.length > 255)
+        else if (email.length > 255)
         {
             // Email exceeds maximum length
             fieldEmail.error = "Email must be 255 characters or less."
         }
-        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(fieldEmail.text).matches())
+        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             // Invalid email
             fieldEmail.error = "Invalid email format."
