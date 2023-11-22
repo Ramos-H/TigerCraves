@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.models.Listing
 
-class ListingAdapter(val dataset: List<Listing>) : RecyclerView.Adapter<ListingAdapter.ViewHolder>()
+class ListingAdapter(val dataset: List<Listing>, val userId: Int) : RecyclerView.Adapter<ListingAdapter.ViewHolder>()
 {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -45,7 +45,10 @@ class ListingAdapter(val dataset: List<Listing>) : RecyclerView.Adapter<ListingA
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
-            context.startActivity(Intent(context, DetailedListingActivity::class.java))
+            val intent = Intent(context, DetailedListingActivity::class.java)
+            intent.putExtra("userId", userId)
+            intent.putExtra("listingId", currentListing.Id)
+            context.startActivity(intent)
         }
     }
 
