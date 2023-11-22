@@ -37,7 +37,9 @@ class LoginActivity : AppCompatActivity() {
         fieldEmail.error = null
         fieldPassword.error = null
 
-        if(fieldEmail.text.isNullOrBlank())
+        val email = fieldEmail.text?.trim()
+
+        if(email.isNullOrBlank())
         {
             fieldEmail.error = "Email is required"
         }
