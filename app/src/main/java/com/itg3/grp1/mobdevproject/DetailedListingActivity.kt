@@ -9,15 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.Review
-import kotlin.random.Random
 
 class DetailedListingActivity : AppCompatActivity()
 {
     var userId: Int? = -1
     // Declare titleValidationText, contentValidationText, and ratingValidationText as properties of the class
-    private lateinit var titleValidationText: TextView
-    private lateinit var contentValidationText: TextView
     private lateinit var ratingValidationText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -73,13 +69,11 @@ class DetailedListingActivity : AppCompatActivity()
         val alertDialog = dialogBuilder.show()
 
         // Find views in the dialog by their IDs
-        val ratingBar = dialogView.findViewById<RatingBar>(R.id.dialogRatingBar)
-        val titleEditText = dialogView.findViewById<EditText>(R.id.dialogTitleEditText)
-        val contentEditText = dialogView.findViewById<EditText>(R.id.dialogContentEditText)
+        val ratingBar: RatingBar = dialogView.findViewById(R.id.dialogRatingBar)
+        val fieldTitle: ValEditText = dialogView.findViewById(R.id.fieldTitle)
+        val fieldContent: ValEditText = dialogView.findViewById(R.id.fieldContent)
 
         // Initialize titleValidationText, contentValidationText, and ratingValidationText
-        titleValidationText = dialogView.findViewById(R.id.dialogTitleValidationText)
-        contentValidationText = dialogView.findViewById(R.id.dialogContentValidationText)
         ratingValidationText = dialogView.findViewById(R.id.dialogRatingValidationText)
 
         val postButton = dialogView.findViewById<Button>(R.id.dialogPostButton)
@@ -92,10 +86,11 @@ class DetailedListingActivity : AppCompatActivity()
         postButton.setOnClickListener {
             // Validate the input fields
             val rating = ratingBar.rating
-            val title = titleEditText.text.toString().trim()
-            val content = contentEditText.text.toString().trim()
+            val title = fieldTitle.text.toString().trim()
+            val content = fieldContent.text.toString().trim()
 
-            if (validateInputFields(title, content, rating, titleEditText, contentEditText)) {
+            if (validateInputFields(fieldTitle, fieldContent, rating))
+            {
                 // Both fields are valid, hide the dialog and show a toast
                 alertDialog.dismiss()
                 showToast("Review Posted!")
@@ -110,48 +105,45 @@ class DetailedListingActivity : AppCompatActivity()
     }
 
     // Function to validate input fields
-    private fun validateInputFields(
-        title: String,
-        content: String,
-        rating: Float,
-        titleEditText: EditText,
-        contentEditText: EditText
-    ): Boolean {
-        // Validation logic for title, content, and rating
-        var isValid = true
+    private fun validateInputFields(fieldTitle: ValEditText, fieldContent: ValEditText, rating: Float): Boolean
+    {
+        fieldTitle.error = null
+        fieldContent.error = null
+        clearValidationErrorsForRating()
 
-        if (title.isEmpty()) {
-            showValidationError(titleEditText, titleValidationText, "Title is required")
-            isValid = false
-        } else if (title.length > 1024) {
-            showValidationError(titleEditText, titleValidationText, "Title cannot exceed 1024 characters")
-            isValid = false
-        } else {
-            clearValidationErrors(titleEditText, titleValidationText)
+        var title = fieldTitle.text?.trim()
+        var content = fieldContent.text?.trim()
+
+        if (title.isNullOrBlank())
+        {
+            fieldTitle.error = "Title is required"
+        }
+        else if (title.length > 1024)
+        {
+            fieldTitle.error = "Title cannot exceed 1024 characters"
         }
 
-        if (content.isEmpty()) {
-            showValidationError(contentEditText, contentValidationText, "Content is required")
-            isValid = false
-        } else if (content.length > 2048) {
-            showValidationError(contentEditText, contentValidationText, "Content cannot exceed 2048 characters")
-            isValid = false
-        } else {
-            clearValidationErrors(contentEditText, contentValidationText)
+        if (content.isNullOrBlank())
+        {
+            fieldContent.error = "Content is required"
+        }
+        else if (content.length > 2048)
+        {
+            fieldContent.error = "Content cannot exceed 2048 characters"
         }
 
-        if (rating == 0.0f) {
+        val noRatingGiven = rating <= 0.0f
+        if (noRatingGiven)
+        {
             showValidationErrorForRating("Rating is required")
-            isValid = false
-        } else {
-            clearValidationErrorsForRating()
         }
 
-        return isValid
+        return fieldTitle.error.isNullOrBlank() && fieldContent.error.isNullOrBlank() && !noRatingGiven
     }
 
     // Function to show validation error for rating
-    private fun showValidationErrorForRating(message: String) {
+    private fun showValidationErrorForRating(message: String)
+    {
         ratingValidationText.text = message
         ratingValidationText.visibility = View.VISIBLE
         ratingValidationText.setTextColor(resources.getColor(R.color.errorText))
@@ -161,27 +153,5 @@ class DetailedListingActivity : AppCompatActivity()
     private fun clearValidationErrorsForRating() {
         ratingValidationText.setTextColor(resources.getColor(R.color.defaultText))
         ratingValidationText.visibility = View.INVISIBLE
-    }
-
-    // Function to show validation error
-    private fun showValidationError(editText: EditText, validationText: TextView, message: String) {
-        // Change text color and border color
-        editText.setTextColor(resources.getColor(R.color.errorText))
-        editText.backgroundTintList = resources.getColorStateList(R.color.errorBorder)
-
-        // Show validation error message
-        validationText.text = message
-        validationText.visibility = View.VISIBLE
-        validationText.setTextColor(resources.getColor(R.color.errorText))
-    }
-
-    // Function to clear validation errors
-    private fun clearValidationErrors(editText: EditText, validationText: TextView) {
-        // Reset text color, border color, and hide validation text
-        editText.setTextColor(resources.getColor(R.color.defaultText))
-        editText.backgroundTintList = resources.getColorStateList(R.color.defaultBorder)
-
-        validationText.setTextColor(resources.getColor(R.color.defaultText))
-        validationText.visibility = View.INVISIBLE
     }
 }
