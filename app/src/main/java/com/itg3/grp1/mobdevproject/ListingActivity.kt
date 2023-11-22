@@ -6,22 +6,39 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.itg3.grp1.mobdevproject.models.Listing
 
-class ListingActivity: AppCompatActivity() {
-    private var layoutManager: RecyclerView.LayoutManager?=null
-    private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>?=null
-    override fun onCreate(savedInstanceState: Bundle?) {
+class ListingActivity: AppCompatActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val dbHelper = DatabaseHelper(this)
+        val user = dbHelper.users.getOne(2)
 
-        layoutManager = LinearLayoutManager(this)
+        val listings = ArrayList<Listing>()
+        for (index in 1..10)
+        {
+            listings.add(Listing(
+                null,
+                user!!,
+                "Restaurant $index",
+                "UST",
+                10.0,
+                1000.0,
+                5.0
+            ))
+        }
+
+        val adapter = ListingAdapter(listings)
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = layoutManager
-
-        adapter = RecyclerAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
     }
+
     fun logout(view: View)
     {
         val intent = Intent(this, LoginActivity::class.java)
