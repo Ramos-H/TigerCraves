@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.models.Listing
 
@@ -31,7 +30,7 @@ class ListingAdapter(val dataset: List<Listing>) : RecyclerView.Adapter<ListingA
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.ViewHolder
     {
-       val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_layout,parent,false)
+       val v = LayoutInflater.from(parent.context).inflate(R.layout.cardview_listing,parent,false)
         return ViewHolder(v)
     }
 
