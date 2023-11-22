@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 
 class RegisterActivity : AppCompatActivity()
 {
@@ -89,6 +90,14 @@ class RegisterActivity : AppCompatActivity()
         {
             // Passwords don't match
             fieldPasswordConfirm.error = "Passwords do not match."
+        }
+
+        val dbHelper = DatabaseHelper(this)
+        val usersWithSameEmail = dbHelper.users.getAll().filter { email == it.Email }
+
+        if(usersWithSameEmail.isNotEmpty())
+        {
+            fieldEmail.error = "Email has already been registered"
         }
 
         // Check if any validation failed
