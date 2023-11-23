@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ValEditText">
+        <attr name="android:text"/>
+        <attr name="android:hint"/>
+        <attr name="android:inputType"/>
+        <attr name="android:maxLength"/>
+        <attr name="android:lines"/>
+        <attr name="android:maxLines"/>
+    </declare-styleable>
+</resources>

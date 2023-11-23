@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group_1mainbg"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="391dp"
+        android:layout_height="295dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="55dp"
+        android:paddingEnd="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922">
+
+        <com.itg3.grp1.mobdevproject.ValEditText
+            android:id="@+id/fieldEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"/>
+
+        <com.itg3.grp1.mobdevproject.ValEditText
+            android:id="@+id/fieldPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:foreground="@drawable/loginbtn"
+            android:onClick="login"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/marykate"
+                android:gravity="end"
+                android:text="Don't have an Account?"
+                android:textColor="#E05D5D" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:foreground="@drawable/group_2registerbtn"
+                android:onClick="goToRegister" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

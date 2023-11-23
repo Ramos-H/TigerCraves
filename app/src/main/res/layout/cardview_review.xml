@@ -1,0 +1,99 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="200dp"
+    android:layout_height="330dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="8dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Review Title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!--Rating-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rating: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="placeholder"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!--Poster-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Posted by: "
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="placeholder"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <!--Date Posted-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date Posted: "
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/datePosted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="placeholder"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>
