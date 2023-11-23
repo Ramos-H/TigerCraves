@@ -8,7 +8,7 @@
     tools:context=".LoginActivity">
 
     <LinearLayout
-        android:layout_width="391dp"
+        android:layout_width="wrap_content"
         android:layout_height="295dp"
         android:gravity="center"
         android:orientation="vertical"
@@ -19,7 +19,8 @@
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922">
+        app:layout_constraintVertical_bias="0.922"
+        android:background="@drawable/group_2layoutbrdr">
 
         <com.itg3.grp1.mobdevproject.ValEditText
             android:id="@+id/fieldEmail"
@@ -33,17 +34,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
+            android:layout_width="151dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
+            android:layout_marginBottom="20dp"
             android:foreground="@drawable/loginbtn"
-            android:onClick="login"
-            android:layout_marginBottom="20dp"/>
+            android:onClick="login" />
 
         <LinearLayout
             android:layout_width="match_parent"
