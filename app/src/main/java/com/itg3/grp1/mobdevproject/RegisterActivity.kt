@@ -49,48 +49,65 @@ class RegisterActivity : AppCompatActivity()
         {
             fieldNameFirst.error = "First Name cannot be empty"
         }
+        else if(nameFirst.length > 255)
+        {
+            fieldNameFirst.error = "First Name must be 255 characters or less"
+        }
+
+        if(nameMiddle!!.length > 255)
+        {
+            fieldNameMiddle.error = "Middle Name must be 255 characters or less"
+        }
 
         if(nameLast.isNullOrBlank())
         {
             fieldNameLast.error = "Last Name cannot be empty"
         }
+        else if(nameLast.length > 255)
+        {
+            fieldNameLast.error = "Last Name must be 255 characters or less"
+        }
 
         if (email.isNullOrBlank())
         {
             // Email is empty
-            fieldEmail.error = "Email cannot be empty."
+            fieldEmail.error = "Email cannot be empty"
         }
         else if (email.length > 255)
         {
             // Email exceeds maximum length
-            fieldEmail.error = "Email must be 255 characters or less."
+            fieldEmail.error = "Email must be 255 characters or less"
         }
         else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
             // Invalid email
-            fieldEmail.error = "Invalid email format."
+            fieldEmail.error = "Invalid email format"
         }
 
         if (fieldPassword.text.isNullOrBlank())
         {
             // Password is empty
-            fieldPassword.error =  "Password cannot be empty."
+            fieldPassword.error =  "Password cannot be empty"
+        }
+        else if(fieldPassword.text.toString().length > 2048)
+        {
+            fieldPassword.error = "Password must be 2048 characters or less"
         }
         else if (!fieldPassword.text!!.matches(Regex("(?=.*[0-9]).{8,}")))
         {
             // Invalid password
-            fieldPassword.error =  "Must be at least 8 alphanumeric characters."
+            fieldPassword.error =  "Must be at least 8 alphanumeric characters"
         }
 
         if (fieldPasswordConfirm.text.isNullOrBlank())
         {
             // Confirm Password is empty
-            fieldPasswordConfirm.error = "Confirm password cannot be empty."
+            fieldPasswordConfirm.error = "Confirm password cannot be empty"
         }
         else if (fieldPasswordConfirm.text != fieldPassword.text)
         {
             // Passwords don't match
-            fieldPasswordConfirm.error = "Passwords do not match."
+            fieldPasswordConfirm.error = "Passwords do not match"
         }
 
         val dbHelper = DatabaseHelper(this)

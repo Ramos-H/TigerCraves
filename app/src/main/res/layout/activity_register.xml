@@ -20,24 +20,28 @@
             android:id="@+id/fieldNameFirst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="255"
             android:hint="First Name"/>
 
         <com.itg3.grp1.mobdevproject.ValEditText
             android:id="@+id/fieldNameMiddle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="255"
             android:hint="Middle Name"/>
 
         <com.itg3.grp1.mobdevproject.ValEditText
             android:id="@+id/fieldNameLast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="255"
             android:hint="Last Name"/>
 
         <com.itg3.grp1.mobdevproject.ValEditText
             android:id="@+id/fieldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="255"
             android:hint="Email"
             android:inputType="textEmailAddress"/>
 
@@ -45,6 +49,7 @@
             android:id="@+id/fieldPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="2048"
             android:hint="Password"
             android:inputType="textPassword"/>
 
