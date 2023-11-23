@@ -48,8 +48,8 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="82dp"
                 android:layout_height="wrap_content"
-                android:numStars="3"
-                android:rating="4"
+                android:numStars="5"
+                android:rating="0"
                 android:theme="@style/RatingBar"></RatingBar>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
