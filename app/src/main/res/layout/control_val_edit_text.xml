@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="40dp"
+    android:orientation="vertical"
+    >
 
     <EditText
         android:id="@+id/textField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@drawable/rounded_edittext_background"
         android:fontFamily="@font/amaranth"
         android:paddingLeft="15dp"
-        android:textSize="18sp" />
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/validationText"
