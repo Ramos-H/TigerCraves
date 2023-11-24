@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F9FAF1">
 
     <!-- Rating Bar -->
     <RatingBar
@@ -54,21 +55,25 @@
         android:layout_marginTop="16dp">
 
         <!-- Post Button -->
-        <Button
+        <ImageButton
             android:id="@+id/dialogPostButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Post"/>
+            android:src="@drawable/post_btn"
+            android:background="@android:color/transparent"
+            android:contentDescription="Post Button"/>
 
         <!-- Cancel Button -->
-        <Button
+        <ImageButton
             android:id="@+id/dialogCancelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#D6D6D6"
-            android:text="Cancel"/>
+            android:src="@drawable/cancel_btn"
+            android:background="@android:color/transparent"
+            android:contentDescription="Cancel Button"/>
 
     </LinearLayout>
 
