@@ -9,59 +9,110 @@
     android:layout_gravity="center">
 
     <LinearLayout
-        android:layout_width="238dp"
-        android:layout_height="199dp"
-        android:gravity="center"
+        android:layout_width="214dp"
+        android:layout_height="304dp"
+        android:background="@drawable/rectangle_6tigeropa"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@drawable/rectangle_6tigeropa">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="message"
-            android:textSize="18sp"
+            android:textSize="15dp"
+            android:fontFamily="@font/telegrafregular"
             android:textStyle="bold"></TextView>
 
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/telegrafregular"
+                    android:text="Minimum Price: "></TextView>
+                        <EditText
+                            android:id="@+id/etMinPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:fontFamily="@font/telegrafregular"
+                            android:inputType="numberDecimal" />
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/telegrafregular"
+                android:text="Maximum Price: "></TextView>
+            <EditText
+                android:id="@+id/etMaxPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/telegrafregular"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/telegrafregular"
+                android:text="Minimum Average Rating: "></TextView>
+            <EditText
+                android:id="@+id/etAveRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:fontFamily="@font/telegrafregular"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
+                <Button
+                    android:id="@+id/resetBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
 
-                <RadioButton
-                    android:id="@+id/rb1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/telegrafregular"
-                    android:text="Ascending"
-                    android:textSize="14sp">
+                    android:background="@drawable/group_4resetbtn"></Button>
 
-                </RadioButton>
+                <Button
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/group_3cancelbtn"></Button>
+            </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/telegrafregular"
-                    android:text="Descending"
-                    android:textSize="14sp">
+            <Button
+                android:id="@+id/applyBtn"
+                android:layout_width="116dp"
+                android:layout_height="37dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/group_5applybtn"></Button>
 
-                </RadioButton>
-            </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

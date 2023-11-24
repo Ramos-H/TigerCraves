@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -32,7 +33,7 @@ class ListingActivity: AppCompatActivity() {
 
 
         showFilter.setOnClickListener() {
-            val message = "Sorting Direction"
+            val message = "Filtering"
             showFiltering(message)
         }
         showSort.setOnClickListener() {
@@ -70,28 +71,27 @@ class ListingActivity: AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
-        val rb1 = dialog.findViewById<RadioButton>(R.id.rb1)
-        val rb2 = dialog.findViewById<RadioButton>(R.id.rb2)
-        val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup)
+        val minprice = dialog.findViewById<EditText>(R.id.etMinPrice)
+        val maxprice = dialog.findViewById<EditText>(R.id.etMaxPrice)
+        val averate= dialog.findViewById<EditText>(R.id.etAveRate)
+
         val reset =dialog.findViewById<Button>(R.id.resetBtn)
         val cancel = dialog.findViewById<Button>(R.id.cancelBtn)
         val apply = dialog.findViewById<Button>(R.id.applyBtn)
-        radioGroup.check(selectedSortingOption)
+
 
         tvTitle.text = message
-
-        rb1.setOnClickListener {
-            selectedSortingOption = R.id.rb1
+        reset.setOnClickListener(){
+        minprice.text = null
+        maxprice.text = null
+        averate.text = null
+        }
+        cancel.setOnClickListener(){
             dialog.dismiss()
         }
-
-        rb2.setOnClickListener {
-            selectedSortingOption = R.id.rb2
-            dialog.dismiss()
+        apply.setOnClickListener(){
+            Toast.makeText(this, "Applied filtering", Toast.LENGTH_SHORT).show()
         }
-
-
-
         dialog.show()
     }
 
@@ -148,9 +148,13 @@ class ListingActivity: AppCompatActivity() {
         }
         cancel.setOnClickListener(){
             dialog.dismiss()
+            selectedSortingOption = R.id.rb1
+            selectedSortingOption2 = R.id.rbf1
+            radioGroup.check(selectedSortingOption)
+            radioGroup2.check(selectedSortingOption2)
         }
         apply.setOnClickListener(){
-            Toast.makeText(this, "Applied filtering", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Applied sorting", Toast.LENGTH_SHORT).show()
         }
         dialog.show()
     }
