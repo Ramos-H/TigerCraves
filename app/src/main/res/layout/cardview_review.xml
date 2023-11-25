@@ -13,22 +13,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@drawable/cardview_bg">
-
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amaranth"
                 android:text="Review Title"
-
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textColor="#EC9F54"/>
-
-
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <!--Rating-->
             <LinearLayout
@@ -38,22 +31,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="Rating: "
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#C6A26A"
-                    />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/rating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="placeholder"
-                    android:textSize="16sp"
-                    android:textColor="#C6A26A"
-                    />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <!--Poster-->
@@ -64,21 +51,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="Posted by: "
                     android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#C6A26A"
-                    />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/poster"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="placeholder"
-                    android:textSize="15sp"
-                    android:textColor="#C6A26A"/>
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <!--Date Posted-->
@@ -89,45 +71,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="Date Posted: "
                     android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="#C6A26A"
-                    />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/datePosted"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/amaranth"
                     android:text="placeholder"
-                    android:textSize="14sp"
-                    android:textColor="#C6A26A"
-                    />
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:orientation="horizontal"></LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="?android:attr/listDivider" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:orientation="horizontal"></LinearLayout>
-
             <TextView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/amaranth"
-                android:text="Review content goes here."
-                android:textColor="#93866D"
+                android:text="Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars Review content goes here. Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello Madlang People Mabuhay Mini Miss U, Mini Miss U Hello madlang people mabuhay Our cutieful cutie queens cute little stars"
                 android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
