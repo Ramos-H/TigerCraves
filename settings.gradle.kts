@@ -1,3 +1,4 @@
+include(":app")
 pluginManagement {
     repositories {
         google()
@@ -15,4 +16,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MobDevProject"
-include(":app")
+
