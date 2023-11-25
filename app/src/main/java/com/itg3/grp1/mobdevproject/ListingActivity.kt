@@ -28,8 +28,8 @@ class ListingActivity: AppCompatActivity() {
         setContentView(R.layout.activity_listing)
 
         val dbHelper = DatabaseHelper(this)
-        val showFilter = findViewById<Button>(R.id.filterbtn)
-        val showSort = findViewById<Button>(R.id.sortbtn)
+        val showFilter = findViewById<ImageButton>(R.id.filterbtn)
+        val showSort = findViewById<ImageButton>(R.id.sortbtn)
 
 
         showFilter.setOnClickListener() {
