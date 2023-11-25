@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.Listing
 
 class ListingActivity: AppCompatActivity() {
     private var selectedSortingOption: Int = R.id.rb1
@@ -28,18 +27,6 @@ class ListingActivity: AppCompatActivity() {
         setContentView(R.layout.activity_listing)
 
         val dbHelper = DatabaseHelper(this)
-        val showFilter = findViewById<ImageButton>(R.id.filterbtn)
-        val showSort = findViewById<ImageButton>(R.id.sortbtn)
-
-
-        showFilter.setOnClickListener() {
-            val message = "Filtering"
-            showFiltering(message)
-        }
-        showSort.setOnClickListener() {
-            val message = "Sorting Criteria"
-            showSorting(message)
-        }
 
         val user = dbHelper.users.getOne(intent.extras!!.getInt("userId"))
         val welcomeBanner: TextView = findViewById(R.id.welcomeBanner)
@@ -63,7 +50,7 @@ class ListingActivity: AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun showFiltering(message: String) {
+    fun showFilterDialog(view: View) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -80,7 +67,7 @@ class ListingActivity: AppCompatActivity() {
         val apply = dialog.findViewById<Button>(R.id.applyBtn)
 
 
-        tvTitle.text = message
+        tvTitle.text = "Filtering"
         reset.setOnClickListener(){
         minprice.text = null
         maxprice.text = null
@@ -96,7 +83,7 @@ class ListingActivity: AppCompatActivity() {
     }
 
 
-    fun showSorting(message: String) {
+    fun showSortDialog(view: View) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
