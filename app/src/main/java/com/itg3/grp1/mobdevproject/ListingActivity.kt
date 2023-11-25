@@ -90,8 +90,6 @@ class ListingActivity: AppCompatActivity() {
         dialog.setContentView(R.layout.cardview_sort)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
-        val tvTitle2 = dialog.findViewById<TextView>(R.id.tvTitle2)
         val rb1 = dialog.findViewById<RadioButton>(R.id.rb1)
         val rb2 = dialog.findViewById<RadioButton>(R.id.rb2)
         val rb3 = dialog.findViewById<RadioButton>(R.id.rb3)
@@ -99,15 +97,12 @@ class ListingActivity: AppCompatActivity() {
         val rbf1 = dialog.findViewById<RadioButton>(R.id.rbf1)
         val rbf2 = dialog.findViewById<RadioButton>(R.id.rbf2)
         val radioGroup2 = dialog.findViewById<RadioGroup>(R.id.radioGroup2)
-        val reset =dialog.findViewById<Button>(R.id.resetBtn)
-        val cancel = dialog.findViewById<Button>(R.id.cancelBtn)
-        val apply = dialog.findViewById<Button>(R.id.applyBtn)
+        val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
+        val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
+        val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
 
         radioGroup.check(selectedSortingOption)
         radioGroup2.check(selectedSortingOption2)
-
-        tvTitle.text = "Sorting Criteria"
-        tvTitle2.text = "Sorting Direction"
 
         rb1.setOnClickListener {
             selectedSortingOption = R.id.rb1
