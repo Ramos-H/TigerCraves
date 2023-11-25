@@ -8,12 +8,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Listing
 import com.itg3.grp1.mobdevproject.data.models.Review
 
-class DetailedListingActivity : AppCompatActivity()
-{
+class DetailedListingActivity : AppCompatActivity() {
     private var userId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
     private var listing: Listing? = null
@@ -22,10 +24,21 @@ class DetailedListingActivity : AppCompatActivity()
 
     private lateinit var ratingValidationText: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
+
+        //Image Slider
+        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+
+        imageSlider.setImageList(imageList, ScaleTypes.FIT)
+        //
 
         userId = intent.extras?.getInt("userId")!!
         val listingId = intent.extras?.getInt("listingId")

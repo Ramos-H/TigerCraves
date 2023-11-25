@@ -25,14 +25,24 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/tigercard2" />
 
-            <ImageView
-                android:id="@+id/restaurantImageView"
+            <!-- Image Slider -->
+            <com.denzcoskun.imageslider.ImageSlider
                 android:layout_width="match_parent"
                 android:layout_height="233dp"
                 android:layout_gravity="top|start"
                 android:layout_marginTop="187dp"
                 android:layout_marginHorizontal="35dp"
-                android:src="@drawable/imgplaceholder" />
+                android:id="@+id/imageSlider"
+                app:iss_auto_cycle="true"
+                app:iss_delay="0"
+                app:iss_placeholder="@android:color/darker_gray"
+                app:iss_error_image="@android:color/darker_gray"
+                app:iss_corner_radius="5"
+                app:iss_selected_dot="@drawable/default_selected_dot"
+                app:iss_unselected_dot="@drawable/default_unselected_dot"
+                app:iss_period="2500"
+                tools:ignore="MissingConstraints"
+                />
 
             <TextView
                 android:id="@+id/tvName"
