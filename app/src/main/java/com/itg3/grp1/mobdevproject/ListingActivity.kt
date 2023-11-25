@@ -57,17 +57,15 @@ class ListingActivity: AppCompatActivity() {
         dialog.setContentView(R.layout.cardview_filter)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val tvTitle = dialog.findViewById<TextView>(R.id.tvTitle)
         val minprice = dialog.findViewById<EditText>(R.id.etMinPrice)
         val maxprice = dialog.findViewById<EditText>(R.id.etMaxPrice)
         val averate= dialog.findViewById<EditText>(R.id.etAveRate)
 
-        val reset =dialog.findViewById<Button>(R.id.resetBtn)
-        val cancel = dialog.findViewById<Button>(R.id.cancelBtn)
-        val apply = dialog.findViewById<Button>(R.id.applyBtn)
+        val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
+        val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
+        val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
 
 
-        tvTitle.text = "Filtering"
         reset.setOnClickListener(){
         minprice.text = null
         maxprice.text = null
