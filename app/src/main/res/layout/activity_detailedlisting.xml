@@ -109,6 +109,7 @@
 
         <!--Your Review Section -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/yourReviewCard"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -262,7 +263,8 @@
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
                             android:contentDescription="Delete Button"
-                            android:src="@drawable/delete_btn" />
+                            android:src="@drawable/delete_btn"
+                            android:onClick="onDeletePostButtonClick"/>
                         <!-- Edit Button -->
                         <ImageButton
                             android:id="@+id/editPostButton"
@@ -272,7 +274,8 @@
                             android:background="@android:color/transparent"
                             android:backgroundTint="#D6D6D6"
                             android:contentDescription="Edit Button"
-                            android:src="@drawable/edit_btn" />
+                            android:src="@drawable/edit_btn"
+                            android:onClick="onEditPostButtonClick"/>
                     </LinearLayout>
 
                 </LinearLayout>

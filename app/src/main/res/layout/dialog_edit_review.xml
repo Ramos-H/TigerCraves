@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#FEF7E4"
+    app:cardCornerRadius="20dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        android:layout_gravity="center"
+        android:padding="60dp"
+        android:src="@drawable/your_review_bg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/reviewComposerHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/marykate"
+            android:text="Edit your Review"
+            android:textAlignment="center"
+            android:textColor="#EC9F54"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="392dp"
+            android:layout_height="346dp"
+            android:orientation="vertical">
+
+            <!-- Rating Bar -->
+            <RatingBar
+                android:id="@+id/dialogRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:progressBackgroundTint="#E4E3E3"
+                android:progressTint="#FFB600"
+                android:rating="0.0"
+                android:stepSize="1.0" />
+
+            <!-- TextView for rating validation -->
+            <TextView
+                android:id="@+id/dialogRatingValidationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text="Rating is required"
+                android:textColor="#FF0000"
+                android:visibility="invisible" />
+
+
+            <!-- Title Input -->
+            <com.itg3.grp1.mobdevproject.ValEditText
+                android:id="@+id/editTitle"
+                android:layout_width="366dp"
+                android:layout_height="51dp"
+                android:layout_gravity="center"
+                android:hint="Title"
+                android:maxLength="1024" />
+
+            <com.itg3.grp1.mobdevproject.ValEditText
+                android:id="@+id/editContent"
+                android:layout_width="366dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Content"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:maxLength="2048"
+                android:maxLines="6" />
+
+            <!-- Buttons -->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp">
+                <ImageButton
+                    android:id="@+id/cancelEditButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Cancel Edit Button"
+                    android:src="@drawable/delete_btn" />
+                <ImageButton
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:backgroundTint="#D6D6D6"
+                    android:contentDescription="Save Changes Button"
+                    android:src="@drawable/edit_btn" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
