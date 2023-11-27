@@ -116,8 +116,8 @@ class DetailedListingActivity : AppCompatActivity() {
         // Initialize titleValidationText, contentValidationText, and ratingValidationText
         ratingValidationText = dialogView.findViewById(R.id.dialogRatingValidationText)
 
-        val postButton = dialogView.findViewById<ImageButton>(R.id.dialogPostButton)
-        val cancelButton = dialogView.findViewById<ImageButton>(R.id.dialogCancelButton)
+        val postButton = dialogView.findViewById<Button>(R.id.dialogPostButton)
+        val cancelButton = dialogView.findViewById<Button>(R.id.dialogCancelButton)
 
         // Set initial rating to 0
         ratingBar.rating = 0.0f
