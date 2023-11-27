@@ -36,7 +36,6 @@
             android:layout_height="346dp"
             android:orientation="vertical">
 
-            <!-- Rating Bar -->
             <RatingBar
                 android:id="@+id/dialogRatingBar"
                 android:layout_width="wrap_content"
@@ -48,7 +47,6 @@
                 android:rating="0.0"
                 android:stepSize="1.0" />
 
-            <!-- TextView for rating validation -->
             <TextView
                 android:id="@+id/dialogRatingValidationText"
                 android:layout_width="wrap_content"
@@ -59,8 +57,6 @@
                 android:textColor="#FF0000"
                 android:visibility="invisible" />
 
-
-            <!-- Title Input -->
             <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/editTitle"
                 android:layout_width="366dp"
@@ -79,9 +75,6 @@
                 android:lines="4"
                 android:maxLength="2048"
                 android:maxLines="6" />
-
-            <!-- Buttons -->
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -106,7 +99,6 @@
                     android:contentDescription="Save Changes Button"
                     android:src="@drawable/saveedit_btn" />
             </LinearLayout>
-
 
         </LinearLayout>
 

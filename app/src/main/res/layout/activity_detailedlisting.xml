@@ -118,12 +118,12 @@
             android:layout_marginBottom="23dp"
             >
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="match_parent"
                 android:layout_height="243dp"
                 android:layout_gravity="center"
                 android:padding="60dp"
-                android:src="@drawable/your_review_bg" />
+                android:src="@drawable/your_review_bg" />-->
 
             <ScrollView
                 android:layout_width="match_parent"
