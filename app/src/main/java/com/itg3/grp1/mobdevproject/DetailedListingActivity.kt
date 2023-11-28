@@ -1,8 +1,12 @@
 package com.itg3.grp1.mobdevproject
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -195,8 +199,8 @@ class DetailedListingActivity : AppCompatActivity() {
             .setView(dialogView)
             .setTitle("Edit Review")
 
-        val editTitle = dialogView.findViewById<EditText>(R.id.editTitle)
-        val editContent = dialogView.findViewById<EditText>(R.id.editContent)
+        val editTitle = dialogView.findViewById<ValEditText>(R.id.editTitle)
+        val editContent = dialogView.findViewById<ValEditText>(R.id.editContent)
         val saveChangesButton = dialogView.findViewById<ImageButton>(R.id.saveChangesButton)
         val cancelEditButton = dialogView.findViewById<ImageButton>(R.id.cancelEditButton)
 
@@ -221,28 +225,29 @@ class DetailedListingActivity : AppCompatActivity() {
 
     // Function to show the delete confirmation dialog
     fun showDeleteConfirmationDialog(view: View) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_delete_confirmation, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setTitle("Delete Review")
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_delete_confirmation)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val confirmDeleteButton = dialogView.findViewById<Button>(R.id.confirmDeleteButton)
-        val cancelDeleteButton = dialogView.findViewById<Button>(R.id.cancelDeleteButton)
-
-        val alertDialog = dialogBuilder.show()
+        val confirmDeleteButton = dialog.findViewById<ImageButton>(R.id.confirmDeleteButton)
+        val cancelDeleteButton = dialog.findViewById<ImageButton>(R.id.cancelDeleteButton)
 
         // Set click listener for "Confirm" button
         confirmDeleteButton.setOnClickListener {
             // Delete the review logic goes here
             showToast("Review Deleted!")
             // Refresh the UI or handle other actions after deletion...
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
 
         // Set click listener for "Cancel" button
         cancelDeleteButton.setOnClickListener {
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
+
+        val alertDialog = dialog.show()
     }
 
     // Function to handle click events on editPostButton
