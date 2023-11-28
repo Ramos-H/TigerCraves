@@ -1,19 +1,24 @@
 package com.itg3.grp1.mobdevproject
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Listing
 import com.itg3.grp1.mobdevproject.data.models.Review
 
-class DetailedListingActivity : AppCompatActivity()
-{
+class DetailedListingActivity : AppCompatActivity() {
     private var userId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
     private var listing: Listing? = null
@@ -22,10 +27,21 @@ class DetailedListingActivity : AppCompatActivity()
 
     private lateinit var ratingValidationText: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
+
+        //Image Slider
+        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
+        val imageList = ArrayList<SlideModel>()
+
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+        imageList.add(SlideModel(R.drawable.imgplaceholder))
+
+        imageSlider.setImageList(imageList, ScaleTypes.FIT)
+        //
 
         userId = intent.extras?.getInt("userId")!!
         val listingId = intent.extras?.getInt("listingId")
@@ -88,23 +104,22 @@ class DetailedListingActivity : AppCompatActivity()
     // Function to show the Review Composer dialog
     fun showReviewComposerDialog(view: View)
     {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_review_composer, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setTitle("Add Review")
-
-        val alertDialog = dialogBuilder.show()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_review_composer)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // Find views in the dialog by their IDs
-        val ratingBar: RatingBar = dialogView.findViewById(R.id.dialogRatingBar)
-        val fieldTitle: ValEditText = dialogView.findViewById(R.id.fieldTitle)
-        val fieldContent: ValEditText = dialogView.findViewById(R.id.fieldContent)
+        val ratingBar: RatingBar = dialog.findViewById(R.id.dialogRatingBar)
+        val fieldTitle: ValEditText = dialog.findViewById(R.id.fieldTitle)
+        val fieldContent: ValEditText = dialog.findViewById(R.id.fieldContent)
 
         // Initialize titleValidationText, contentValidationText, and ratingValidationText
-        ratingValidationText = dialogView.findViewById(R.id.dialogRatingValidationText)
+        ratingValidationText = dialog.findViewById(R.id.dialogRatingValidationText)
 
-        val postButton = dialogView.findViewById<Button>(R.id.dialogPostButton)
-        val cancelButton = dialogView.findViewById<Button>(R.id.dialogCancelButton)
+        val postButton = dialog.findViewById<ImageButton>(R.id.dialogPostButton)
+        val cancelButton = dialog.findViewById<ImageButton>(R.id.dialogCancelButton)
 
         // Set initial rating to 0
         ratingBar.rating = 0.0f
@@ -141,15 +156,17 @@ class DetailedListingActivity : AppCompatActivity()
                     showToast("Review Posted!")
                 }
 
-                alertDialog.dismiss()
+                dialog.dismiss()
             }
         }
 
         // Set click listener for the "Cancel" button in the dialog
         cancelButton.setOnClickListener {
             // Close the dialog without posting the review
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
+
+        dialog.show()
     }
 
     // Function to validate input fields

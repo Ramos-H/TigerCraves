@@ -12,4 +12,6 @@
 
     <!-- Error border color -->
     <color name="errorBorder">#FF0000</color>
+    <color name="black">#FF000000</color>
+    <color name="cardview1">#FFF8E5</color>
 </resources>

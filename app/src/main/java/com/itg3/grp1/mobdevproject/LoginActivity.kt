@@ -12,7 +12,6 @@ import android.widget.Button
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
-
     lateinit var fieldEmail : ValEditText
     lateinit var fieldPassword : ValEditText
 
@@ -20,9 +19,6 @@ class LoginActivity : AppCompatActivity() {
     {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        fieldEmail = findViewById(R.id.fieldEmail)
-        fieldPassword = findViewById(R.id.fieldPassword)
 
 //        AddTestListing()
     }
