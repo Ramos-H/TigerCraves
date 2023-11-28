@@ -117,6 +117,185 @@
                 app:srcCompat="@drawable/backtolistings_btn" />
         </FrameLayout>
 
+        <!-- Your Review Section -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/yourReviewCard"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="8dp"
+            app:cardBackgroundColor="#FEF7E4"
+            android:layout_marginBottom="23dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amaranth"
+                    android:gravity="center"
+                    android:text="Your Review"
+                    android:textColor="#EC9F54"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp"/>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:background="@drawable/testing1">
+
+                        <TextView
+                            android:id="@+id/yourTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/amaranth"
+                            android:text="Review Title"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="#EC9F54"/>
+
+                        <!-- Rating -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="Rating: "
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:textColor="#C6A26A" />
+
+                            <TextView
+                                android:id="@+id/yourRating"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="placeholder"
+                                android:textSize="16sp"
+                                android:textColor="#C6A26A" />
+                        </LinearLayout>
+
+                        <!-- Poster -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="Posted by: "
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#C6A26A" />
+
+                            <TextView
+                                android:id="@+id/yourName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="placeholder"
+                                android:textSize="15sp"
+                                android:textColor="#C6A26A" />
+                        </LinearLayout>
+
+                        <!-- Date Posted -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="Date Posted: "
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#C6A26A" />
+
+                            <TextView
+                                android:id="@+id/yourDatePosted"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/amaranth"
+                                android:text="placeholder"
+                                android:textSize="14sp"
+                                android:textColor="#C6A26A" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:orientation="horizontal"></LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:orientation="horizontal"></LinearLayout>
+
+                        <TextView
+                            android:id="@+id/yourContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/amaranth"
+                            android:text="Review content goes here.Review content goes here.Review content goes here.Review content goes here.Review content goes here.Review content goes here.Review content goes here."
+                            android:textColor="#93866D"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <!-- Delete Button -->
+                    <ImageButton
+                        android:id="@+id/deletePostButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Delete Button"
+                        android:src="@drawable/delete_btn"
+                        android:onClick="onDeletePostButtonClick"/>
+                    <!-- Edit Button -->
+                    <ImageButton
+                        android:id="@+id/editPostButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="#D6D6D6"
+                        android:contentDescription="Edit Button"
+                        android:src="@drawable/edit_btn"
+                        android:onClick="onEditPostButtonClick"/>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+        <!-- Reviews Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

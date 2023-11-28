@@ -27,7 +27,8 @@ class DetailedListingActivity : AppCompatActivity() {
 
     private lateinit var ratingValidationText: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
 
@@ -63,34 +64,29 @@ class DetailedListingActivity : AppCompatActivity() {
         val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
 
 
-        if(!reviews.isNullOrEmpty())
-        {
+        if (!reviews.isNullOrEmpty()) {
             val noReviewsText: TextView = findViewById(R.id.noReviewsText)
             noReviewsText.visibility = View.GONE
             initReviewAdapter(reviews)
         }
     }
 
-    private fun initReviewAdapter(reviews: List<Review>)
-    {
+    private fun initReviewAdapter(reviews: List<Review>) {
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.visibility = View.VISIBLE
-        reviewRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        reviewRecycler.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        if(reviewAdapter != null)
-        {
+        if (reviewAdapter != null) {
             reviewAdapter!!.dataset = reviews
             reviewAdapter!!.notifyDataSetChanged()
-        }
-        else
-        {
+        } else {
             reviewAdapter = ReviewAdapter(reviews)
             reviewRecycler.adapter = reviewAdapter
         }
     }
 
-    fun goToListingPage(view: View)
-    {
+    fun goToListingPage(view: View) {
         val intent = Intent(this, ListingActivity::class.java)
         intent.putExtra("userId", userId)
         startActivity(intent)
@@ -131,19 +127,15 @@ class DetailedListingActivity : AppCompatActivity() {
             val title = fieldTitle.text.toString().trim()
             val content = fieldContent.text.toString().trim()
 
-            if (validateInputFields(fieldTitle, fieldContent, rating))
-            {
+            if (validateInputFields(fieldTitle, fieldContent, rating)) {
                 // Both fields are valid, hide the dialog and show a toast
                 val poster = dbHelper.users.getOne(userId!!)
                 val newReview = Review(null, poster!!, listing!!, rating.toDouble(), title, content)
                 val newReviewId = dbHelper.reviews.add(newReview)
 
-                if(newReviewId.toInt() == -1)
-                {
+                if (newReviewId.toInt() == -1) {
                     showToast("Review cannot be posted. There must be a problem with the database.")
-                }
-                else
-                {
+                } else {
                     // Get fresh list of reviews
                     val reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
 
@@ -170,8 +162,11 @@ class DetailedListingActivity : AppCompatActivity() {
     }
 
     // Function to validate input fields
-    private fun validateInputFields(fieldTitle: ValEditText, fieldContent: ValEditText, rating: Float): Boolean
-    {
+    private fun validateInputFields(
+        fieldTitle: ValEditText,
+        fieldContent: ValEditText,
+        rating: Float
+    ): Boolean {
         fieldTitle.error = null
         fieldContent.error = null
         clearValidationErrorsForRating()
@@ -179,27 +174,20 @@ class DetailedListingActivity : AppCompatActivity() {
         var title = fieldTitle.text?.trim()
         var content = fieldContent.text?.trim()
 
-        if (title.isNullOrBlank())
-        {
+        if (title.isNullOrBlank()) {
             fieldTitle.error = "Title is required"
-        }
-        else if (title.length > 1024)
-        {
+        } else if (title.length > 1024) {
             fieldTitle.error = "Title cannot exceed 1024 characters"
         }
 
-        if (content.isNullOrBlank())
-        {
+        if (content.isNullOrBlank()) {
             fieldContent.error = "Content is required"
-        }
-        else if (content.length > 2048)
-        {
+        } else if (content.length > 2048) {
             fieldContent.error = "Content cannot exceed 2048 characters"
         }
 
         val noRatingGiven = rating <= 0.0f
-        if (noRatingGiven)
-        {
+        if (noRatingGiven) {
             showValidationErrorForRating("Rating is required")
         }
 
@@ -207,8 +195,7 @@ class DetailedListingActivity : AppCompatActivity() {
     }
 
     // Function to show validation error for rating
-    private fun showValidationErrorForRating(message: String)
-    {
+    private fun showValidationErrorForRating(message: String) {
         ratingValidationText.text = message
         ratingValidationText.visibility = View.VISIBLE
         ratingValidationText.setTextColor(resources.getColor(R.color.errorText))
@@ -219,4 +206,73 @@ class DetailedListingActivity : AppCompatActivity() {
         ratingValidationText.setTextColor(resources.getColor(R.color.defaultText))
         ratingValidationText.visibility = View.INVISIBLE
     }
+
+    /* FUNCTIONS FOR EDIT AND DELETE YOUR REVIEW SECTION */
+
+    // Function to show the edit dialog
+    fun showEditDialog(view: View) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_edit_review)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val editTitle = dialog.findViewById<ValEditText>(R.id.editTitle)
+        val editContent = dialog.findViewById<ValEditText>(R.id.editContent)
+        val saveChangesButton = dialog.findViewById<ImageButton>(R.id.saveChangesButton)
+        val cancelEditButton = dialog.findViewById<ImageButton>(R.id.cancelEditButton)
+
+        // Set click listener for "Save Changes" button
+        saveChangesButton.setOnClickListener {
+            // Save changes logic goes here
+            showToast("Review Edited!")
+            // Refresh the UI or handle other actions after editing...
+            dialog.dismiss()
+        }
+
+        // Set click listener for "Cancel" button
+        cancelEditButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    // Function to show the delete confirmation dialog
+    fun showDeleteConfirmationDialog(view: View) {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_delete_confirmation)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val confirmDeleteButton = dialog.findViewById<ImageButton>(R.id.confirmDeleteButton)
+        val cancelDeleteButton = dialog.findViewById<ImageButton>(R.id.cancelDeleteButton)
+
+        // Set click listener for "Confirm" button
+        confirmDeleteButton.setOnClickListener {
+            // Delete the review logic goes here
+            showToast("Review Deleted!")
+            // Refresh the UI or handle other actions after deletion...
+            dialog.dismiss()
+        }
+
+        // Set click listener for "Cancel" button
+        cancelDeleteButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        val alertDialog = dialog.show()
+    }
+
+    // Function to handle click events on editPostButton
+    fun onEditPostButtonClick(view: View) {
+        showEditDialog(view)
+    }
+
+    // Function to handle click events on deletePostButton
+    fun onDeletePostButtonClick(view: View) {
+        showDeleteConfirmationDialog(view)
+    }
+
 }
