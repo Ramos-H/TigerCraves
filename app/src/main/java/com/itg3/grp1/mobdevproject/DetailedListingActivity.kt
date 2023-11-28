@@ -1,10 +1,13 @@
 package com.itg3.grp1.mobdevproject
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -88,23 +91,22 @@ class DetailedListingActivity : AppCompatActivity()
     // Function to show the Review Composer dialog
     fun showReviewComposerDialog(view: View)
     {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_review_composer, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setTitle("Add Review")
-
-        val alertDialog = dialogBuilder.show()
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_review_composer)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // Find views in the dialog by their IDs
-        val ratingBar: RatingBar = dialogView.findViewById(R.id.dialogRatingBar)
-        val fieldTitle: ValEditText = dialogView.findViewById(R.id.fieldTitle)
-        val fieldContent: ValEditText = dialogView.findViewById(R.id.fieldContent)
+        val ratingBar: RatingBar = dialog.findViewById(R.id.dialogRatingBar)
+        val fieldTitle: ValEditText = dialog.findViewById(R.id.fieldTitle)
+        val fieldContent: ValEditText = dialog.findViewById(R.id.fieldContent)
 
         // Initialize titleValidationText, contentValidationText, and ratingValidationText
-        ratingValidationText = dialogView.findViewById(R.id.dialogRatingValidationText)
+        ratingValidationText = dialog.findViewById(R.id.dialogRatingValidationText)
 
-        val postButton = dialogView.findViewById<ImageButton>(R.id.dialogPostButton)
-        val cancelButton = dialogView.findViewById<ImageButton>(R.id.dialogCancelButton)
+        val postButton = dialog.findViewById<ImageButton>(R.id.dialogPostButton)
+        val cancelButton = dialog.findViewById<ImageButton>(R.id.dialogCancelButton)
 
         // Set initial rating to 0
         ratingBar.rating = 0.0f
@@ -141,15 +143,17 @@ class DetailedListingActivity : AppCompatActivity()
                     showToast("Review Posted!")
                 }
 
-                alertDialog.dismiss()
+                dialog.dismiss()
             }
         }
 
         // Set click listener for the "Cancel" button in the dialog
         cancelButton.setOnClickListener {
             // Close the dialog without posting the review
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
+
+        dialog.show()
     }
 
     // Function to validate input fields
