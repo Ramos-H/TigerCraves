@@ -16,9 +16,6 @@ class LoginActivity : AppCompatActivity() {
     lateinit var fieldEmail : ValEditText
     lateinit var fieldPassword : ValEditText
 
-    lateinit var btnLogin : Button
-    lateinit var btnRegister : Button
-
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -26,8 +23,6 @@ class LoginActivity : AppCompatActivity() {
 
         fieldEmail = findViewById(R.id.fieldEmail)
         fieldPassword = findViewById(R.id.fieldPassword)
-        btnLogin = findViewById(R.id.btnLogin)
-        btnRegister = findViewById(R.id.btnRegister)
 
 //        AddTestListing()
     }
