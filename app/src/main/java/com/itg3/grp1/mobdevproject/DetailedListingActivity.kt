@@ -194,33 +194,31 @@ class DetailedListingActivity : AppCompatActivity() {
 
     // Function to show the edit dialog
     fun showEditDialog(view: View) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_edit_review, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setTitle("Edit Review")
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_edit_review)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val editTitle = dialogView.findViewById<ValEditText>(R.id.editTitle)
-        val editContent = dialogView.findViewById<ValEditText>(R.id.editContent)
-        val saveChangesButton = dialogView.findViewById<ImageButton>(R.id.saveChangesButton)
-        val cancelEditButton = dialogView.findViewById<ImageButton>(R.id.cancelEditButton)
-
-        // Set existing review details to EditText fields if needed
-        // ...
-
-        val alertDialog = dialogBuilder.show()
+        val editTitle = dialog.findViewById<ValEditText>(R.id.editTitle)
+        val editContent = dialog.findViewById<ValEditText>(R.id.editContent)
+        val saveChangesButton = dialog.findViewById<ImageButton>(R.id.saveChangesButton)
+        val cancelEditButton = dialog.findViewById<ImageButton>(R.id.cancelEditButton)
 
         // Set click listener for "Save Changes" button
         saveChangesButton.setOnClickListener {
             // Save changes logic goes here
             showToast("Review Edited!")
             // Refresh the UI or handle other actions after editing...
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
 
         // Set click listener for "Cancel" button
         cancelEditButton.setOnClickListener {
-            alertDialog.dismiss()
+            dialog.dismiss()
         }
+
+        dialog.show()
     }
 
     // Function to show the delete confirmation dialog
