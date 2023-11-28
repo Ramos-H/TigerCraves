@@ -32,7 +32,7 @@
             android:textSize="40sp" />
 
         <LinearLayout
-            android:layout_width="392dp"
+            android:layout_width="match_parent"
             android:layout_height="304dp"
             android:orientation="vertical">
 
@@ -40,7 +40,7 @@
             <RatingBar
                 android:id="@+id/dialogRatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="47dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:numStars="5"
                 android:progressBackgroundTint="#E4E3E3"
@@ -59,19 +59,19 @@
                 android:textColor="#FF0000"
                 android:visibility="invisible" />
 
-
             <!-- Title Input -->
             <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/fieldTitle"
-                android:layout_width="366dp"
-                android:layout_height="51dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
                 android:hint="Title"
                 android:maxLength="1024" />
 
             <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/fieldContent"
-                android:layout_width="366dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="Content"
@@ -90,7 +90,7 @@
                 <!-- Cancel Button -->
                 <ImageButton
                     android:id="@+id/dialogCancelButton"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -101,7 +101,7 @@
                 <!-- Post Button -->
                 <ImageButton
                     android:id="@+id/dialogPostButton"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
