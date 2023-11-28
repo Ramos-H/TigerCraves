@@ -42,7 +42,6 @@ class DetailedListingActivity : AppCompatActivity() {
         imageList.add(SlideModel(R.drawable.imgplaceholder))
 
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
-        //
 
         userId = intent.extras?.getInt("userId")!!
         val listingId = intent.extras?.getInt("listingId")

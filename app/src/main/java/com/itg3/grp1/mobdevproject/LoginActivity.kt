@@ -20,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        fieldEmail = findViewById(R.id.fieldEmail)
+        fieldPassword = findViewById(R.id.fieldPassword)
+
 //        AddTestListing()
     }
 
