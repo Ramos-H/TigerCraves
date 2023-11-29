@@ -20,11 +20,17 @@ import com.itg3.grp1.mobdevproject.data.models.Review
 
 class DetailedListingActivity : AppCompatActivity() {
     private var userId: Int? = -1
+    private var listingId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
     private var listing: Listing? = null
 
     private var reviewAdapter: ReviewAdapter? = null
 
+    private lateinit var tvName: TextView
+    private lateinit var tvLocation: TextView
+    private lateinit var tvPriceMin: TextView
+    private lateinit var tvPriceMax: TextView
+    private lateinit var tvRating: TextView
     private lateinit var ratingValidationText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -43,31 +49,34 @@ class DetailedListingActivity : AppCompatActivity() {
 
         imageSlider.setImageList(imageList, ScaleTypes.FIT)
 
-        userId = intent.extras?.getInt("userId")!!
-        val listingId = intent.extras?.getInt("listingId")
+        tvName = findViewById(R.id.tvName)
+        tvLocation = findViewById(R.id.tvLocation)
+        tvPriceMin = findViewById(R.id.tvPriceMin)
+        tvPriceMax = findViewById(R.id.tvPriceMax)
+        tvRating = findViewById(R.id.tvRating)
 
-        listing = dbHelper.listings.getOne(listingId!!)
-
-        val tvName: TextView = findViewById(R.id.tvName)
-        val tvLocation: TextView = findViewById(R.id.tvLocation)
-        val tvPriceMin: TextView = findViewById(R.id.tvPriceMin)
-        val tvPriceMax: TextView = findViewById(R.id.tvPriceMax)
-        val tvRating: TextView = findViewById(R.id.tvRating)
-
-        tvName.text = listing!!.Name
-        tvLocation.text = listing!!.Address
-        tvPriceMin.text = String.format("%.2f", listing!!.PriceMin)
-        tvPriceMax.text = String.format("%.2f", listing!!.PriceMax)
-        tvRating.text = String.format("%.1f", listing!!.Rating)
+        loadListingInfo()
 
         val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
-
 
         if (!reviews.isNullOrEmpty()) {
             val noReviewsText: TextView = findViewById(R.id.noReviewsText)
             noReviewsText.visibility = View.GONE
             initReviewAdapter(reviews)
         }
+    }
+
+    private fun loadListingInfo()
+    {
+        userId = intent.extras?.getInt("userId")!!
+        listingId = intent.extras?.getInt("listingId")
+        listing = dbHelper.listings.getOne(listingId!!)
+
+        tvName.text = listing!!.Name
+        tvLocation.text = listing!!.Address
+        tvPriceMin.text = String.format("%.2f", listing!!.PriceMin)
+        tvPriceMax.text = String.format("%.2f", listing!!.PriceMax)
+        tvRating.text = String.format("%.1f", listing!!.Rating)
     }
 
     private fun initReviewAdapter(reviews: List<Review>) {
@@ -144,6 +153,7 @@ class DetailedListingActivity : AppCompatActivity() {
                     dbHelper.listings.update(listing!!)
 
                     initReviewAdapter(reviews)
+                    loadListingInfo()
                     showToast("Review Posted!")
                 }
 
