@@ -279,6 +279,10 @@ class DetailedListingActivity : AppCompatActivity() {
         val cancelEditButton = dialog.findViewById<ImageButton>(R.id.cancelEditButton)
         val editRatingValidationText = dialog.findViewById<TextView>(R.id.editRatingValidationText)
 
+        editTitle.text = yourReview!!.Title
+        editContent.text = yourReview!!.Content
+        editRating.rating = yourReview!!.Rating.toFloat()
+
         // Set click listener for "Save Changes" button
         saveChangesButton.setOnClickListener {
             if(validateInputFields(editTitle!!, editContent, editRatingValidationText, editRating.rating))
