@@ -23,6 +23,7 @@ class DetailedListingActivity : AppCompatActivity() {
     private var listingId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
     private var listing: Listing? = null
+    private var reviews : List<Review>? = null
 
     private var reviewAdapter: ReviewAdapter? = null
 
@@ -32,6 +33,11 @@ class DetailedListingActivity : AppCompatActivity() {
     private lateinit var tvPriceMax: TextView
     private lateinit var tvRating: TextView
     private lateinit var ratingValidationText: TextView
+
+    private lateinit var tvYourTitle: TextView
+    private lateinit var tvYourRating: TextView
+    private lateinit var tvYourDatePosted: TextView
+    private lateinit var tvYourContent: TextView
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -55,23 +61,30 @@ class DetailedListingActivity : AppCompatActivity() {
         tvPriceMax = findViewById(R.id.tvPriceMax)
         tvRating = findViewById(R.id.tvRating)
 
+        tvYourTitle = findViewById(R.id.yourTitle)
+        tvYourRating = findViewById(R.id.yourRating)
+        tvYourDatePosted = findViewById(R.id.yourDatePosted)
+        tvYourContent = findViewById(R.id.yourContent)
+
+        loadPageData()
+    }
+
+    private fun loadPageData()
+    {
+        // Fetch relevant data
+        userId = intent.extras?.getInt("userId")
+        listingId = intent.extras?.getInt("listingId")
+        listing = dbHelper.listings.getOne(listingId!!)
+        reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
+
+        // Load fetched data into the view
         loadListingInfo()
-
-        val reviews = dbHelper.reviews.getAll().filter { listingId == it.Listing.Id }
-
-        if (!reviews.isNullOrEmpty()) {
-            val noReviewsText: TextView = findViewById(R.id.noReviewsText)
-            noReviewsText.visibility = View.GONE
-            initReviewAdapter(reviews)
-        }
+        loadOwnReview()
+        loadReviewSection()
     }
 
     private fun loadListingInfo()
     {
-        userId = intent.extras?.getInt("userId")!!
-        listingId = intent.extras?.getInt("listingId")
-        listing = dbHelper.listings.getOne(listingId!!)
-
         tvName.text = listing!!.Name
         tvLocation.text = listing!!.Address
         tvPriceMin.text = String.format("%.2f", listing!!.PriceMin)
@@ -79,17 +92,45 @@ class DetailedListingActivity : AppCompatActivity() {
         tvRating.text = String.format("%.1f", listing!!.Rating)
     }
 
-    private fun initReviewAdapter(reviews: List<Review>) {
+    private fun loadOwnReview()
+    {
+        val yourReview = reviews?.filter { it.Poster.Id == userId }?.firstOrNull()
+        if(yourReview == null)
+        {
+            // hide your review section
+        }
+        else
+        {
+            tvYourTitle.text = yourReview.Title
+            tvYourRating.text = String.format("%.1f", yourReview.Rating)
+            tvYourDatePosted.text = yourReview.DatePosted.toString()
+            tvYourContent.text = yourReview.Content
+        }
+    }
+
+    private fun loadReviewSection()
+    {
+        val noReviewsText: TextView = findViewById(R.id.noReviewsText)
+        if (reviews.isNullOrEmpty())
+        {
+            noReviewsText.visibility = View.VISIBLE
+            return
+        }
+
+        noReviewsText.visibility = View.GONE
         val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.visibility = View.VISIBLE
         reviewRecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        if (reviewAdapter != null) {
-            reviewAdapter!!.dataset = reviews
+        if (reviewAdapter != null)
+        {
+            reviewAdapter!!.dataset = reviews!!
             reviewAdapter!!.notifyDataSetChanged()
-        } else {
-            reviewAdapter = ReviewAdapter(reviews)
+        }
+        else
+        {
+            reviewAdapter = ReviewAdapter(reviews!!)
             reviewRecycler.adapter = reviewAdapter
         }
     }
@@ -144,16 +185,15 @@ class DetailedListingActivity : AppCompatActivity() {
                 if (newReviewId.toInt() == -1) {
                     showToast("Review cannot be posted. There must be a problem with the database.")
                 } else {
-                    // Get fresh list of reviews
-                    val reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
+                    // Get fresh list of reviews for average rating score recalculation
+                    reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
 
                     // Update average rating for the current listing
-                    val averageRating = reviews.sumOf { it.Rating } / reviews.count()
+                    val averageRating = reviews!!.sumOf { it.Rating } / reviews!!.count()
                     listing!!.Rating = averageRating
                     dbHelper.listings.update(listing!!)
 
-                    initReviewAdapter(reviews)
-                    loadListingInfo()
+                    loadPageData()
                     showToast("Review Posted!")
                 }
 
