@@ -110,27 +110,30 @@ class DetailedListingActivity : AppCompatActivity() {
 
     private fun loadReviewSection()
     {
+        val otherReviews = reviews!!.filter { it.Poster.Id != userId }
         val noReviewsText: TextView = findViewById(R.id.noReviewsText)
-        if (reviews.isNullOrEmpty())
+        val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
+        if (otherReviews.isNullOrEmpty())
         {
             noReviewsText.visibility = View.VISIBLE
+            reviewRecycler.visibility = View.GONE
             return
         }
 
         noReviewsText.visibility = View.GONE
-        val reviewRecycler = findViewById<RecyclerView>(R.id.reviewRecycler)
         reviewRecycler.visibility = View.VISIBLE
+
         reviewRecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         if (reviewAdapter != null)
         {
-            reviewAdapter!!.dataset = reviews!!
+            reviewAdapter!!.dataset = otherReviews!!
             reviewAdapter!!.notifyDataSetChanged()
         }
         else
         {
-            reviewAdapter = ReviewAdapter(reviews!!)
+            reviewAdapter = ReviewAdapter(otherReviews!!)
             reviewRecycler.adapter = reviewAdapter
         }
     }
