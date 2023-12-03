@@ -1,6 +1,6 @@
 package com.itg3.grp1.mobdevproject.data.models
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class Review(
     var Id: Int? = null,
@@ -9,5 +9,5 @@ data class Review(
     var Rating: Double,
     var Title: String,
     var Content: String,
-    var DatePosted: Date? = null
+    var DatePosted: LocalDateTime? = null
 ) : IModel

@@ -1,6 +1,6 @@
 package com.itg3.grp1.mobdevproject.data.models
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class User(
     var Id: Int? = null,
@@ -9,5 +9,5 @@ data class User(
     var NameLast: String,
     var Email: String,
     var PasswordHash: String,
-    var DateRegistered: Date? = null
+    var DateRegistered: LocalDateTime? = null
 ) : IModel

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Review
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.Date
 
 class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
@@ -73,7 +75,7 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
                     cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
                     cursor.getString(cursor.getColumnIndex(COL_TITLE)),
                     cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                    LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                 )
             }
         }
@@ -113,7 +115,7 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
                         cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
                         cursor.getString(cursor.getColumnIndex(COL_TITLE)),
                         cursor.getString(cursor.getColumnIndex(COL_CONTENT)),
-                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                        LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                     )
 
                     result.add(review)
@@ -144,7 +146,7 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
         contentValues.put(COL_RATING, instance.Rating)
         contentValues.put(COL_TITLE, instance.Title)
         contentValues.put(COL_CONTENT, instance.Content)
-        contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
+        contentValues.put(COL_DATE_POSTED, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC))
 
         val success = db.insert(TBL_NAME, null, contentValues)
         if(success > -1)

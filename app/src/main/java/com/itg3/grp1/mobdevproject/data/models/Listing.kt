@@ -1,6 +1,6 @@
 package com.itg3.grp1.mobdevproject.data.models
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class Listing(
     var Id: Int? = null,
@@ -9,5 +9,5 @@ data class Listing(
     var PriceMin: Double?,
     var PriceMax: Double?,
     var Rating: Double?,
-    var DatePosted: Date? = null
+    var DatePosted: LocalDateTime? = null
 ) : IModel

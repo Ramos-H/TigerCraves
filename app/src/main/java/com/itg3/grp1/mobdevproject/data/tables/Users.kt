@@ -5,8 +5,12 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.User
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.Date
 
 class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)
@@ -64,7 +68,7 @@ class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)
                     cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
                     cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
                     cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                    LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)), 0, ZoneOffset.UTC)
                 )
             }
         }
@@ -98,7 +102,7 @@ class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)
                         cursor.getString(cursor.getColumnIndex(COL_NAME_LAST)),
                         cursor.getString(cursor.getColumnIndex(COL_EMAIL)),
                         cursor.getString(cursor.getColumnIndex(COL_PASSWORD_HASH)),
-                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)))
+                        LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_REGISTERED)), 0, ZoneOffset.UTC)
                     )
                     result.add(user)
                 }
@@ -128,7 +132,7 @@ class Users(newDbHandler: DatabaseHelper) : DbTable<User>(newDbHandler)
         contentValues.put(COL_NAME_LAST, instance.NameLast)
         contentValues.put(COL_EMAIL, instance.Email)
         contentValues.put(COL_PASSWORD_HASH, instance.PasswordHash)
-        contentValues.put(COL_DATE_REGISTERED, System.currentTimeMillis())
+        contentValues.put(COL_DATE_REGISTERED, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC))
 
         val success = db.insert(TBL_NAME, null, contentValues)
         return success

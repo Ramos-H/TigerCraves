@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Listing
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.Date
 
 class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
@@ -65,7 +67,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                     cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
                     cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
                     cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
-                    Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                    LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                 )
             }
         }
@@ -99,7 +101,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                         cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
                         cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
                         cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
-                        Date(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)))
+                        LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                     )
 
                     result.add(listing)
@@ -130,7 +132,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         contentValues.put(COL_PRICE_MIN, instance.PriceMin)
         contentValues.put(COL_PRICE_MAX, instance.PriceMax)
         contentValues.put(COL_RATING, 0.0)
-        contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
+        contentValues.put(COL_DATE_POSTED, LocalDateTime.now().toEpochSecond(ZoneOffset.UTC))
 
         val success = db.insert(TBL_NAME, null, contentValues)
         return success
