@@ -12,12 +12,8 @@ import android.widget.Button
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
-
     lateinit var fieldEmail : ValEditText
     lateinit var fieldPassword : ValEditText
-
-    lateinit var btnLogin : Button
-    lateinit var btnRegister : Button
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -26,8 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
         fieldEmail = findViewById(R.id.fieldEmail)
         fieldPassword = findViewById(R.id.fieldPassword)
-        btnLogin = findViewById(R.id.btnLogin)
-        btnRegister = findViewById(R.id.btnRegister)
 
 //        AddTestListing()
     }

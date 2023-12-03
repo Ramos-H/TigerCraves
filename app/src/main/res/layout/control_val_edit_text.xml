@@ -7,11 +7,12 @@
     <EditText
         android:id="@+id/textField"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/rounded_edittext_background"
         android:fontFamily="@font/amaranth"
-        android:paddingLeft="15dp"
-        android:textSize="18sp" />
+        android:padding="8dp"
+        android:text="suhdush"
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/validationText"
