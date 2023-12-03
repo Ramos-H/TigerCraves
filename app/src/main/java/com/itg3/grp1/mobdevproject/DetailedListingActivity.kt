@@ -9,7 +9,6 @@ import android.view.View
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
@@ -24,6 +23,7 @@ class DetailedListingActivity : AppCompatActivity() {
     private var listingId: Int? = -1
     private val dbHelper = DatabaseHelper(this)
     private var listing: Listing? = null
+    private var yourReview: Review? = null
     private var reviews : List<Review>? = null
 
     private var reviewAdapter: ReviewAdapter? = null
@@ -101,19 +101,22 @@ class DetailedListingActivity : AppCompatActivity() {
 
     private fun loadOwnReview()
     {
-        val yourReview = reviews?.filter { it.Poster.Id == userId }?.firstOrNull()
+        yourReview = reviews?.filter { it.Poster.Id == userId }?.firstOrNull()
         if(yourReview == null)
         {
             vYourReviewSection.visibility = View.GONE
             btnAddReview.visibility = View.VISIBLE
+            return
         }
         else
         {
-            tvYourTitle.text = yourReview.Title
-            tvYourRating.text = String.format("%.1f", yourReview.Rating)
-            tvYourDatePosted.text = yourReview.DatePosted.toString()
-            tvYourContent.text = yourReview.Content
             btnAddReview.visibility = View.GONE
+            vYourReviewSection.visibility = View.VISIBLE
+
+            tvYourTitle.text = yourReview!!.Title
+            tvYourRating.text = String.format("%.1f", yourReview!!.Rating)
+            tvYourDatePosted.text = yourReview!!.DatePosted.toString()
+            tvYourContent.text = yourReview!!.Content
         }
     }
 
@@ -168,12 +171,12 @@ class DetailedListingActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         // Find views in the dialog by their IDs
-        val ratingBar: RatingBar = dialog.findViewById(R.id.dialogRatingBar)
+        val ratingBar: RatingBar = dialog.findViewById(R.id.editRating)
         val fieldTitle: ValEditText = dialog.findViewById(R.id.fieldTitle)
         val fieldContent: ValEditText = dialog.findViewById(R.id.fieldContent)
 
         // Initialize titleValidationText, contentValidationText, and ratingValidationText
-        ratingValidationText = dialog.findViewById(R.id.dialogRatingValidationText)
+        ratingValidationText = dialog.findViewById(R.id.editRatingValidationText)
 
         val postButton = dialog.findViewById<ImageButton>(R.id.dialogPostButton)
         val cancelButton = dialog.findViewById<ImageButton>(R.id.dialogCancelButton)
@@ -188,7 +191,7 @@ class DetailedListingActivity : AppCompatActivity() {
             val title = fieldTitle.text.toString().trim()
             val content = fieldContent.text.toString().trim()
 
-            if (validateInputFields(fieldTitle, fieldContent, rating)) {
+            if (validateInputFields(fieldTitle, fieldContent, ratingValidationText, rating)) {
                 // Both fields are valid, hide the dialog and show a toast
                 val poster = dbHelper.users.getOne(userId!!)
                 val newReview = Review(null, poster!!, listing!!, rating.toDouble(), title, content)
@@ -223,14 +226,16 @@ class DetailedListingActivity : AppCompatActivity() {
     }
 
     // Function to validate input fields
-    private fun validateInputFields(
-        fieldTitle: ValEditText,
-        fieldContent: ValEditText,
-        rating: Float
-    ): Boolean {
+    private fun validateInputFields(fieldTitle: ValEditText,
+                                    fieldContent: ValEditText,
+                                    ratingValText: TextView,
+                                    rating: Float): Boolean
+    {
         fieldTitle.error = null
         fieldContent.error = null
-        clearValidationErrorsForRating()
+
+        ratingValText.setTextColor(resources.getColor(R.color.defaultText))
+        ratingValText.visibility = View.INVISIBLE
 
         var title = fieldTitle.text?.trim()
         var content = fieldContent.text?.trim()
@@ -249,23 +254,12 @@ class DetailedListingActivity : AppCompatActivity() {
 
         val noRatingGiven = rating <= 0.0f
         if (noRatingGiven) {
-            showValidationErrorForRating("Rating is required")
+            ratingValText.text = "Rating is required"
+            ratingValText.visibility = View.VISIBLE
+            ratingValText.setTextColor(resources.getColor(R.color.errorText))
         }
 
         return fieldTitle.error.isNullOrBlank() && fieldContent.error.isNullOrBlank() && !noRatingGiven
-    }
-
-    // Function to show validation error for rating
-    private fun showValidationErrorForRating(message: String) {
-        ratingValidationText.text = message
-        ratingValidationText.visibility = View.VISIBLE
-        ratingValidationText.setTextColor(resources.getColor(R.color.errorText))
-    }
-
-    // Function to clear validation errors for rating
-    private fun clearValidationErrorsForRating() {
-        ratingValidationText.setTextColor(resources.getColor(R.color.defaultText))
-        ratingValidationText.visibility = View.INVISIBLE
     }
 
     /* FUNCTIONS FOR EDIT AND DELETE YOUR REVIEW SECTION */
@@ -280,15 +274,23 @@ class DetailedListingActivity : AppCompatActivity() {
 
         val editTitle = dialog.findViewById<ValEditText>(R.id.editTitle)
         val editContent = dialog.findViewById<ValEditText>(R.id.editContent)
+        val editRating = dialog.findViewById<RatingBar>(R.id.editRating)
         val saveChangesButton = dialog.findViewById<ImageButton>(R.id.saveChangesButton)
         val cancelEditButton = dialog.findViewById<ImageButton>(R.id.cancelEditButton)
+        val editRatingValidationText = dialog.findViewById<TextView>(R.id.editRatingValidationText)
 
         // Set click listener for "Save Changes" button
         saveChangesButton.setOnClickListener {
-            // Save changes logic goes here
-            showToast("Review Edited!")
-            // Refresh the UI or handle other actions after editing...
-            dialog.dismiss()
+            if(validateInputFields(editTitle!!, editContent, editRatingValidationText, editRating.rating))
+            {
+                yourReview?.Title = editTitle.text!!
+                yourReview?.Content = editContent.text!!
+                yourReview?.Rating = editRating.rating.toDouble()
+                dbHelper.reviews.update(yourReview!!)
+                loadPageData()
+                showToast("Edited review")
+                dialog.dismiss()
+            }
         }
 
         // Set click listener for "Cancel" button
@@ -298,6 +300,7 @@ class DetailedListingActivity : AppCompatActivity() {
 
         dialog.show()
     }
+
 
     // Function to show the delete confirmation dialog
     fun showDeleteConfirmationDialog(view: View) {

@@ -38,7 +38,7 @@
 
             <!-- Rating Bar -->
             <RatingBar
-                android:id="@+id/dialogRatingBar"
+                android:id="@+id/editRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -50,7 +50,7 @@
 
             <!-- TextView for rating validation -->
             <TextView
-                android:id="@+id/dialogRatingValidationText"
+                android:id="@+id/editRatingValidationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
