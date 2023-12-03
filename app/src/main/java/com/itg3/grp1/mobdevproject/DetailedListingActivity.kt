@@ -9,6 +9,7 @@ import android.view.View
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
@@ -34,6 +35,7 @@ class DetailedListingActivity : AppCompatActivity() {
     private lateinit var tvRating: TextView
     private lateinit var ratingValidationText: TextView
 
+    private lateinit var vYourReviewSection : View
     private lateinit var tvYourTitle: TextView
     private lateinit var tvYourRating: TextView
     private lateinit var tvYourDatePosted: TextView
@@ -67,6 +69,7 @@ class DetailedListingActivity : AppCompatActivity() {
         tvYourRating = findViewById(R.id.yourRating)
         tvYourDatePosted = findViewById(R.id.yourDatePosted)
         tvYourContent = findViewById(R.id.yourContent)
+        vYourReviewSection = findViewById(R.id.yourReviewCard)
 
         btnAddReview = findViewById(R.id.btnAddReview)
 
@@ -101,7 +104,7 @@ class DetailedListingActivity : AppCompatActivity() {
         val yourReview = reviews?.filter { it.Poster.Id == userId }?.firstOrNull()
         if(yourReview == null)
         {
-            // hide your review section
+            vYourReviewSection.visibility = View.GONE
             btnAddReview.visibility = View.VISIBLE
         }
         else
