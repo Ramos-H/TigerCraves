@@ -147,6 +147,10 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
         contentValues.put(COL_DATE_POSTED, System.currentTimeMillis())
 
         val success = db.insert(TBL_NAME, null, contentValues)
+        if(success > -1)
+        {
+            updateListingAverageRating(instance)
+        }
         return success
     }
 
@@ -160,13 +164,37 @@ class Reviews(dbHandler: DatabaseHelper) : DbTable<Review>(dbHandler)
         contentValues.put(COL_CONTENT, instance.Content)
 
         val success = db.update(TBL_NAME, contentValues, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        if(success > -1)
+        {
+            updateListingAverageRating(instance)
+        }
         return success
+    }
+
+    fun updateListingAverageRating(instance: Review)
+    {
+        val reviews = getAll().filter { it.Listing.Id == instance.Listing.Id }
+        if(reviews == null)
+        {
+            instance.Listing.Rating = 0.0
+        }
+        else
+        {
+            instance.Listing.Rating = reviews.sumOf { it.Rating } / reviews.count()
+        }
+
+        dbHelper.listings.update(instance.Listing)
     }
 
     override fun delete(instance: Review): Int
     {
+
         val db = dbHelper.writableDatabase
         val success = db.delete(TBL_NAME, "$COL_ID = ?", arrayOf(instance.Id.toString()))
+        if(success > -1)
+        {
+            updateListingAverageRating(instance)
+        }
         return success
     }
 }

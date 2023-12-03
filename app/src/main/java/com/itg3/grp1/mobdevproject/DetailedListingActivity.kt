@@ -197,22 +197,16 @@ class DetailedListingActivity : AppCompatActivity() {
                 val newReview = Review(null, poster!!, listing!!, rating.toDouble(), title, content)
                 val newReviewId = dbHelper.reviews.add(newReview)
 
-                if (newReviewId.toInt() == -1) {
+                if (newReviewId.toInt() == -1)
+                {
                     showToast("Review cannot be posted. There must be a problem with the database.")
-                } else {
-                    // Get fresh list of reviews for average rating score recalculation
-                    reviews = dbHelper.reviews.getAll().filter { listing!!.Id == it.Listing.Id }
-
-                    // Update average rating for the current listing
-                    val averageRating = reviews!!.sumOf { it.Rating } / reviews!!.count()
-                    listing!!.Rating = averageRating
-                    dbHelper.listings.update(listing!!)
-
+                }
+                else
+                {
                     loadPageData()
                     showToast("Review Posted!")
+                    dialog.dismiss()
                 }
-
-                dialog.dismiss()
             }
         }
 
