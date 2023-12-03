@@ -319,6 +319,8 @@ class DetailedListingActivity : AppCompatActivity() {
 
         // Set click listener for "Confirm" button
         confirmDeleteButton.setOnClickListener {
+            dbHelper.reviews.delete(yourReview!!)
+            loadPageData()
             // Delete the review logic goes here
             showToast("Review Deleted!")
             // Refresh the UI or handle other actions after deletion...
