@@ -39,6 +39,8 @@ class DetailedListingActivity : AppCompatActivity() {
     private lateinit var tvYourDatePosted: TextView
     private lateinit var tvYourContent: TextView
 
+    private lateinit var btnAddReview : ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?)
     {
         super.onCreate(savedInstanceState)
@@ -65,6 +67,8 @@ class DetailedListingActivity : AppCompatActivity() {
         tvYourRating = findViewById(R.id.yourRating)
         tvYourDatePosted = findViewById(R.id.yourDatePosted)
         tvYourContent = findViewById(R.id.yourContent)
+
+        btnAddReview = findViewById(R.id.btnAddReview)
 
         loadPageData()
     }
@@ -98,6 +102,7 @@ class DetailedListingActivity : AppCompatActivity() {
         if(yourReview == null)
         {
             // hide your review section
+            btnAddReview.visibility = View.VISIBLE
         }
         else
         {
@@ -105,6 +110,7 @@ class DetailedListingActivity : AppCompatActivity() {
             tvYourRating.text = String.format("%.1f", yourReview.Rating)
             tvYourDatePosted.text = yourReview.DatePosted.toString()
             tvYourContent.text = yourReview.Content
+            btnAddReview.visibility = View.GONE
         }
     }
 
