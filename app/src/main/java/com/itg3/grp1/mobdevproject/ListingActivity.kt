@@ -17,22 +17,87 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
+import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.User
 
-class ListingActivity: AppCompatActivity() {
-    private var selectedSortingOption: Int = R.id.rb1
-    private var selectedSortingOption2: Int = R.id.rbf1
+class ListingActivity: AppCompatActivity()
+{
+    private var selectedSortCriteriaControl: Int = R.id.rb2
+    private var selectedSortDirectionControl: Int = R.id.rbf1
+    private var selectedSortCriteria : SortCriteria = SortCriteria.AVERAGE_RATING
+    private var selectedSortDirection : SortDirections = SortDirections.DESCENDING
+    private lateinit var user : User
+
+    private val dbHelper = DatabaseHelper(this)
+    enum class SortDirections
+    {
+        ASCENDING,
+        DESCENDING
+    }
+
+    enum class SortCriteria
+    {
+        NAME,
+        AVERAGE_RATING,
+        PRICE
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listing)
 
-        val dbHelper = DatabaseHelper(this)
-
-        val user = dbHelper.users.getOne(intent.extras!!.getInt("userId"))
+        user = dbHelper.users.getOne(intent.extras!!.getInt("userId"))!!
         val welcomeBanner: TextView = findViewById(R.id.welcomeBanner)
         welcomeBanner.text = "Welcome, ${user!!.NameFirst}!"
 
-        val listings = dbHelper.listings.getAll()
-        if (!listings.isNullOrEmpty()) {
+        loadListings()
+    }
+
+    fun fetchListings(): List<Listing>
+    {
+        var listings = dbHelper.listings.getAll()
+        if(selectedSortCriteria == SortCriteria.NAME)
+        {
+            if(selectedSortDirection == SortDirections.ASCENDING)
+            {
+                listings = listings.sortedBy { it.Name }
+            }
+            else
+            {
+                listings = listings.sortedByDescending { it.Name }
+            }
+        }
+        else if(selectedSortCriteria == SortCriteria.PRICE)
+        {
+            if(selectedSortDirection == SortDirections.ASCENDING)
+            {
+                listings = listings.sortedBy { it.PriceMin }
+            }
+            else
+            {
+                listings = listings.sortedByDescending { it.PriceMin }
+            }
+        }
+        else
+        {
+            if(selectedSortDirection == SortDirections.ASCENDING)
+            {
+                listings = listings.sortedBy { it.Rating }
+            }
+            else
+            {
+                listings = listings.sortedByDescending { it.Rating }
+            }
+        }
+
+        return listings
+    }
+
+    fun loadListings()
+    {
+        val listings = fetchListings()
+        if (!listings.isNullOrEmpty())
+        {
             val noListingsText: TextView = findViewById(R.id.noListingsText)
             noListingsText.visibility = View.INVISIBLE
 
@@ -79,7 +144,6 @@ class ListingActivity: AppCompatActivity() {
         dialog.show()
     }
 
-
     fun showSortDialog(view: View) {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -91,49 +155,61 @@ class ListingActivity: AppCompatActivity() {
         val rb2 = dialog.findViewById<RadioButton>(R.id.rb2)
         val rb3 = dialog.findViewById<RadioButton>(R.id.rb3)
         val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup)
+
         val rbf1 = dialog.findViewById<RadioButton>(R.id.rbf1)
         val rbf2 = dialog.findViewById<RadioButton>(R.id.rbf2)
         val radioGroup2 = dialog.findViewById<RadioGroup>(R.id.radioGroup2)
+
         val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
         val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
         val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
 
-        radioGroup.check(selectedSortingOption)
-        radioGroup2.check(selectedSortingOption2)
+        radioGroup.check(selectedSortCriteriaControl)
+        radioGroup2.check(selectedSortDirectionControl)
 
         rb1.setOnClickListener {
-            selectedSortingOption = R.id.rb1
+            selectedSortCriteriaControl = R.id.rb1
+            selectedSortCriteria = SortCriteria.NAME
         }
-
         rb2.setOnClickListener {
-            selectedSortingOption = R.id.rb2
+            selectedSortCriteriaControl = R.id.rb2
+            selectedSortCriteria = SortCriteria.AVERAGE_RATING
         }
         rb3.setOnClickListener {
-            selectedSortingOption = R.id.rb3
+            selectedSortCriteriaControl = R.id.rb3
+            selectedSortCriteria = SortCriteria.PRICE
         }
 
         rbf1.setOnClickListener {
-
-            selectedSortingOption2 = R.id.rbf1
+            selectedSortDirectionControl = R.id.rbf1
+            selectedSortDirection = SortDirections.ASCENDING
         }
         rbf2.setOnClickListener {
-            selectedSortingOption2 = R.id.rbf2
+            selectedSortDirectionControl = R.id.rbf2
+            selectedSortDirection = SortDirections.DESCENDING
         }
+
+        fun resetSortDialog()
+        {
+            selectedSortCriteriaControl = R.id.rb2
+            selectedSortDirectionControl = R.id.rbf1
+            radioGroup.check(selectedSortCriteriaControl)
+            radioGroup2.check(selectedSortDirectionControl)
+        }
+
         reset.setOnClickListener(){
-            selectedSortingOption = R.id.rb1
-            selectedSortingOption2 = R.id.rbf1
-            radioGroup.check(selectedSortingOption)
-            radioGroup2.check(selectedSortingOption2)
+          resetSortDialog()
         }
+
         cancel.setOnClickListener(){
-            dialog.dismiss()
-            selectedSortingOption = R.id.rb1
-            selectedSortingOption2 = R.id.rbf1
-            radioGroup.check(selectedSortingOption)
-            radioGroup2.check(selectedSortingOption2)
+            resetSortDialog()
+            dialog.hide()
         }
-        apply.setOnClickListener(){
+
+        apply.setOnClickListener() {
             Toast.makeText(this, "Applied sorting", Toast.LENGTH_SHORT).show()
+            loadListings()
+            dialog.hide()
         }
         dialog.show()
     }
