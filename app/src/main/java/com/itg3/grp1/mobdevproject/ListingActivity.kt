@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
@@ -54,7 +53,7 @@ class ListingActivity: AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.cardview_filter)
+        dialog.setContentView(R.layout.dialog_filter)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val minprice = dialog.findViewById<EditText>(R.id.etMinPrice)
@@ -85,7 +84,7 @@ class ListingActivity: AppCompatActivity() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.cardview_sort)
+        dialog.setContentView(R.layout.dialog_sort)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         val rb1 = dialog.findViewById<RadioButton>(R.id.rb1)
