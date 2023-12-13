@@ -1,6 +1,8 @@
 package com.itg3.grp1.mobdevproject.data
 
+import com.itg3.grp1.mobdevproject.R
 import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.ListingImage
 import com.itg3.grp1.mobdevproject.data.models.Review
 import com.itg3.grp1.mobdevproject.data.models.User
 
@@ -155,5 +157,50 @@ class DatabaseSeeder(val databaseHelper: DatabaseHelper)
             Review(30,databaseHelper.users.getOne(10)!!,databaseHelper.listings.getOne(4)!!,2.0,"Puro manok!?","puro manok e kaumay")
         )
         reviews.forEach { databaseHelper.reviews.add(it) }
+    }
+
+    fun seedImages()
+    {
+        var listingImages = listOf<ListingImage>(
+            ListingImage(1, 1, R.drawable.listing_dimsum1),
+            ListingImage(1, 1, R.drawable.listing_dimsum2),
+            ListingImage(1, 1, R.drawable.listing_dimsum3),
+            ListingImage(1, 2, R.drawable.listing_tigerwinx1),
+            ListingImage(1, 2, R.drawable.listing_tigerwinx2),
+            ListingImage(1, 2, R.drawable.listing_tigerwinx3),
+            ListingImage(1, 2, R.drawable.listing_tigerwinx4),
+            ListingImage(1, 3, R.drawable.listing_barcollie1),
+            ListingImage(1, 3, R.drawable.listing_barcollie2),
+            ListingImage(1, 3, R.drawable.listing_barcollie3),
+            ListingImage(1, 4, R.drawable.listing_unclejohns1),
+            ListingImage(1, 4, R.drawable.listing_unclejohns2),
+            ListingImage(1, 4, R.drawable.listing_unclejohns3),
+            ListingImage(1, 4, R.drawable.listing_unclejohns4),
+            ListingImage(1, 5, R.drawable.listing_jollibee1),
+            ListingImage(1, 5, R.drawable.listing_jollibee2),
+            ListingImage(1, 5, R.drawable.listing_jollibee3),
+            ListingImage(1, 5, R.drawable.listing_jollibee4),
+            ListingImage(1, 6, R.drawable.listing_manilacafe1),
+            ListingImage(1, 6, R.drawable.listing_manilacafe2),
+            ListingImage(1, 6, R.drawable.listing_manilacafe3),
+            ListingImage(1, 6, R.drawable.listing_manilacafe4),
+            ListingImage(1, 7, R.drawable.listing_ramen1),
+            ListingImage(1, 7, R.drawable.listing_ramen2),
+            ListingImage(1, 7, R.drawable.listing_ramen3),
+            ListingImage(1, 7, R.drawable.listing_ramen4),
+            ListingImage(1, 8, R.drawable.listing_macao1),
+            ListingImage(1, 8, R.drawable.listing_macao2),
+            ListingImage(1, 8, R.drawable.listing_macao3),
+            ListingImage(1, 9, R.drawable.listing_mcdo1),
+            ListingImage(1, 9, R.drawable.listing_mcdo2),
+            ListingImage(1, 9, R.drawable.listing_mcdo3),
+            ListingImage(1, 9, R.drawable.listing_mcdo4),
+            ListingImage(1, 10, R.drawable.listing_kfc1),
+            ListingImage(1, 10, R.drawable.listing_kfc2),
+            ListingImage(1, 10, R.drawable.listing_kfc3),
+            ListingImage(1, 10, R.drawable.listing_kfc4)
+        )
+
+        listingImages.forEach { databaseHelper.images.add(it) }
     }
 }

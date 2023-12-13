@@ -22,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
 //        dbSeeder.seedUsers()
 //        dbSeeder.seedListings()
 //        dbSeeder.seedReviews()
+//        dbSeeder.seedImages()
 
         fieldEmail = findViewById(R.id.fieldEmail)
         fieldPassword = findViewById(R.id.fieldPassword)

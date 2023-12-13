@@ -3,6 +3,7 @@ package com.itg3.grp1.mobdevproject.data
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.itg3.grp1.mobdevproject.data.tables.ListingImages
 import com.itg3.grp1.mobdevproject.data.tables.Listings
 import com.itg3.grp1.mobdevproject.data.tables.Reviews
 import com.itg3.grp1.mobdevproject.data.tables.Users
@@ -18,10 +19,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     val users = Users(this)
     val listings = Listings(this)
     val reviews = Reviews(this)
+    val images = ListingImages(this)
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        val tables = listOf(users, listings, reviews)
+        val tables = listOf(users, listings, reviews, images)
 
         for (table in tables)
         {

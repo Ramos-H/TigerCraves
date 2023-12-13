@@ -7,11 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.ListingImage
-import com.itg3.grp1.mobdevproject.data.models.Review
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
-class Images(dbHandler: DatabaseHelper) : DbTable<ListingImage>(dbHandler)
+class ListingImages(dbHandler: DatabaseHelper) : DbTable<ListingImage>(dbHandler)
 {
     companion object
     {
