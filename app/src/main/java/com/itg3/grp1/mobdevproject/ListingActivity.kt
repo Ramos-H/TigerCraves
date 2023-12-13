@@ -1,6 +1,7 @@
 package com.itg3.grp1.mobdevproject
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -29,11 +30,13 @@ class ListingActivity: AppCompatActivity()
     private var selectedSortDirectionControl: Int = R.id.rbf1
     private var selectedSortCriteria : SortCriteria = SortCriteria.AVERAGE_RATING
     private var selectedSortDirection : SortDirections = SortDirections.DESCENDING
+    private lateinit var dialogSort : Dialog
 
     // Filtering
     private var filterPriceMin : Double? = null
     private var filterPriceMax : Double? = null
     private var filterAveRating : Double? = null
+    private lateinit var dialogFilter : Dialog
 
     enum class SortDirections
     {
@@ -56,6 +59,8 @@ class ListingActivity: AppCompatActivity()
         val welcomeBanner: TextView = findViewById(R.id.welcomeBanner)
         welcomeBanner.text = "Welcome, ${user!!.NameFirst}!"
 
+        setupFilterDialog()
+        setupSortDialog()
         loadListings()
     }
 
@@ -149,21 +154,27 @@ class ListingActivity: AppCompatActivity()
         startActivity(intent)
     }
 
-    fun showFilterDialog(view: View)
+    fun createDialog(context: Context): Dialog
     {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dialog_filter)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val newDialog = Dialog(context)
+        newDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        newDialog.setCancelable(false)
+        newDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return newDialog
+    }
 
-        val fieldPriceMin = dialog.findViewById<ValEditText>(R.id.etMinPrice)
-        val fieldPriceMax = dialog.findViewById<ValEditText>(R.id.etMaxPrice)
-        val fieldAveRating= dialog.findViewById<ValEditText>(R.id.etAveRate)
+    fun setupFilterDialog()
+    {
+        dialogFilter = createDialog(this)
+        dialogFilter.setContentView(R.layout.dialog_filter)
 
-        val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
-        val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
-        val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
+        val fieldPriceMin = dialogFilter.findViewById<ValEditText>(R.id.etMinPrice)
+        val fieldPriceMax = dialogFilter.findViewById<ValEditText>(R.id.etMaxPrice)
+        val fieldAveRating= dialogFilter.findViewById<ValEditText>(R.id.etAveRate)
+
+        val reset =dialogFilter.findViewById<ImageButton>(R.id.resetBtn)
+        val cancel = dialogFilter.findViewById<ImageButton>(R.id.cancelBtn)
+        val apply = dialogFilter.findViewById<ImageButton>(R.id.applyBtn)
 
         reset.setOnClickListener(){
             fieldPriceMin.text = null
@@ -171,7 +182,7 @@ class ListingActivity: AppCompatActivity()
             fieldAveRating.text = null
         }
         cancel.setOnClickListener(){
-            dialog.hide()
+            dialogFilter.hide()
         }
         apply.setOnClickListener(){
             // Parse input
@@ -228,33 +239,28 @@ class ListingActivity: AppCompatActivity()
             {
                 loadListings()
                 Toast.makeText(this, "Applied filtering", Toast.LENGTH_SHORT).show()
-                dialog.hide()
+                dialogFilter.hide()
             }
         }
-
-        dialog.show()
     }
 
-    fun showSortDialog(view: View)
+    fun setupSortDialog()
     {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.dialog_sort)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogSort = createDialog(this)
+        dialogSort.setContentView(R.layout.dialog_sort)
 
-        val rb1 = dialog.findViewById<RadioButton>(R.id.rb1)
-        val rb2 = dialog.findViewById<RadioButton>(R.id.rb2)
-        val rb3 = dialog.findViewById<RadioButton>(R.id.rb3)
-        val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup)
+        val rb1 = dialogSort.findViewById<RadioButton>(R.id.rb1)
+        val rb2 = dialogSort.findViewById<RadioButton>(R.id.rb2)
+        val rb3 = dialogSort.findViewById<RadioButton>(R.id.rb3)
+        val radioGroup = dialogSort.findViewById<RadioGroup>(R.id.radioGroup)
 
-        val rbf1 = dialog.findViewById<RadioButton>(R.id.rbf1)
-        val rbf2 = dialog.findViewById<RadioButton>(R.id.rbf2)
-        val radioGroup2 = dialog.findViewById<RadioGroup>(R.id.radioGroup2)
+        val rbf1 = dialogSort.findViewById<RadioButton>(R.id.rbf1)
+        val rbf2 = dialogSort.findViewById<RadioButton>(R.id.rbf2)
+        val radioGroup2 = dialogSort.findViewById<RadioGroup>(R.id.radioGroup2)
 
-        val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
-        val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
-        val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
+        val reset =dialogSort.findViewById<ImageButton>(R.id.resetBtn)
+        val cancel = dialogSort.findViewById<ImageButton>(R.id.cancelBtn)
+        val apply = dialogSort.findViewById<ImageButton>(R.id.applyBtn)
 
         radioGroup.check(selectedSortCriteriaControl)
         radioGroup2.check(selectedSortDirectionControl)
@@ -290,20 +296,23 @@ class ListingActivity: AppCompatActivity()
         }
 
         reset.setOnClickListener(){
-          resetSortDialog()
+            resetSortDialog()
         }
 
         cancel.setOnClickListener(){
             resetSortDialog()
-            dialog.hide()
+            dialogSort.hide()
         }
 
         apply.setOnClickListener() {
             Toast.makeText(this, "Applied sorting", Toast.LENGTH_SHORT).show()
             loadListings()
-            dialog.hide()
+            dialogSort.hide()
         }
-        dialog.show()
     }
+
+    fun showFilterDialog(view: View) = dialogFilter.show()
+
+    fun showSortDialog(view: View) = dialogSort.show()
 }
 
