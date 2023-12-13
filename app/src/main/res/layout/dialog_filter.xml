@@ -40,12 +40,10 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Minimum Price: "/>
 
-            <EditText
+            <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/etMinPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/telegrafregular"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
@@ -60,12 +58,10 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Maximum Price: "/>
 
-            <EditText
+            <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/etMaxPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/telegrafregular"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
@@ -80,12 +76,10 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Minimum Average Rating: "/>
 
-            <EditText
+            <com.itg3.grp1.mobdevproject.ValEditText
                 android:id="@+id/etAveRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="@font/telegrafregular"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 

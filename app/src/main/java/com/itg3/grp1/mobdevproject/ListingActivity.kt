@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -22,13 +21,20 @@ import com.itg3.grp1.mobdevproject.data.models.User
 
 class ListingActivity: AppCompatActivity()
 {
+    private lateinit var user : User
+    private val dbHelper = DatabaseHelper(this)
+
+    // Sorting
     private var selectedSortCriteriaControl: Int = R.id.rb2
     private var selectedSortDirectionControl: Int = R.id.rbf1
     private var selectedSortCriteria : SortCriteria = SortCriteria.AVERAGE_RATING
     private var selectedSortDirection : SortDirections = SortDirections.DESCENDING
-    private lateinit var user : User
 
-    private val dbHelper = DatabaseHelper(this)
+    // Filtering
+    private var filterPriceMin : Double? = null
+    private var filterPriceMax : Double? = null
+    private var filterAveRating : Double? = null
+
     enum class SortDirections
     {
         ASCENDING,
@@ -53,9 +59,31 @@ class ListingActivity: AppCompatActivity()
         loadListings()
     }
 
-    fun fetchListings(): List<Listing>
+    fun fetchListings(): List<Listing>?
     {
         var listings = dbHelper.listings.getAll()
+        // Filter
+        if(listings.isNotEmpty() && filterPriceMin != null)
+        {
+            listings = listings.filter { it.PriceMin!! >= filterPriceMin!! }
+        }
+
+        if(listings.isNotEmpty() && filterPriceMax != null)
+        {
+            listings = listings.filter { it.PriceMax!! <= filterPriceMax!! }
+        }
+
+        if(listings.isNotEmpty() && filterAveRating != null)
+        {
+            listings = listings.filter { it.Rating!! >= filterAveRating!! }
+        }
+
+        if(listings.isEmpty())
+        {
+            return null
+        }
+
+        // Sort
         if(selectedSortCriteria == SortCriteria.NAME)
         {
             if(selectedSortDirection == SortDirections.ASCENDING)
@@ -96,55 +124,119 @@ class ListingActivity: AppCompatActivity()
     fun loadListings()
     {
         val listings = fetchListings()
+
+        val noListingsText: TextView = findViewById(R.id.noListingsText)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+
+        noListingsText.visibility = View.VISIBLE
+        recyclerView.visibility = View.INVISIBLE
+
         if (!listings.isNullOrEmpty())
         {
-            val noListingsText: TextView = findViewById(R.id.noListingsText)
             noListingsText.visibility = View.INVISIBLE
+            recyclerView.visibility = View.VISIBLE
 
             val adapter = ListingAdapter(listings, user.Id!!)
-            val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
-            recyclerView.visibility = View.VISIBLE
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
     }
 
-    fun logout(view: View) {
+    fun logout(view: View)
+    {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
-    fun showFilterDialog(view: View) {
+    fun showFilterDialog(view: View)
+    {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.dialog_filter)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val minprice = dialog.findViewById<EditText>(R.id.etMinPrice)
-        val maxprice = dialog.findViewById<EditText>(R.id.etMaxPrice)
-        val averate= dialog.findViewById<EditText>(R.id.etAveRate)
+        val fieldPriceMin = dialog.findViewById<ValEditText>(R.id.etMinPrice)
+        val fieldPriceMax = dialog.findViewById<ValEditText>(R.id.etMaxPrice)
+        val fieldAveRating= dialog.findViewById<ValEditText>(R.id.etAveRate)
 
         val reset =dialog.findViewById<ImageButton>(R.id.resetBtn)
         val cancel = dialog.findViewById<ImageButton>(R.id.cancelBtn)
         val apply = dialog.findViewById<ImageButton>(R.id.applyBtn)
 
-
         reset.setOnClickListener(){
-        minprice.text = null
-        maxprice.text = null
-        averate.text = null
+            fieldPriceMin.text = null
+            fieldPriceMax.text = null
+            fieldAveRating.text = null
         }
         cancel.setOnClickListener(){
-            dialog.dismiss()
+            dialog.hide()
         }
         apply.setOnClickListener(){
-            Toast.makeText(this, "Applied filtering", Toast.LENGTH_SHORT).show()
+            // Parse input
+            filterPriceMin = fieldPriceMin.text?.toDoubleOrNull()
+            filterPriceMax = fieldPriceMax.text?.toDoubleOrNull()
+            filterAveRating = fieldAveRating.text?.toDoubleOrNull()
+
+            // Reset field validation states
+            fieldPriceMin.error = null
+            fieldPriceMax.error = null
+            fieldAveRating.error = null
+
+            // Validate min price
+            if(filterPriceMin == null)
+            {
+                filterPriceMin = 0.0
+            }
+            else if(filterPriceMin!! < 0.0)
+            {
+                fieldPriceMin.error = "Minimum price cannot be a negative value"
+            }
+
+            // Validate max price
+            if(filterPriceMax != null)
+            {
+                if(filterPriceMax!! < 0.0)
+                {
+                    fieldPriceMax.error = "Maximum price cannot be a negative value"
+                }
+                else if(filterPriceMin!! > filterPriceMax!!)
+                {
+                    fieldPriceMax.error = "Maximum price cannot be less than minimum price"
+                }
+            }
+
+            // Validate ave rating
+            if(filterAveRating != null)
+            {
+                if(filterAveRating!! < 0.0)
+                {
+                    fieldAveRating.error = "Average rating cannot be a negative value"
+                }
+                else if(filterAveRating!! > 5.0)
+                {
+                    fieldAveRating.error = "Average rating cannot be greater than 5"
+                }
+            }
+
+            val fieldPriceMinIsValid = fieldPriceMin.error.isNullOrBlank()
+            val fieldPriceMaxIsValid = fieldPriceMax.error.isNullOrBlank()
+            val fieldAveRatingIsValid = fieldAveRating.error.isNullOrBlank()
+
+            if(fieldPriceMinIsValid && fieldPriceMaxIsValid && fieldAveRatingIsValid)
+            {
+                loadListings()
+                Toast.makeText(this, "Applied filtering", Toast.LENGTH_SHORT).show()
+                dialog.hide()
+            }
         }
+
         dialog.show()
     }
 
-    fun showSortDialog(view: View) {
+    fun showSortDialog(view: View)
+    {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
