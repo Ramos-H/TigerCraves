@@ -52,7 +52,7 @@ class ListingImages(dbHandler: DatabaseHelper) : DbTable<ListingImage>(dbHandler
             {
                 result = ListingImage(
                     cursor.getInt(cursor.getColumnIndex(Reviews.COL_ID)),
-                    cursor.getInt(cursor.getInt(cursor.getColumnIndex(COL_LISTING))),
+                    cursor.getInt(cursor.getColumnIndex(COL_LISTING)),
                     cursor.getInt(cursor.getColumnIndex(COL_RESOURCE_ID))
                 )
             }
@@ -82,7 +82,7 @@ class ListingImages(dbHandler: DatabaseHelper) : DbTable<ListingImage>(dbHandler
                 {
                     result.add(ListingImage(
                         cursor.getInt(cursor.getColumnIndex(Reviews.COL_ID)),
-                        cursor.getInt(cursor.getInt(cursor.getColumnIndex(COL_LISTING))),
+                        cursor.getInt(cursor.getColumnIndex(COL_LISTING)),
                         cursor.getInt(cursor.getColumnIndex(COL_RESOURCE_ID))
                     ))
                 }

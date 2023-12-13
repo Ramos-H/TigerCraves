@@ -53,17 +53,6 @@ class DetailedListingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailedlisting)
 
-        //Image Slider
-        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
-        val imageList = ArrayList<SlideModel>()
-
-        imageList.add(SlideModel(R.drawable.imgplaceholder))
-        imageList.add(SlideModel(R.drawable.imgplaceholder))
-        imageList.add(SlideModel(R.drawable.imgplaceholder))
-        imageList.add(SlideModel(R.drawable.imgplaceholder))
-
-        imageSlider.setImageList(imageList, ScaleTypes.FIT)
-
         tvName = findViewById(R.id.tvName)
         tvLocation = findViewById(R.id.tvLocation)
         tvPriceMin = findViewById(R.id.tvPriceMin)
@@ -79,6 +68,13 @@ class DetailedListingActivity : AppCompatActivity() {
         btnAddReview = findViewById(R.id.btnAddReview)
 
         loadPageData()
+        //Image Slider
+        val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
+
+        val images = dbHelper.images.getAll().filter { listing!!.Id == it.ListingId }
+        val slides = images.map { SlideModel(it.ResourceId) }
+
+        imageSlider.setImageList(slides, ScaleTypes.FIT)
     }
 
     private fun loadPageData()
