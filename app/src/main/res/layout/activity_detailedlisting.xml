@@ -64,6 +64,7 @@
                 android:layout_marginStart="75dp"
                 android:layout_marginTop="115dp"
                 android:fontFamily="sans-serif-black"
+                android:onClick="openMapsLink"
                 android:text="123 Anywhere St., Any City"
                 android:textColor="#8B8B8B"
                 android:textSize="18sp" />

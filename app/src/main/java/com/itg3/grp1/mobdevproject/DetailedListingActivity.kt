@@ -4,10 +4,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.RatingBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +21,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.itg3.grp1.mobdevproject.data.DatabaseHelper
 import com.itg3.grp1.mobdevproject.data.models.Listing
 import com.itg3.grp1.mobdevproject.data.models.Review
+
 
 class DetailedListingActivity : AppCompatActivity() {
     private var userId: Int? = -1
@@ -147,6 +152,21 @@ class DetailedListingActivity : AppCompatActivity() {
         {
             reviewAdapter = ReviewAdapter(otherReviews!!)
             reviewRecycler.adapter = reviewAdapter
+        }
+    }
+
+    fun openMapsLink(view: View)
+    {
+        if(listing != null)
+        {
+            if(listing!!.GMapLink != null)
+            {
+                val intent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(listing!!.GMapLink)
+                )
+                startActivity(intent)
+            }
         }
     }
 
