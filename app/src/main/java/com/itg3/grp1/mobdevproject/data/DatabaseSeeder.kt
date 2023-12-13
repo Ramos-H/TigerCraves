@@ -1,6 +1,7 @@
 package com.itg3.grp1.mobdevproject.data
 
 import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.mobdevproject.data.models.Review
 import com.itg3.grp1.mobdevproject.data.models.User
 
 class DatabaseSeeder(val databaseHelper: DatabaseHelper)
@@ -19,7 +20,6 @@ class DatabaseSeeder(val databaseHelper: DatabaseHelper)
             User(9, "Tim", "Thompson", "Taureen", "timta@gmail.com", "t9402"),
             User(10, "Olivia", "Wilson", "Santos", "olivia.wilson@gmail.com", "oliveisGr33n")
         )
-
         users.forEach { databaseHelper.users.add(it) }
     }
 
@@ -118,5 +118,42 @@ class DatabaseSeeder(val databaseHelper: DatabaseHelper)
             )
         )
         listings.forEach { databaseHelper.listings.add(it) }
+    }
+
+    fun seedReviews()
+    {
+        val reviews = listOf<Review>(
+            Review(1,databaseHelper.users.getOne(1)!!,databaseHelper.listings.getOne(1)!!,5.0,"Dimsum da best!","Masarap na Affordable pa, very recommended for budget meal !"),
+            Review(2,databaseHelper.users.getOne(1)!!,databaseHelper.listings.getOne(2)!!,2.0,"TigerWinx","Medyo mahal siya at di ganon kasarap para sa price nya."),
+            Review(3,databaseHelper.users.getOne(1)!!,databaseHelper.listings.getOne(3)!!,5.0,"Barcollie na tayo!","Loved the flavors lalo na yung unli gravy!"),
+            Review(4,databaseHelper.users.getOne(2)!!,databaseHelper.listings.getOne(5)!!,4.0,"Jabee parin!","Pag wala na kaming maisip ng friends jabee na agad!"),
+            Review(5,databaseHelper.users.getOne(2)!!,databaseHelper.listings.getOne(10)!!,3.0,"KFC ano na?","Ok naman yung KFC kaso pansin ko parang lumiliit na yung serving nila"),
+            Review(6,databaseHelper.users.getOne(2)!!,databaseHelper.listings.getOne(9)!!,2.0,"Mcdo nanaman?","medyo maraming tao at mga estudyante na maiingay"),
+            Review(7,databaseHelper.users.getOne(3)!!,databaseHelper.listings.getOne(3)!!,5.0,"Barcollie lang sakalam","Dito house vibes talaga tas affordable!"),
+            Review(8,databaseHelper.users.getOne(3)!!,databaseHelper.listings.getOne(4)!!,4.0,"Uncle John's enjoyer!","Junior meal ang meta na ngayon may tubig na + chocolate + soup"),
+            Review(9,databaseHelper.users.getOne(3)!!,databaseHelper.listings.getOne(8)!!,5.0,"I love it!","mahilig talaga ako sa mga matatamis + affordable na to!"),
+            Review(10,databaseHelper.users.getOne(4)!!,databaseHelper.listings.getOne(3)!!,4.0,"Lutong Bahay ba hanap","Recommended yung sisig!"),
+            Review(11,databaseHelper.users.getOne(4)!!,databaseHelper.listings.getOne(7)!!,4.0,"sawa na sa dry food?","Maraming affordable na ramen dito pwede na sa price nya"),
+            Review(12,databaseHelper.users.getOne(4)!!,databaseHelper.listings.getOne(1)!!,5.0,"Dimsum 3ts gang grumaduate","5/5 na to matik sa mga laking siomai dyan"),
+            Review(13,databaseHelper.users.getOne(5)!!,databaseHelper.listings.getOne(5)!!,2.0,"Ang init sa 2nd floor!","ok naman yung food kaso yung 2nd floor walang kurtina tirik yung araw pagkumakain HAHA"),
+            Review(14,databaseHelper.users.getOne(5)!!,databaseHelper.listings.getOne(8)!!,1.0,"Not for me","Masyadong matamis para sakin"),
+            Review(15,databaseHelper.users.getOne(5)!!,databaseHelper.listings.getOne(4)!!,4.0,"Recommended talaga!","likod lang ng frassatti, affordable at hindi masyado crowded, malamig pa!"),
+            Review(16,databaseHelper.users.getOne(6)!!,databaseHelper.listings.getOne(7)!!,1.0,"Not recommended","matagal serving"),
+            Review(17,databaseHelper.users.getOne(6)!!,databaseHelper.listings.getOne(6)!!,5.0,"Manila Cafe Sponsor naman","lagi ako dyan! affordable tas malamig pa!"),
+            Review(18,databaseHelper.users.getOne(6)!!,databaseHelper.listings.getOne(2)!!,4.0,"Budgetted Group meals","affordable lalo na sa group meals"),
+            Review(19,databaseHelper.users.getOne(7)!!,databaseHelper.listings.getOne(1)!!,5.0,"UST's best","matik na 5/5"),
+            Review(20,databaseHelper.users.getOne(7)!!,databaseHelper.listings.getOne(3)!!,4.0,"Recommended para sa lutong bahay","masarap kaso mainit yung pwesto lalo na sa 2nd floor"),
+            Review(21,databaseHelper.users.getOne(7)!!,databaseHelper.listings.getOne(6)!!,5.0,"#1 study area","matahimik yung people pati affordable na pwede mag aral."),
+            Review(22,databaseHelper.users.getOne(8)!!,databaseHelper.listings.getOne(3)!!,1.0,"Wrong service!","mali yung sinerve sakin na pagkain!"),
+            Review(23,databaseHelper.users.getOne(8)!!,databaseHelper.listings.getOne(2)!!,5.0,"Da best Wings!","Sarap ng wings nila talaga!"),
+            Review(24,databaseHelper.users.getOne(8)!!,databaseHelper.listings.getOne(7)!!,4.0,"Favorite Ramen!","sarap ng ramen!"),
+            Review(25,databaseHelper.users.getOne(9)!!,databaseHelper.listings.getOne(8)!!,4.0,"reco. milk teas","dito masasarap ung milk tea"),
+            Review(26,databaseHelper.users.getOne(9)!!,databaseHelper.listings.getOne(10)!!,5.0,"KFC gang","san dito yung KFC gangs!"),
+            Review(27,databaseHelper.users.getOne(9)!!,databaseHelper.listings.getOne(1)!!,1.0,"overhyped?","overhyped para sakin dimsum treats"),
+            Review(28,databaseHelper.users.getOne(10)!!,databaseHelper.listings.getOne(2)!!,3.0,"Good Wings","masarap naman yung wings yung area lang masikip."),
+            Review(29,databaseHelper.users.getOne(10)!!,databaseHelper.listings.getOne(6)!!,5.0,"Manila Cafe #1","Affordable na SB variant hahaha"),
+            Review(30,databaseHelper.users.getOne(10)!!,databaseHelper.listings.getOne(4)!!,2.0,"Puro manok!?","puro manok e kaumay")
+        )
+        reviews.forEach { databaseHelper.reviews.add(it) }
     }
 }
