@@ -11,6 +11,7 @@ import android.view.Window
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,9 @@ class ListingActivity: AppCompatActivity()
 {
     private lateinit var user : User
     private val dbHelper = DatabaseHelper(this)
+
+    // Search
+    private var searchString : String? = null
 
     // Sorting
     private var selectedSortCriteriaControl: Int = R.id.rb2
@@ -60,6 +64,26 @@ class ListingActivity: AppCompatActivity()
         val welcomeBanner: TextView = findViewById(R.id.welcomeBanner)
         welcomeBanner.text = "Welcome, ${user!!.NameFirst}!"
 
+        // Search
+        val searchField = findViewById<SearchView>(R.id.searchField)
+        searchField.clearFocus()
+        searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean
+            {
+                searchString = query
+                loadListings()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean
+            {
+                searchString = newText
+                loadListings()
+                return true
+            }
+
+        })
+
         setupFilterDialog()
         setupSortDialog()
         loadListings()
@@ -68,6 +92,16 @@ class ListingActivity: AppCompatActivity()
     fun fetchListings(): List<Listing>?
     {
         var listings = dbHelper.listings.getAll()
+
+        // Search
+        if(listings.isNotEmpty() && !searchString.isNullOrBlank())
+        {
+            listings = listings.filter {
+                it.Name.contains(searchString!!, true)
+                || it.Address.contains(searchString!!, true)
+            }
+        }
+
         // Filter
         if(listings.isNotEmpty() && filterPriceMin != null)
         {
