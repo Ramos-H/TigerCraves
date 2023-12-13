@@ -19,7 +19,8 @@ class LoginActivity : AppCompatActivity() {
 
         val dbHelper = DatabaseHelper(this)
         val dbSeeder = DatabaseSeeder(dbHelper)
-        dbSeeder.seedUsers()
+//        dbSeeder.seedUsers()
+//        dbSeeder.seedListings()
 
         fieldEmail = findViewById(R.id.fieldEmail)
         fieldPassword = findViewById(R.id.fieldPassword)
