@@ -26,17 +26,18 @@
 
         <activity
             android:name=".DetailedListingActivity"
-            android:exported="true">
+            android:exported="false">
         </activity>
       
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
+            android:exported="false">
         </activity>
       
         <activity
             android:name=".ListingActivity"
-            android:exported="true">
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan">
         </activity>
 
         <meta-data
