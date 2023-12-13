@@ -6,6 +6,7 @@ data class Listing(
     var Id: Int? = null,
     var Name: String,
     var Address: String,
+    var GMapLink: String?,
     var PriceMin: Double?,
     var PriceMax: Double?,
     var Rating: Double?,

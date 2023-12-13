@@ -19,6 +19,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         val COL_ID = "Id"
         val COL_NAME = "Name"
         val COL_ADDRESS = "Address"
+        val COL_GMAP = "GMapLink"
         val COL_PRICE_MIN = "PriceMin"
         val COL_PRICE_MAX = "PriceMax"
         val COL_RATING = "Rating"
@@ -30,7 +31,8 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         val SQL_TBL_CREATE = "CREATE TABLE $TBL_NAME (" +
                 "$COL_ID INTEGER PRIMARY KEY NOT NULL, " +
                 "$COL_NAME TEXT NOT NULL, " +
-                "$COL_ADDRESS TEXT NOT NULL, " +
+                "$COL_ADDRESS TEXT NOT NULL," +
+                "$COL_GMAP TEXT, " +
                 "$COL_PRICE_MIN REAL, " +
                 "$COL_PRICE_MAX REAL, " +
                 "$COL_RATING REAL, " +
@@ -64,6 +66,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                     cursor.getInt(cursor.getColumnIndex(COL_ID)),
                     cursor.getString(cursor.getColumnIndex(COL_NAME)),
                     cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                    cursor.getString(cursor.getColumnIndex(COL_GMAP)),
                     cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
                     cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
                     cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
@@ -98,6 +101,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                         cursor.getInt(cursor.getColumnIndex(COL_ID)),
                         cursor.getString(cursor.getColumnIndex(COL_NAME)),
                         cursor.getString(cursor.getColumnIndex(COL_ADDRESS)),
+                        cursor.getString(cursor.getColumnIndex(COL_GMAP)),
                         cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MIN)),
                         cursor.getDouble(cursor.getColumnIndex(COL_PRICE_MAX)),
                         cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
@@ -129,6 +133,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         val contentValues = ContentValues()
         contentValues.put(COL_NAME, instance.Name)
         contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_GMAP, instance.GMapLink)
         contentValues.put(COL_PRICE_MIN, instance.PriceMin)
         contentValues.put(COL_PRICE_MAX, instance.PriceMax)
         contentValues.put(COL_RATING, 0.0)
@@ -145,6 +150,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
         val contentValues = ContentValues()
         contentValues.put(COL_NAME, instance.Name)
         contentValues.put(COL_ADDRESS, instance.Address)
+        contentValues.put(COL_GMAP, instance.GMapLink)
         contentValues.put(COL_PRICE_MIN, instance.PriceMin)
         contentValues.put(COL_PRICE_MAX, instance.PriceMax)
         contentValues.put(COL_RATING, instance.Rating)
