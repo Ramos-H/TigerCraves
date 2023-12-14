@@ -8,7 +8,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
@@ -35,10 +37,11 @@ class DetailedListingActivity : AppCompatActivity() {
 
     private lateinit var tvName: TextView
     private lateinit var tvLocation: TextView
-    private lateinit var tvPriceMin: TextView
-    private lateinit var tvPriceMax: TextView
+    private lateinit var tvPrice: TextView
     private lateinit var tvRating: TextView
     private lateinit var ratingValidationText: TextView
+    private lateinit var btnOpenMaps: Button
+    private lateinit var llPriceLabel : LinearLayout
 
     private lateinit var vYourReviewSection : View
     private lateinit var tvYourTitle: TextView
@@ -55,9 +58,10 @@ class DetailedListingActivity : AppCompatActivity() {
 
         tvName = findViewById(R.id.tvName)
         tvLocation = findViewById(R.id.tvLocation)
-        tvPriceMin = findViewById(R.id.tvPriceMin)
-        tvPriceMax = findViewById(R.id.tvPriceMax)
+        tvPrice = findViewById(R.id.tvPrice)
         tvRating = findViewById(R.id.tvRating)
+        btnOpenMaps = findViewById(R.id.btnOpenMaps)
+        llPriceLabel = findViewById(R.id.llPriceLabel)
 
         tvYourTitle = findViewById(R.id.yourTitle)
         tvYourRating = findViewById(R.id.yourRating)
@@ -97,9 +101,27 @@ class DetailedListingActivity : AppCompatActivity() {
     {
         tvName.text = listing!!.Name
         tvLocation.text = listing!!.Address
-        tvPriceMin.text = String.format("%.2f", listing!!.PriceMin)
-        tvPriceMax.text = String.format("%.2f", listing!!.PriceMax)
         tvRating.text = String.format("%.1f", listing!!.Rating)
+
+        llPriceLabel.visibility = View.VISIBLE
+        if(listing!!.PriceMin == null && listing!!.PriceMax == null)
+        {
+            llPriceLabel.visibility = View.INVISIBLE
+        }
+        else if(listing!!.PriceMin != null && listing!!.PriceMax == null)
+        {
+            tvPrice.text = "${String.format(" %.2f", listing!!.PriceMin)}PHP (Minimum)"
+        }
+        else if(listing!!.PriceMin == null && listing!!.PriceMax != null)
+        {
+            tvPrice.text = "${String.format(" %.2f", listing!!.PriceMax)}PHP (Maximum)"
+        }
+        else
+        {
+            tvPrice.text = "${String.format(" %.2f", listing!!.PriceMin)}PHP - ${String.format(" %.2f", listing!!.PriceMax)}PHP"
+        }
+
+        btnOpenMaps.visibility = if(listing!!.GMapLink == null) View.GONE else View.VISIBLE
     }
 
     private fun loadOwnReview()
