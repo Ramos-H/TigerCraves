@@ -140,7 +140,7 @@ class DetailedListingActivity : AppCompatActivity() {
 
             tvYourTitle.text = yourReview!!.Title
             tvYourRating.text = String.format("%.1f", yourReview!!.Rating)
-            tvYourDatePosted.text = yourReview!!.DatePosted.toString()
+            tvYourDatePosted.text = yourReview!!.getSimplifiedReviewDate()
             tvYourContent.text = yourReview!!.Content
         }
     }

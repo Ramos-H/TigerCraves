@@ -41,7 +41,7 @@ class ReviewAdapter(var dataset: List<Review>) : RecyclerView.Adapter<ReviewAdap
         holder.title.text = currentReview.Title
         holder.poster.text = "${poster.NameFirst} ${poster.NameMiddle} ${poster.NameLast}"
         holder.content.text = currentReview.Content
-        holder.datePosted.text = currentReview.DatePosted?.toString()
+        holder.datePosted.text = currentReview.getSimplifiedReviewDate()
         holder.rating.text = String.format("%.1f", currentReview.Rating)
     }
 

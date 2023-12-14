@@ -1,8 +1,9 @@
 package com.itg3.grp1.mobdevproject.data.models
 
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-data class Review(
+class Review(
     var Id: Int? = null,
     var Poster: User,
     var Listing: Listing,
@@ -11,3 +12,10 @@ data class Review(
     var Content: String,
     var DatePosted: LocalDateTime? = null
 ) : IModel
+{
+    fun getSimplifiedReviewDate(): String?
+    {
+        val formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY")
+        return DatePosted?.format(formatter)
+    }
+}
