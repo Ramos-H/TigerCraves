@@ -33,8 +33,8 @@
                 android:fontFamily="@font/telegrafregular"
                 android:gravity="center"
                 android:text="Sorting Criteria"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -50,6 +50,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/telegrafregular"
                     android:text="Name"
+                    android:textColor="#93866D"
                     android:textSize="14sp">
 
                 </RadioButton>
@@ -62,6 +63,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/telegrafregular"
                     android:text="Average rating"
+                    android:textColor="#93866D"
                     android:textSize="14sp">
 
                 </RadioButton>
@@ -74,6 +76,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/telegrafregular"
                     android:text="Price"
+                    android:textColor="#93866D"
                     android:textSize="14sp">
 
                 </RadioButton>
@@ -92,8 +95,8 @@
                 android:fontFamily="@font/telegrafregular"
                 android:gravity="center"
                 android:text="Sorting Direction"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/radioGroup2"
@@ -109,6 +112,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/telegrafregular"
                     android:text="Ascending"
+                    android:textColor="#93866D"
                     android:textSize="14sp">
 
                 </RadioButton>
@@ -121,6 +125,7 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/telegrafregular"
                     android:text="Descending"
+                    android:textColor="#93866D"
                     android:textSize="14sp">
 
                 </RadioButton>
