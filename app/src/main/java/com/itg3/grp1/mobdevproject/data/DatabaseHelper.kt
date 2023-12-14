@@ -29,6 +29,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         {
             table.createTable(db)
         }
+
+        val dbSeeder = DatabaseSeeder(this)
+        dbSeeder.seedUsers()
+        dbSeeder.seedListings()
+        dbSeeder.seedReviews()
+        dbSeeder.seedImages()
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int)

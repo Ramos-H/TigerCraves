@@ -18,11 +18,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val dbHelper = DatabaseHelper(this)
-        val dbSeeder = DatabaseSeeder(dbHelper)
-//        dbSeeder.seedUsers()
-//        dbSeeder.seedListings()
-//        dbSeeder.seedReviews()
-//        dbSeeder.seedImages()
 
         fieldEmail = findViewById(R.id.fieldEmail)
         fieldPassword = findViewById(R.id.fieldPassword)
