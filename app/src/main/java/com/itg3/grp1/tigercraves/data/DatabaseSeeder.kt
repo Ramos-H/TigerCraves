@@ -1,10 +1,10 @@
-package com.itg3.grp1.mobdevproject.data
+package com.itg3.grp1.tigercraves.data
 
-import com.itg3.grp1.mobdevproject.R
-import com.itg3.grp1.mobdevproject.data.models.Listing
-import com.itg3.grp1.mobdevproject.data.models.ListingImage
-import com.itg3.grp1.mobdevproject.data.models.Review
-import com.itg3.grp1.mobdevproject.data.models.User
+import com.itg3.grp1.tigercraves.R
+import com.itg3.grp1.tigercraves.data.models.Listing
+import com.itg3.grp1.tigercraves.data.models.ListingImage
+import com.itg3.grp1.tigercraves.data.models.Review
+import com.itg3.grp1.tigercraves.data.models.User
 
 class DatabaseSeeder(val databaseHelper: DatabaseHelper)
 {

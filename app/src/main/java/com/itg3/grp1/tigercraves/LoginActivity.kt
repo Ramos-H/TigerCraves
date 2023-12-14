@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.itg3.grp1.mobdevproject.data.models.User
+import com.itg3.grp1.tigercraves.data.models.User
 import android.view.View
-import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.DatabaseSeeder
+import com.itg3.grp1.tigercraves.data.DatabaseHelper
+import com.itg3.grp1.tigercraves.data.DatabaseSeeder
 
 class LoginActivity : AppCompatActivity() {
     lateinit var fieldEmail : ValEditText

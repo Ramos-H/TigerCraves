@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import org.junit.Test
 

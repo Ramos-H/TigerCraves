@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import android.app.Dialog
 import android.content.Intent
@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.Listing
-import com.itg3.grp1.mobdevproject.data.models.Review
+import com.itg3.grp1.tigercraves.data.DatabaseHelper
+import com.itg3.grp1.tigercraves.data.models.Listing
+import com.itg3.grp1.tigercraves.data.models.Review
 
 
 class DetailedListingActivity : AppCompatActivity() {

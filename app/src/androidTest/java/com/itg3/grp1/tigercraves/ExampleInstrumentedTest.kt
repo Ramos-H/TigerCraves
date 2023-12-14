@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

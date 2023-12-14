@@ -33,14 +33,14 @@
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
-                <com.itg3.grp1.mobdevproject.ValEditText
+                <com.itg3.grp1.tigercraves.ValEditText
                     android:id="@+id/fieldNameFirst"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:hint="First Name"
                     android:maxLength="255" />
 
-                <com.itg3.grp1.mobdevproject.ValEditText
+                <com.itg3.grp1.tigercraves.ValEditText
                     android:id="@+id/fieldNameMiddle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                     android:maxLength="255" />
             </LinearLayout>
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/fieldNameLast"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 android:hint="Last Name"
                 android:maxLength="255" />
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/fieldEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLength="255" />
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/fieldPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:inputType="textPassword"
                 android:maxLength="2048" />
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/fieldPasswordConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

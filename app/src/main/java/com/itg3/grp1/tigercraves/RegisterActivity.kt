@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.User
+import com.itg3.grp1.tigercraves.data.DatabaseHelper
+import com.itg3.grp1.tigercraves.data.models.User
 
 class RegisterActivity : AppCompatActivity()
 {

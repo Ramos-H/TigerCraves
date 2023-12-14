@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.922"
         android:background="@drawable/group_2layoutbrdr">
 
-        <com.itg3.grp1.mobdevproject.ValEditText
+        <com.itg3.grp1.tigercraves.ValEditText
             android:id="@+id/fieldEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:inputType="textEmailAddress"
             android:layout_marginBottom="10dp"/>
 
-        <com.itg3.grp1.mobdevproject.ValEditText
+        <com.itg3.grp1.tigercraves.ValEditText
             android:id="@+id/fieldPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

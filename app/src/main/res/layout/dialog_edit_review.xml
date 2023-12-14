@@ -57,7 +57,7 @@
                 android:textColor="#FF0000"
                 android:visibility="invisible" />
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/editTitle"
                 android:layout_width="366dp"
                 android:layout_height="51dp"
@@ -65,7 +65,7 @@
                 android:hint="Title"
                 android:maxLength="1024" />
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/editContent"
                 android:layout_width="366dp"
                 android:layout_height="wrap_content"

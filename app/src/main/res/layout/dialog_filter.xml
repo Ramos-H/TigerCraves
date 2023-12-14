@@ -40,7 +40,7 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Minimum Price: "/>
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/etMinPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Maximum Price: "/>
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/etMaxPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:fontFamily="@font/telegrafregular"
                 android:text="Minimum Average Rating: "/>
 
-            <com.itg3.grp1.mobdevproject.ValEditText
+            <com.itg3.grp1.tigercraves.ValEditText
                 android:id="@+id/etAveRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

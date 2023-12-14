@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MobDevProject"
+rootProject.name = "TigerCraves"
 

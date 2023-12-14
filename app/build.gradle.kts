@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.itg3.grp1.mobdevproject"
+    namespace = "com.itg3.grp1.tigercraves"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.itg3.grp1.mobdevproject"
+        applicationId = "com.itg3.grp1.tigercraves"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

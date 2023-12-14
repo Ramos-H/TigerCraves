@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject.data.models
+package com.itg3.grp1.tigercraves.data.models
 
 import java.time.LocalDateTime
 

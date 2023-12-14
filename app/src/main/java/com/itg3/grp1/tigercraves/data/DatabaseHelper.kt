@@ -1,12 +1,12 @@
-package com.itg3.grp1.mobdevproject.data
+package com.itg3.grp1.tigercraves.data
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.itg3.grp1.mobdevproject.data.tables.ListingImages
-import com.itg3.grp1.mobdevproject.data.tables.Listings
-import com.itg3.grp1.mobdevproject.data.tables.Reviews
-import com.itg3.grp1.mobdevproject.data.tables.Users
+import com.itg3.grp1.tigercraves.data.tables.ListingImages
+import com.itg3.grp1.tigercraves.data.tables.Listings
+import com.itg3.grp1.tigercraves.data.tables.Reviews
+import com.itg3.grp1.tigercraves.data.tables.Users
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION)
 {

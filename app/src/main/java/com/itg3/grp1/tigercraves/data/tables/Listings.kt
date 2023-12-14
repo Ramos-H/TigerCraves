@@ -1,15 +1,14 @@
-package com.itg3.grp1.mobdevproject.data.tables
+package com.itg3.grp1.tigercraves.data.tables
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
-import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.tigercraves.data.DatabaseHelper
+import com.itg3.grp1.tigercraves.data.models.Listing
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.util.Date
 
 class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
 {

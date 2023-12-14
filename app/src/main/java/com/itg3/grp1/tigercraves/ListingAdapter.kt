@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.data.models.Listing
+import com.itg3.grp1.tigercraves.data.models.Listing
 
 class ListingAdapter(val dataset: List<Listing>, val userId: Int) : RecyclerView.Adapter<ListingAdapter.ViewHolder>()
 {

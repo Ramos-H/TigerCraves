@@ -1,4 +1,4 @@
-package com.itg3.grp1.mobdevproject
+package com.itg3.grp1.tigercraves
 
 import android.app.Dialog
 import android.content.Context
@@ -17,9 +17,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.itg3.grp1.mobdevproject.data.DatabaseHelper
-import com.itg3.grp1.mobdevproject.data.models.Listing
-import com.itg3.grp1.mobdevproject.data.models.User
+import com.itg3.grp1.tigercraves.data.DatabaseHelper
+import com.itg3.grp1.tigercraves.data.models.Listing
+import com.itg3.grp1.tigercraves.data.models.User
 
 class ListingActivity: AppCompatActivity()
 {
