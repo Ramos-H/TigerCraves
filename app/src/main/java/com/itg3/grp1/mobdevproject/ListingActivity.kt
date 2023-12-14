@@ -325,7 +325,9 @@ class ListingActivity: AppCompatActivity()
         fun resetSortDialog()
         {
             selectedSortCriteriaControl = R.id.rb2
-            selectedSortDirectionControl = R.id.rbf1
+            selectedSortCriteria = SortCriteria.AVERAGE_RATING
+            selectedSortDirectionControl = R.id.rbf2
+            selectedSortDirection = SortDirections.DESCENDING
             radioGroup.check(selectedSortCriteriaControl)
             radioGroup2.check(selectedSortDirectionControl)
         }
