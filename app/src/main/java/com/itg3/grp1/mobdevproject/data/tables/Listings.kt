@@ -72,6 +72,8 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                     cursor.getDouble(cursor.getColumnIndex(COL_RATING)),
                     LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                 )
+
+                result.Images = dbHelper.images.getAll().filter { it.ListingId == result.Id }
             }
         }
         finally
@@ -108,6 +110,7 @@ class Listings(dbHandler: DatabaseHelper) : DbTable<Listing>(dbHandler)
                         LocalDateTime.ofEpochSecond(cursor.getLong(cursor.getColumnIndex(COL_DATE_POSTED)), 0, ZoneOffset.UTC)
                     )
 
+                    listing.Images = dbHelper.images.getAll().filter { it.ListingId == listing.Id }
                     result.add(listing)
                 }
                 while (cursor.moveToNext())

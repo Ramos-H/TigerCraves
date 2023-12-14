@@ -10,5 +10,6 @@ data class Listing(
     var PriceMin: Double?,
     var PriceMax: Double?,
     var Rating: Double?,
-    var DatePosted: LocalDateTime? = null
+    var DatePosted: LocalDateTime? = null,
+    var Images: List<ListingImage>? = null
 ) : IModel

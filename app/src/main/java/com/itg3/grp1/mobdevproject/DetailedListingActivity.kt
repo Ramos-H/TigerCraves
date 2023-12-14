@@ -71,10 +71,12 @@ class DetailedListingActivity : AppCompatActivity() {
         //Image Slider
         val imageSlider = findViewById<ImageSlider>(R.id.imageSlider)
 
-        val images = dbHelper.images.getAll().filter { listing!!.Id == it.ListingId }
-        val slides = images.map { SlideModel(it.ResourceId) }
+        val slides = listing?.Images?.map { SlideModel(it.ResourceId) }
 
-        imageSlider.setImageList(slides, ScaleTypes.FIT)
+        if(slides?.isNotEmpty() == true)
+        {
+            imageSlider.setImageList(slides, ScaleTypes.FIT)
+        }
     }
 
     private fun loadPageData()

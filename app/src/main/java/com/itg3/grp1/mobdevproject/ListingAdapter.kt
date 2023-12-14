@@ -16,6 +16,7 @@ class ListingAdapter(val dataset: List<Listing>, val userId: Int) : RecyclerView
     {
         var itemImage: ImageView
         var title: TextView
+        var price: TextView
         var description: TextView
         var ratingBar: RatingBar
 
@@ -23,6 +24,7 @@ class ListingAdapter(val dataset: List<Listing>, val userId: Int) : RecyclerView
         {
             itemImage = itemView.findViewById(R.id.imageview)
             title = itemView.findViewById(R.id.title)
+            price = itemView.findViewById(R.id.price)
             description = itemView.findViewById(R.id.description)
             ratingBar = itemView.findViewById(R.id.ratingBar)
         }
@@ -42,6 +44,29 @@ class ListingAdapter(val dataset: List<Listing>, val userId: Int) : RecyclerView
         holder.description.text = currentListing.Address
         holder.itemImage.setImageResource(R.drawable.imgtst)
         holder.ratingBar.rating = currentListing.Rating!!.toFloat()
+
+        if(currentListing.PriceMin == null && currentListing.PriceMax == null)
+        {
+            holder.price.visibility = View.GONE
+        }
+        else if(currentListing.PriceMin != null && currentListing.PriceMax == null)
+        {
+            holder.price.text = "${String.format("%.2f", currentListing.PriceMin)}PHP (Min. Price)"
+        }
+        else if(currentListing.PriceMin == null && currentListing.PriceMax != null)
+        {
+            holder.price.text = "${String.format("%.2f", currentListing.PriceMax)}PHP (Max Price)"
+        }
+        else
+        {
+            holder.price.text = "${String.format("%.2f", currentListing.PriceMin)}PHP - ${String.format("%.2f", currentListing.PriceMax)}PHP"
+        }
+
+        val resourceId = currentListing.Images?.first()?.ResourceId
+        if(resourceId != null)
+        {
+            holder.itemImage.setImageResource(resourceId)
+        }
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
